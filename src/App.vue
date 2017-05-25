@@ -37,7 +37,7 @@
   .app {
     font-family: sans-serif;
     font-size: 16px;
-    line-height: 1;
+    line-height: 1.2;
     color: #444;
   }
 

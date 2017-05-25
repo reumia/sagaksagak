@@ -1,16 +1,17 @@
 <template>
   <div class="intro">
     <Carousel></Carousel>
-    {{ title }}
+    <TabNavigation></TabNavigation>
   </div>
 </template>
 
 <script>
   import Carousel from '../partials/Carousel';
+  import TabNavigation from '../partials/TabNavigation';
 
   export default {
     name: 'hello',
-    components: { Carousel },
+    components: { Carousel, TabNavigation },
     data() {
       return {
         title: '사각사각 소개',
