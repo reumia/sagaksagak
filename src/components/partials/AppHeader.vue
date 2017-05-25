@@ -8,15 +8,18 @@
     </div>
     <div class="nav-user">
       <button class="nav-user-button" v-bind:class="{active: isAuthorized}" type="button"><span class="hidden">유저메뉴</span></button>
+      <GlobalNavigation></GlobalNavigation>
     </div>
   </header>
 </template>
 
 <script>
   import 'vue';
+  import GlobalNavigation from './GlobalNavigation';
 
   export default {
     name: 'app-header',
+    components: { GlobalNavigation },
     data() {
       return {
         msg: 'Welcome to Your Vue.js App',
