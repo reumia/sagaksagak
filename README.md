@@ -7,12 +7,15 @@ SAGAKSAGAK : 사각사각 : 릴레이툰 플랫폼
 - [Justinmind](https://www.justinmind.com/) : UX 프로토타입 제작 도구
 
 ## 개발 검토
-- [Awesome Vue](https://github.com/vuejs/awesome-vue) : 라이브러리 참고
 - [Firebase](https://firebase.google.com/) : Serverless, Restful, Database, OAuth
 - [Vue.js](https://vuejs.org/) : SPA, Route
 - [Hummer.js](http://hammerjs.github.io/) : Canvas 내에서의 Touch Gesture
 - [D3.js](https://d3js.org/) : 데이터 기반 릴레이툰 구조 시각화
 - [Electron.js](https://electron.atom.io/) : 추후 PC 버전 개발
+
+## Vue 참고
+- [Awesome Vue - Vue 라이브러리 모음](https://github.com/vuejs/awesome-vue)
+- [비 부모-자식간 통신](https://kr.vuejs.org/v2/guide/components.html#비-부모-자식간-통신)
 
 ## 빌드
 
