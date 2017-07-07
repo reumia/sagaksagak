@@ -1,25 +1,23 @@
 <template>
   <header class="app__header">
     <div class="nav-header">
-      <button class="nav-header-button" type="button"><span class="hidden">헤더메뉴</span></button>
+      <button class="nav-header-button" type="button" @click="$emit('toggleAside')"><span class="hidden">헤더메뉴</span></button>
     </div>
     <div class="logo">
-      <a href="/" class="logo-link"><span class="hidden">사각사각</span></a>
+      <router-link :to="{name: 'Intro'}" class="logo-link"><span class="hidden">사각사각</span></router-link>
     </div>
     <div class="nav-user">
-      <button class="nav-user-button" v-bind:class="{active: isAuthorized}" type="button"><span class="hidden">유저메뉴</span></button>
-      <GlobalNavigation></GlobalNavigation>
+      <router-link :to="{name: 'Login'}" class="nav-user-button" v-bind:class="{active: isAuthorized}"><span class="hidden">유저메뉴</span></router-link>
+      
     </div>
   </header>
 </template>
 
 <script>
   import 'vue';
-  import GlobalNavigation from './GlobalNavigation';
 
   export default {
     name: 'app-header',
-    components: { GlobalNavigation },
     data() {
       return {
         msg: 'Welcome to Your Vue.js App',
@@ -31,6 +29,11 @@
 
 <style lang="scss" scoped>
   .app__header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
     display: flex;
     justify-content: space-between;
     align-items: center;

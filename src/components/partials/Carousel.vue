@@ -30,7 +30,6 @@
 
 <style lang="scss">
   .carousel {
-    margin: -20px -20px 0;
     color: #fff;
   }
   .carousel-body {

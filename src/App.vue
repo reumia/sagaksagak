@@ -1,19 +1,12 @@
 <template>
   <div class="app">
-
-    <!-- 헤더 -->
-    <AppHeader></AppHeader>
-    <!-- 헤더 -->
-
-    <!-- 본문 -->
-    <article class="app__body">
+    <AppHeader @toggleAside="toggleAside"></AppHeader>
+    <GlobalNavigation :isShown="isAsideShown"></GlobalNavigation>
+    <article class="app__body" :class="{'with-aside': isAsideShown}">
       <router-view></router-view>
     </article>
-    <!-- 본문 -->
-
-    <!-- 푸터 -->
-    <AppFooter></AppFooter>
-    <!-- 푸터 -->
+    <AppFooter :class="{'with-aside': isAsideShown}"></AppFooter>
+    <div class="dimmed" :class="{active: isAsideShown}"></div>
   </div>
 </template>
 
@@ -22,14 +15,27 @@
   import 'vue';
   import AppHeader from './components/partials/AppHeader';
   import AppFooter from './components/partials/AppFooter';
+  import GlobalNavigation from './components/partials/GlobalNavigation';
 
   export default {
     name: 'app',
-    components: { AppHeader, AppFooter },
+    components: { AppHeader, AppFooter, GlobalNavigation },
+    data() {
+      return {
+        isAsideShown: false,
+      };
+    },
+    methods: {
+      toggleAside() {
+        this.isAsideShown = this.isAsideShown === false;
+      },
+    },
   };
 </script>
 
 <style lang="scss">
+  @import '~reset-css/reset.css';
+
   html {
     background-color: #f3f3f3;
   }
@@ -42,7 +48,25 @@
   }
 
   .app__body {
-    padding: 20px;
+    margin-top: 60px;
+    transition: transform 0.2s ease;
+    &.with-aside {
+      transform: translateX(240px);
+    }
+  }
+
+  .dimmed {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: rgba(0,0,0,.4);
+    &.active {
+      display: block;
+    }
   }
 
   .hidden {

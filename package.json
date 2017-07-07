@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "firebase": "^3.9.0",
+    "reset-css": "^2.2.0",
     "vue": "^2.2.6",
     "vue-router": "^2.3.1",
     "vuefire": "^1.4.2"

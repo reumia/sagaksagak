@@ -21,7 +21,7 @@
 
 <style lang="scss" scoped>
   .tab {
-    margin-top: 20px;
+    margin: 20px 0;
     text-align: center;
   }
 </style>

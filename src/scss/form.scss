@@ -1,0 +1,51 @@
+.form {
+
+  }
+
+  %form-init {
+    box-sizing: border-box;
+    display: block;
+    outline: 0;
+    padding: 10px 12px;
+    margin: 0;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .input {
+    @extend %form-init;
+    border: 1px solid #e3e3e3;
+    background-color: #f3f3f3;
+    &:focus {
+      border-color: #35a3ff;
+      color: #333;
+    }
+  }
+
+  ::-webkit-input-placeholder {
+    color: #aaa;
+  }
+
+  .button-wrap {
+    display: flex;
+    margin-top: 5px;
+    .button ~ .button {
+      margin-left: 5px;
+    }
+  }
+
+  .button {
+    @extend %form-init;
+    border: 1px solid #999;
+    background-color: #999;
+    color: #fff;
+    &.button-primary {
+      border-color: #35a3ff;
+      background-color: #35a3ff;
+    }
+  }
+
+  .input ~ .input,
+  .input ~ .button {
+    margin-top: 5px;
+  }

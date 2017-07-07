@@ -1,12 +1,11 @@
 import Vue from 'vue';
-import VueFire from 'vuefire';
 import 'firebase';
 import Router from 'vue-router';
 import Intro from '@/components/pages/Intro';
 import Help from '@/components/pages/Help';
+import Login from '@/components/pages/Login';
 
 Vue.use(Router);
-Vue.use(VueFire);
 
 export default new Router({
   routes: [
@@ -19,6 +18,11 @@ export default new Router({
       path: '/help',
       name: 'Help',
       component: Help,
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
     },
   ],
 });

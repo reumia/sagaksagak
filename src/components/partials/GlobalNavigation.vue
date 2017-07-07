@@ -1,5 +1,5 @@
 <template>
-  <nav class="nav" role="navigation">
+  <nav class="nav" :class="{active: isShown}" role="navigation">
     <a href="#" class="nav__item" role="menuitem">메뉴1</a>
     <a href="#" class="nav__item" role="menuitem">메뉴2</a>
     <a href="#" class="nav__item" role="menuitem">메뉴3</a>
@@ -11,6 +11,7 @@
 <script>
   export default {
     name: 'global-navigation',
+    props: ['isShown'],
     data() {
       return {
         msg: '',
@@ -21,19 +22,32 @@
 
 <style lang="scss" scoped>
   .nav {
-    display: none;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: block;
     position: fixed;
-    z-index: 100;
+    z-index: 200;
     top: 60px;
+    bottom: 0;
     left: 0;
-    right: 0;
+    padding: 10px 0;
+    width: 240px;
+    transform: translateX(-100%);
     background-color: #fff;
-    /*background-color: #35a3ff;*/
+    transition: transform 0.2s ease;
+    &.active {
+      display: block;
+      transform: translateX(0);
+    }
   }
   .nav__item {
     display: block;
-    padding: 10px;
-    text-align: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+    &.active {
+      color: #35a3ff;
+    }
   }
 
 </style>
