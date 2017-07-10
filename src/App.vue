@@ -1,12 +1,12 @@
 <template>
   <div class="app">
     <AppHeader @toggleAside="toggleAside"></AppHeader>
-    <GlobalNavigation :isShown="$store.state.isAsideShown"></GlobalNavigation>
-    <article class="app__body" :class="{'with-aside': $store.state.isAsideShown}">
+    <GlobalNavigation :isShown="isAsideShown"></GlobalNavigation>
+    <article class="app__body" :class="{'with-aside': isAsideShown}">
       <router-view></router-view>
     </article>
-    <AppFooter :class="{'with-aside': $store.state.isAsideShown}"></AppFooter>
-    <div class="dimmed" :class="{active: $store.state.isAsideShown}"></div>
+    <AppFooter :class="{'with-aside': isAsideShown}"></AppFooter>
+    <div class="dimmed" @click="toggleAside" :class="{active: isAsideShown}"></div>
   </div>
 </template>
 
@@ -20,9 +20,14 @@
   export default {
     name: 'app',
     components: { AppHeader, AppFooter, GlobalNavigation },
+    data() {
+      return {
+        isAsideShown: false,
+      };
+    },
     methods: {
       toggleAside() {
-        this.$store.state.isAsideShown = this.$store.state.isAsideShown === false;
+        this.isAsideShown = this.isAsideShown === false;
       },
     },
   };

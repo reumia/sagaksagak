@@ -4,7 +4,6 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const state = {
-  isAsideShown: false,
   isAuthorized: false,
 };
 
