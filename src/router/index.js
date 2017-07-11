@@ -21,8 +21,23 @@ export default new Router({
       component: Help,
     },
     {
-      path: '/login',
+      path: '/user/login',
       name: 'Login',
+      component: Login,
+    },
+    {
+      path: '/user/join',
+      name: 'Join',
+      component: Login,
+    },
+    {
+      path: '/user/Index',
+      name: 'UserIndex',
+      component: Taxonomy,
+    },
+    {
+      path: '/user/password',
+      name: 'Password',
       component: Login,
     },
     {
