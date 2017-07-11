@@ -1,51 +1,62 @@
-.form {
+%form-init {
+  box-sizing: border-box;
+  display: block;
+  outline: 0;
+  padding: 12px 12px 9px;
+  margin: 0;
+  width: 100%;
+  font-size: 16px;
+}
 
+.input {
+  @extend %form-init;
+  border: 2px solid #e3e3e3;
+  background-color: #f3f3f3;
+  &:focus {
+    border-color: #35a3ff;
+    color: #333;
   }
+}
 
-  %form-init {
-    box-sizing: border-box;
-    display: block;
-    outline: 0;
-    padding: 10px 12px;
-    margin: 0;
-    width: 100%;
-    font-size: 16px;
+::-webkit-input-placeholder {
+  color: #aaa;
+}
+
+.button-wrap {
+  display: flex;
+  margin-top: 5px;
+  .button ~ .button {
+    margin-left: 5px;
   }
+}
 
-  .input {
-    @extend %form-init;
-    border: 1px solid #e3e3e3;
-    background-color: #f3f3f3;
-    &:focus {
-      border-color: #35a3ff;
-      color: #333;
+.button {
+  @extend %form-init;
+  position: relative;
+  border-width: 0 0 2px 0;
+  border-style: solid;
+  border-color: #888;
+  background-color: #999;
+  border-radius: 3px;
+  color: #fff;
+  &:before {
+    content: '';
+    position: absolute;
+    display: none;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255,255,255,.12);
+  }
+  &:focus ,
+  &:hover {
+    &:before {
+      display: block;
     }
   }
-
-  ::-webkit-input-placeholder {
-    color: #aaa;
+  &.button-primary {
+    border-color: #3296eb;
+    background-color: #35a3ff;
   }
-
-  .button-wrap {
-    display: flex;
-    margin-top: 5px;
-    .button ~ .button {
-      margin-left: 5px;
-    }
-  }
-
-  .button {
-    @extend %form-init;
-    border: 1px solid #999;
-    background-color: #999;
-    color: #fff;
-    &.button-primary {
-      border-color: #35a3ff;
-      background-color: #35a3ff;
-    }
-  }
-
-  .input ~ .input,
-  .input ~ .button {
-    margin-top: 5px;
-  }
+}

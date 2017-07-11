@@ -8,7 +8,6 @@
     </div>
     <div class="nav-user">
       <router-link :to="{name: 'Login'}" class="nav-user-button" v-bind:class="{active: $store.state.isAuthorized}"><span class="hidden">유저메뉴</span></router-link>
-      
     </div>
   </header>
 </template>
@@ -26,7 +25,7 @@
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" rel="stylesheet/scss" scoped>
   .app__header {
     position: fixed;
     top: 0;
@@ -46,6 +45,7 @@
     display: block;
     padding: 13px 10px;
     border: 0;
+    outline: 0;
     background-color: transparent;
     &:after {
       content: '';
