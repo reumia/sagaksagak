@@ -13,9 +13,9 @@
 <script>
   import 'normalize.css';
   import 'vue';
-  import AppHeader from './components/partials/AppHeader';
-  import AppFooter from './components/partials/AppFooter';
-  import GlobalNavigation from './components/partials/GlobalNavigation';
+  import AppHeader from '@/components/partials/AppHeader';
+  import AppFooter from '@/components/partials/AppFooter';
+  import GlobalNavigation from '@/components/partials/GlobalNavigation';
 
   export default {
     name: 'app',

@@ -1,5 +1,5 @@
 <template>
-  <a href="#" class="tab__item" v-bind:class="{active: isActive}">{{ text }}</a>
+  <a href="#" class="tab__item" :class="{active: isActive}">{{ text }}</a>
 </template>
 
 <script>

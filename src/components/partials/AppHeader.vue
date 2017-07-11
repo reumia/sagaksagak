@@ -7,7 +7,7 @@
       <router-link :to="{name: 'Intro'}" class="logo-link"><span class="hidden">사각사각</span></router-link>
     </div>
     <div class="nav-user">
-      <router-link :to="{name: 'Login'}" class="nav-user-button" v-bind:class="{active: $store.state.isAuthorized}"><span class="hidden">유저메뉴</span></router-link>
+      <router-link :to="{name: 'Login'}" class="nav-user-button" :class="{active: $store.state.isAuthorized}"><span class="hidden">유저메뉴</span></router-link>
     </div>
   </header>
 </template>
