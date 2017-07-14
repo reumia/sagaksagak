@@ -1,5 +1,5 @@
 <template>
-  <a href="#" class="tab__item" :class="{active: isActive}">{{ text }}</a>
+  <a href="#" class="tab" :class="{active: isActive}">{{ text }}</a>
 </template>
 
 <script>
@@ -14,8 +14,8 @@
   };
 </script>
 
-<style lang="scss" scoped>
-  .tab__item {
+<style lang="scss" scoped rel="stylesheet/scss">
+  .tab {
     display: inline-block;
     padding: 5px 7px 3px;
     border-radius: 3px;
@@ -30,7 +30,7 @@
       color: #35a3ff;
     }
   }
-  .tab__item ~ .tab__item {
+  .tab ~ .tab {
     margin-left: 8px;
   }
 </style>

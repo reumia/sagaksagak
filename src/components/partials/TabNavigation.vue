@@ -1,5 +1,5 @@
 <template>
-  <div class="tab">
+  <div class="tab-wrap">
     <Tab text="인기사각"></Tab><!--
     --><Tab text="최근사각"></Tab><!--
     --><Tab text="관심사각"></Tab><!--
@@ -20,9 +20,9 @@
 </script>
 
 <style lang="scss" scoped>
-  .tab {
+  .tab-wrap {
     padding: 20px 0;
-    margin: 0 -20px 20px;
+    margin: -20px -20px 20px;
     background-color: #f3f3f3;
     text-align: center;
   }
