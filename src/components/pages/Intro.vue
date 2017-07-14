@@ -24,9 +24,6 @@
 </script>
 
 <style lang="scss" scoped rel="stylesheet/scss">
-  .page-intro {
-    margin-top: -60px;
-  }
   p {
     margin-bottom: 20px;
   }
