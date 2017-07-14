@@ -31,11 +31,14 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 200;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #fff;
+    transition: transform 0.2s ease;
+    &.with-aside {
+      transform: translateX(240px);
+    }
   }
 
   .nav-header-button,
@@ -43,12 +46,13 @@
   .logo-link {
     -webkit-appearance: none;
     display: block;
-    padding: 13px 10px;
+    padding: 13px;
     border: 0;
     outline: 0;
     background-color: transparent;
     &:after {
       content: '';
+      box-sizing: border-box;
       display: block;
       height: 34px;
     }

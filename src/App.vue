@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <AppHeader @toggleAside="toggleAside"></AppHeader>
+    <AppHeader @toggleAside="toggleAside" :class="{'with-aside': isAsideShown}"></AppHeader>
     <GlobalNavigation :isShown="isAsideShown"></GlobalNavigation>
     <article class="app__body" :class="{'with-aside': isAsideShown}">
       <router-view></router-view>
@@ -33,11 +33,12 @@
   };
 </script>
 
-<style lang="scss">
+<style lang="scss" rel="stylesheet/scss">
   @import '~reset-css/reset.css';
 
   html {
     background-color: #f3f3f3;
+    overflow-x: hidden;
   }
 
   .app {
@@ -45,6 +46,15 @@
     font-size: 16px;
     line-height: 1.2;
     color: #444;
+    .app__header {
+      z-index: 100;
+    }
+    .nav {
+      z-index: 300;
+    }
+    .dimmed {
+      z-index: 200;
+    }
   }
 
   .app__body {
@@ -62,7 +72,6 @@
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 100;
     background-color: rgba(0,0,0,.4);
     &.active {
       display: block;

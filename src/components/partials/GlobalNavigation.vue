@@ -20,24 +20,24 @@
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped rel="stylesheet/scss">
   .nav {
     box-sizing: border-box;
     overflow: hidden;
     display: block;
     position: fixed;
-    z-index: 200;
-    top: 60px;
+    top: 0;
     bottom: 0;
     left: 0;
     padding: 10px 0;
     width: 240px;
-    transform: translateX(-100%);
     background-color: #fff;
+    transform: translateX(-100%);
     transition: transform 0.2s ease;
     &.active {
       display: block;
       transform: translateX(0);
+       box-shadow: 0 2px 10px rgba(0,0,0,.1);
     }
   }
   .nav__item {

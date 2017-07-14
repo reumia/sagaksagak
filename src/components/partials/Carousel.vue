@@ -30,13 +30,17 @@
 
 <style lang="scss">
   .carousel {
+    margin: 0 -20px 0;
     color: #fff;
   }
   .carousel-body {
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
     width: 100%;
-    height: 200px;
+    height: 300px;
     background-color: #35a3ff;
   }
   .carousel-dots {

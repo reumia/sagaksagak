@@ -17,11 +17,12 @@
 <style lang="scss" scoped>
   .tab__item {
     display: inline-block;
-    padding: 3px 7px;
+    padding: 5px 7px 3px;
+    border-radius: 3px;
     border: 2px solid #aaa;
     color: #aaa;
     font-size: 14px;
-    line-height: 17px;
+    font-weight: bold;
     text-decoration: none;
     &.active {
       background-color: #fff;
