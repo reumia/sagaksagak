@@ -75,7 +75,8 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0,0,0,.4);
+    background-color: #35a3ff;
+    opacity: .9;
     &.fade-enter-active,
     &.fade-leave-active {
       transition: opacity $transition-options
