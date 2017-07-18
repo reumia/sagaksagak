@@ -36,7 +36,6 @@
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-  @import '../../scss/grid.scss';
   @import '../../scss/form.scss';
 
   .form-login {
