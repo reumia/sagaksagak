@@ -26,6 +26,8 @@
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
+  @import '../../scss/variables';
+
   .app__header {
     position: fixed;
     top: 0;
@@ -35,9 +37,9 @@
     justify-content: space-between;
     align-items: center;
     background-color: #fff;
-    transition: transform 0.2s ease;
+    transition: transform $transition-options;
     &.with-aside {
-      transform: translateX(240px);
+      transform: translateX($aside-width);
     }
   }
 

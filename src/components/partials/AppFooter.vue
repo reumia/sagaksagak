@@ -15,15 +15,17 @@
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped rel="stylesheet/scss">
+  @import '../../scss/variables';
+
   .app__footer {
     border-top: 2px solid #e9e9e9;
     padding: 20px;
     color: #999;
     text-align: center;
-    transition: transform 0.2s ease;
+    transition: transform $transition-options;
     &.with-aside {
-      transform: translateX(240px);
+      transform: translateX($aside-width);
     }
   }
 </style>

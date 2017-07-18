@@ -6,7 +6,9 @@
       <router-view></router-view>
     </article>
     <AppFooter :class="{'with-aside': isAsideShown}"></AppFooter>
-    <div class="dimmed" @click="toggleAside" :class="{active: isAsideShown}"></div>
+    <transition name="fade">
+      <div class="dimmed" v-if="isAsideShown" @click="toggleAside"></div>
+    </transition>
   </div>
 </template>
 
@@ -35,6 +37,7 @@
 
 <style lang="scss" rel="stylesheet/scss">
   @import '~reset-css/reset.css';
+  @import './scss/variables';
 
   html {
     background-color: #f3f3f3;
@@ -59,22 +62,27 @@
 
   .app__body {
     margin-top: 60px;
-    transition: transform 0.2s ease;
+    transition: transform $transition-options;
     &.with-aside {
-      transform: translateX(240px);
+      transform: translateX($aside-width);
     }
   }
 
   .dimmed {
-    display: none;
+    display: block;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     background-color: rgba(0,0,0,.4);
-    &.active {
-      display: block;
+    &.fade-enter-active,
+    &.fade-leave-active {
+      transition: opacity $transition-options
+    }
+    &.fade-enter,
+    &.fade-leave-to {
+      opacity: 0
     }
   }
 

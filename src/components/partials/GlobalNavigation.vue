@@ -21,6 +21,8 @@
 </script>
 
 <style lang="scss" scoped rel="stylesheet/scss">
+  @import '../../scss/variables';
+
   .nav {
     box-sizing: border-box;
     overflow: hidden;
@@ -30,10 +32,10 @@
     bottom: 0;
     left: 0;
     padding: 10px 0;
-    width: 240px;
+    width: $aside-width;
     background-color: #fff;
-    transform: translateX(-100%);
-    transition: transform 0.2s ease;
+    transform: translateX($aside-width * -1);
+    transition: transform $transition-options;
     &.active {
       display: block;
       transform: translateX(0);
