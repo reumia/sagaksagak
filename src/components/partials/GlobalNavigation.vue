@@ -20,7 +20,7 @@
   }
 </script>
 
-<style lang="scss" scoped rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss">
   @import 'init';
 
   .nav {
@@ -31,11 +31,11 @@
     position: fixed;
     top: 0;
     bottom: 0;
-    left: 0;
+    right: 0;
     padding: $space-unit 0;
     width: $aside-width;
     background-color: $color-background;
-    transform: translateX($aside-width * -1);
+    transform: translateX($aside-width);
     &.active {
       display: block;
       transform: translateX(0);
@@ -50,6 +50,10 @@
     &.active {
       color: $color-brand;
     }
+  }
+
+  .with-aside {
+    transform: translateX($aside-width * -1);
   }
 
 </style>

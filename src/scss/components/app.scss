@@ -21,36 +21,26 @@ html {
 
 .app__body {
   @include transition (transform);
-  overflow: hidden;
-  &.with-aside {
-    transform: translateX($aside-width);
-  }
 }
 
 .app__header {
   @include transition (transform);
   position: relative;
   display: flex;
-  padding: 0 $space-unit;
+  padding: 0 ($space-unit * 2);
   justify-content: space-between;
   align-items: center;
   color: $color-brand;
   background-color: $color-background;
-  box-shadow: 0 2px 0 rgba(0,0,0, .07);
-  &.with-aside {
-    transform: translateX($aside-width);
-  }
+  box-shadow: $box-shadow-unit;
 }
 
 .app__footer {
   @include transition (transform)
-  margin-top: $space-unit * 2;
+  margin-top: $space-unit * 4;
   padding: $space-unit;
-  color: $color-text-light;
+  color: $color-disabled;
   text-align: center;
-  &.with-aside {
-    transform: translateX($aside-width);
-  }
 }
 
 .dimmed {

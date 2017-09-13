@@ -1,11 +1,11 @@
 <template>
   <header class="app__header">
     <div class="header-logo">
-      <router-link :to="{name: 'Intro'}" class="header-logo-link">사각사각</router-link>
+      <router-link :to="{name: 'Intro'}" class="header-logo-link">sagaksagak</router-link>
     </div>
     <div class="header-button-wrap">
-      <button class="header-button" type="button" @click="$emit('toggleAside')">메뉴</button>
-      <router-link :to="{name: 'Login'}" class="header-button" :class="{active: $store.state.isAuthorized}">로그인</router-link>
+      <button class="header-button" type="button" @click="$emit('toggleAside')">menu</button>
+      <router-link :to="{name: 'Login'}" class="header-button" :class="{active: $store.state.isAuthorized}">login</router-link>
     </div>
   </header>
 </template>
@@ -42,7 +42,7 @@
   }
 
   .header-logo-link {
-    font-size: $font-size * 1.5;
+    font-size: $font-size-large;
     font-weight: bold;
     color: $color-brand;
   }
