@@ -61,26 +61,20 @@
   }
 
   .logo-link:after {
-    width: 64px;
-    background-image: url(../../assets/ico-logo.png);
-    background-size: 64px 34px;
+    @extend .icon-logo;
   }
 
   .nav-header-button:after {
-    width: 34px;
-    background-image: url(../../assets/ico-menu.png);
-    background-size: 34px 34px;
+    @extend .icon-menu;
   }
 
   .nav-user-button {
     &:after {
-      width: 34px;
-      background-image: url(../../assets/ico-user-logged-out.png);
-      background-size: 34px 34px;
+      @extend .icon-user-logged-out;
     }
     &.active {
       &:after {
-        background-image: url(../../assets/ico-user-logged-in.png);
+        @extend .icon-user-logged-in;
       }
     }
   }
