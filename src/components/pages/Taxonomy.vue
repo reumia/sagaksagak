@@ -1,15 +1,15 @@
 <template>
-  <Page class="page-taxonomy">
+  <Card class="page-taxonomy">
     <h1>카테고리를 위한 Taxnomy 페이지</h1>
-  </Page>
+  </Card>
 </template>
 
 <script>
-  import Page from '@/components/partials/Page'
+  import Card from '@/components/partials/Card'
 
   export default {
     name: 'taxonomy',
-    components: { Page },
+    components: { Card },
     data () {
       return {
       }

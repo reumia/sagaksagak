@@ -1,13 +1,13 @@
 <template>
-  <div class="page">
-    <div class="page-title" v-if="title">{{title}}</div>
+  <div class="card">
+    <div class="card-title" v-if="title">{{title}}</div>
     <slot></slot>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'page',
+    name: 'card',
     props: ['title']
   }
 </script>
@@ -15,11 +15,13 @@
 <style lang="scss" scoped rel="stylesheet/scss">
   @import 'init';
 
-  .page {
+  .card {
+    margin: $space-unit;
     padding: $space-unit;
     background-color: $color-background;
+    border-bottom: 2px solid $color-border;
   }
-  .page-title {
+  .card-title {
     margin-bottom: $space-unit;
     font-weight: bold;
   }

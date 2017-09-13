@@ -17,15 +17,4 @@
 
 <style lang="scss" scoped rel="stylesheet/scss">
   @import 'init';
-
-  .app__footer {
-    @include transition (transform)
-    border-top: 2px solid $color-border;
-    padding: $space-unit;
-    color: $color-text-light;
-    text-align: center;
-    &.with-aside {
-      transform: translateX($aside-width);
-    }
-  }
 </style>

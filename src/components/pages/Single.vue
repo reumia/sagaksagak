@@ -1,18 +1,18 @@
-<template>
-  <Page class="page-single">
+Card<template>
+  <Card class="page-single">
     <h1>캔바스를 위한 싱글페이지</h1>
     <canvas class="canvas">
 
     </canvas>
-  </Page>
+  </Card>
 </template>
 
 <script>
-  import Page from '@/components/partials/Page'
+  import Card from '@/components/partials/Card'
 
   export default {
     name: 'single',
-    components: { Page },
+    components: { Card },
     data () {
       return {
       }

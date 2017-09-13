@@ -26,19 +26,6 @@
 <style lang="scss" rel="stylesheet/scss" scoped>
   @import 'init';
 
-  .app__header {
-    @include transition (transform);
-    display: flex;
-    padding: 0 $space-unit;
-    justify-content: space-between;
-    align-items: center;
-    color: $color-brand;
-    background-color: $color-background;
-    &.with-aside {
-      transform: translateX($aside-width);
-    }
-  }
-
   .header-logo,
   .header-button-wrap {
     flex: 1;
@@ -52,11 +39,12 @@
     line-height: $space-unit * 4;
     text-align: left;
     white-space: nowrap;
-    color: $color-brand;
   }
 
   .header-logo-link {
     font-size: $font-size * 1.5;
+    font-weight: bold;
+    color: $color-brand;
   }
 
   .header-button-wrap {
