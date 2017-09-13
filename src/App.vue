@@ -13,25 +13,25 @@
 </template>
 
 <script>
-  import 'vue';
-  import AppHeader from '@/components/partials/AppHeader';
-  import AppFooter from '@/components/partials/AppFooter';
-  import GlobalNavigation from '@/components/partials/GlobalNavigation';
+  import 'vue'
+  import AppHeader from '@/components/partials/AppHeader'
+  import AppFooter from '@/components/partials/AppFooter'
+  import GlobalNavigation from '@/components/partials/GlobalNavigation'
 
   export default {
     name: 'app',
     components: { AppHeader, AppFooter, GlobalNavigation },
-    data() {
+    data () {
       return {
-        isAsideShown: false,
-      };
+        isAsideShown: false
+      }
     },
     methods: {
-      toggleAside() {
-        this.isAsideShown = this.isAsideShown === false;
-      },
-    },
-  };
+      toggleAside () {
+        this.isAsideShown = this.isAsideShown === false
+      }
+    }
+  }
 </script>
 
 <style lang="scss" rel="stylesheet/scss">

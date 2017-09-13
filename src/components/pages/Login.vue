@@ -16,23 +16,23 @@
 
 <script>
   // TODO : 로그인 페이지 구성 https://github.com/jacobwise/vuex-firebase/blob/master/src/components/Login.vue
-  import Page from '@/components/partials/Page';
+  import Page from '@/components/partials/Page'
 
   export default {
     name: 'login',
     components: { Page },
-    data() {
+    data () {
       return {
         email: '',
-        password: '',
-      };
+        password: ''
+      }
     },
     methods: {
-      login() {
-        window.console.log(this.email, this.password);
-      },
-    },
-  };
+      login () {
+        window.console.log(this.email, this.password)
+      }
+    }
+  }
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>

@@ -12,18 +12,18 @@
 </template>
 
 <script>
-  import Page from '@/components/partials/Page';
-  import Carousel from '@/components/partials/Carousel';
+  import Page from '@/components/partials/Page'
+  import Carousel from '@/components/partials/Carousel'
 
   export default {
     name: 'hello',
     components: { Page, Carousel },
-    data() {
+    data () {
       return {
-        title: '사각사각 소개',
-      };
-    },
-  };
+        title: '사각사각 소개'
+      }
+    }
+  }
 </script>
 
 <style lang="scss" scoped rel="stylesheet/scss">

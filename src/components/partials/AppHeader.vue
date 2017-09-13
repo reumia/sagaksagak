@@ -13,16 +13,16 @@
 </template>
 
 <script>
-  import 'vue';
+  import 'vue'
 
   export default {
     name: 'app-header',
-    data() {
+    data () {
       return {
-        msg: 'Welcome to Your Vue.js App',
-      };
-    },
-  };
+        msg: 'Welcome to Your Vue.js App'
+      }
+    }
+  }
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>

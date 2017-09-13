@@ -1,15 +1,15 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 const state = {
-  isAuthorized: false,
-};
+  isAuthorized: false
+}
 
-const mutations = {};
+const mutations = {}
 
 export default new Vuex.Store({
   state,
-  mutations,
-});
+  mutations
+})

@@ -8,8 +8,8 @@
 <script>
   export default {
     name: 'page',
-    props: ['title'],
-  };
+    props: ['title']
+  }
 </script>
 
 <style lang="scss" scoped rel="stylesheet/scss">

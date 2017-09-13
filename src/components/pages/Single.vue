@@ -8,16 +8,16 @@
 </template>
 
 <script>
-  import Page from '@/components/partials/Page';
+  import Page from '@/components/partials/Page'
 
   export default {
     name: 'single',
     components: { Page },
-    data() {
+    data () {
       return {
-      };
-    },
-  };
+      }
+    }
+  }
 </script>
 
 <style lang="scss" scoped>

@@ -10,29 +10,29 @@
 </template>
 
 <script>
-  import Slick from 'vue-slick';
-  import 'slick-carousel/slick/slick.css';
+  import Slick from 'vue-slick'
+  import 'slick-carousel/slick/slick.css'
 
   export default {
     name: 'carousel',
     components: { Slick },
-    data() {
+    data () {
       return {
         slickOptions: {
           arrows: false,
           dots: true,
-          dotsClass: 'carousel-dots',
-        },
-      };
-    },
-  };
+          dotsClass: 'carousel-dots'
+        }
+      }
+    }
+  }
 </script>
 
 <style lang="scss">
   @import 'init';
 
   .carousel {
-    color: #fff;
+    color: #fff
   }
   .carousel-body {
     box-sizing: border-box;

@@ -7,12 +7,12 @@
 <script>
   export default {
     name: 'app-footer',
-    data() {
+    data () {
       return {
-        msg: 'Welcome to Your Vue.js App',
-      };
-    },
-  };
+        msg: 'Welcome to Your Vue.js App'
+      }
+    }
+  }
 </script>
 
 <style lang="scss" scoped rel="stylesheet/scss">

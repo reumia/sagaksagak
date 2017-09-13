@@ -5,16 +5,16 @@
 </template>
 
 <script>
-  import Page from '@/components/partials/Page';
+  import Page from '@/components/partials/Page'
 
   export default {
     name: 'taxonomy',
     components: { Page },
-    data() {
+    data () {
       return {
-      };
-    },
-  };
+      }
+    }
+  }
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>

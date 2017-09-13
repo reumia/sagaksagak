@@ -12,12 +12,12 @@
   export default {
     name: 'global-navigation',
     props: ['isShown'],
-    data() {
+    data () {
       return {
-        msg: '',
-      };
-    },
-  };
+        msg: ''
+      }
+    }
+  }
 </script>
 
 <style lang="scss" scoped rel="stylesheet/scss">
