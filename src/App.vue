@@ -13,7 +13,6 @@
 </template>
 
 <script>
-  import 'normalize.css';
   import 'vue';
   import AppHeader from '@/components/partials/AppHeader';
   import AppFooter from '@/components/partials/AppFooter';
@@ -36,19 +35,18 @@
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-  @import '~reset-css/reset.css';
-  @import './scss/variables';
+  @import 'init';
 
   html {
-    background-color: #f3f3f3;
+    background-color: $color-background-dark;
     overflow-x: hidden;
   }
 
   .app {
-    font-family: sans-serif;
-    font-size: 16px;
-    line-height: 1.2;
-    color: #444;
+    font-family: $font-family;
+    font-size: $font-size;
+    line-height: $ling-height;
+    color: $color-text;
     .app__header {
       z-index: 100;
     }
@@ -61,8 +59,8 @@
   }
 
   .app__body {
+    @include transition (transform);
     margin-top: 60px;
-    transition: transform $transition-options;
     &.with-aside {
       transform: translateX($aside-width);
     }
@@ -75,11 +73,11 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #35a3ff;
+    background-color: $color-brand;
     opacity: .9;
     &.fade-enter-active,
     &.fade-leave-active {
-      transition: opacity $transition-options
+      @include transition (opacity);
     }
     &.fade-enter,
     &.fade-leave-to {

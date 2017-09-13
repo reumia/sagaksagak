@@ -20,6 +20,6 @@
   };
 </script>
 
-<style lang="scss" rel="stylesheet/scss" scoped>
-  @import '../../scss/form.scss';
+<style lang="scss" scoped>
+  @import 'init';
 </style>

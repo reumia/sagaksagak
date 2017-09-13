@@ -36,20 +36,20 @@
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-  @import '../../scss/form.scss';
+  @import 'init';
 
   .form-login {
-    margin: 40px auto;
-    max-width: 260px;
+    margin: ($space-unit * 2) auto;
+    max-width: $space-unit * 20;
   }
 
   .section-other {
-    margin-top: 40px;
+    margin-top: $space-unit * 2;
   }
 
   .input ~ .input,
   .input ~ .button,
   .button ~ .button {
-    margin-top: 5px;
+    margin-top: $space-unit / 4;
   }
 </style>

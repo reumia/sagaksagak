@@ -16,14 +16,14 @@
 </script>
 
 <style lang="scss" scoped rel="stylesheet/scss">
-  @import '../../scss/variables';
+  @import 'init';
 
   .app__footer {
-    border-top: 2px solid #e9e9e9;
-    padding: 20px;
-    color: #999;
+    @include transition (transform)
+    border-top: 2px solid $color-border;
+    padding: $space-unit;
+    color: $color-text-light;
     text-align: center;
-    transition: transform $transition-options;
     &.with-aside {
       transform: translateX($aside-width);
     }

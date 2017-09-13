@@ -15,22 +15,24 @@
 </script>
 
 <style lang="scss" scoped rel="stylesheet/scss">
+  @import 'init';
+
   .tab {
     display: inline-block;
     padding: 5px 7px 3px;
     border-radius: 3px;
-    border: 2px solid #aaa;
-    color: #aaa;
-    font-size: 14px;
+    border: 2px solid $color-border-dark;
+    color: $color-border-dark;
+    font-size: $font-size-small;
     font-weight: bold;
     text-decoration: none;
     &.active {
-      background-color: #fff;
-      border-color: #35a3ff;
-      color: #35a3ff;
+      background-color: $color-background;
+      border-color: $color-brand;
+      color: $color-brand;
     }
   }
   .tab ~ .tab {
-    margin-left: 8px;
+    margin-left: $space-unit / 2;
   }
 </style>

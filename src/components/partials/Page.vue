@@ -13,12 +13,14 @@
 </script>
 
 <style lang="scss" scoped rel="stylesheet/scss">
+  @import 'init';
+
   .page {
-    padding: 20px;
-    background-color: #fff;
+    padding: $space-unit;
+    background-color: $color-background;
   }
   .page-title {
-    margin-bottom: 20px;
+    margin-bottom: $space-unit;
     font-weight: bold;
   }
 </style>

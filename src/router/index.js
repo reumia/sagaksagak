@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Intro from '@/components/pages/Intro';
-import Help from '@/components/pages/Help';
 import Login from '@/components/pages/Login';
 import Single from '@/components/pages/Single';
 import Taxonomy from '@/components/pages/Taxonomy';
@@ -16,11 +15,6 @@ export default new Router({
       component: Intro,
     },
     {
-      path: '/help',
-      name: 'Help',
-      component: Help,
-    },
-    {
       path: '/user/login',
       name: 'Login',
       component: Login,
@@ -31,7 +25,7 @@ export default new Router({
       component: Login,
     },
     {
-      path: '/user/Index',
+      path: '/user',
       name: 'UserIndex',
       component: Taxonomy,
     },

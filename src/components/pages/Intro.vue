@@ -27,7 +27,9 @@
 </script>
 
 <style lang="scss" scoped rel="stylesheet/scss">
-  p ~ p {
-    margin-top: 20px;
-  }
+@import 'init';
+
+p ~ p {
+  margin-top: $space-unit;
+}
 </style>

@@ -29,6 +29,8 @@
 </script>
 
 <style lang="scss">
+  @import 'init';
+
   .carousel {
     color: #fff;
   }
@@ -37,25 +39,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: $space-unit;
     width: 100%;
-    height: 300px;
-    background-color: #35a3ff;
+    height: $space-unit * 20;
+    background-color: $color-brand;
   }
   .carousel-dots {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: $space-unit;
+    right: $space-unit;
     margin: 0;
     padding: 0;
     list-style: none;
     display: flex;
     li ~ li {
-      margin-left: 5px;
+      margin-left: $space-unit / 4;
     }
     .slick-active {
       button {
-        background-color: #fff;
+        background-color: $color-background;
       }
     }
     button {
@@ -64,9 +66,9 @@
       display: block;
       margin: 0;
       padding: 0;
-      width: 8px;
-      height: 8px;
-      border: 2px solid #fff;
+      width: $space-unit / 2;
+      height: $space-unit / 2;
+      border: 2px solid $color-background;
       background-color: transparent;
       color: transparent;
     }

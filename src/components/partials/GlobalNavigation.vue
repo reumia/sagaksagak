@@ -21,9 +21,10 @@
 </script>
 
 <style lang="scss" scoped rel="stylesheet/scss">
-  @import '../../scss/variables';
+  @import 'init';
 
   .nav {
+    @include transition (transform);
     box-sizing: border-box;
     overflow: hidden;
     display: block;
@@ -31,11 +32,10 @@
     top: 0;
     bottom: 0;
     left: 0;
-    padding: 10px 0;
+    padding: $space-unit 0;
     width: $aside-width;
-    background-color: #fff;
+    background-color: $color-background;
     transform: translateX($aside-width * -1);
-    transition: transform $transition-options;
     &.active {
       display: block;
       transform: translateX(0);
@@ -44,11 +44,11 @@
   }
   .nav__item {
     display: block;
-    padding: 10px 20px;
+    padding: ($space-unit / 2) $space-unit;
     text-decoration: none;
-    color: #333;
+    color: $color-text;
     &.active {
-      color: #35a3ff;
+      color: $color-brand;
     }
   }
 

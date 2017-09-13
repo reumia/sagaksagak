@@ -26,9 +26,10 @@
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-  @import '../../scss/variables';
+  @import 'init';
 
   .app__header {
+    @include transition (transform);
     position: fixed;
     top: 0;
     left: 0;
@@ -36,8 +37,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
-    transition: transform $transition-options;
+    background-color: $color-background;
     &.with-aside {
       transform: translateX($aside-width);
     }

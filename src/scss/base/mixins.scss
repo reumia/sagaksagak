@@ -1,0 +1,9 @@
+@mixin transition ($transitions...) {
+  $values: ();
+
+  @each $transition in $transitions {
+    $values: join($transition, $transition-unit);
+  }
+
+  transition: $values;
+}
