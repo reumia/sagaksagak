@@ -5,8 +5,31 @@
   display: block;
   outline: 0;
   border-radius: 0;
-  padding: 12px 12px 9px;
+  padding: 0;
   margin: 0;
   width: 100%;
-  font-size: 16px;
+  font-size: $font-size;
+  text-decoration: none;
+  color: $color-text;
+  border-width: 0;
+  background-color: transparent;
+}
+
+.hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.clearfix {
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
 }

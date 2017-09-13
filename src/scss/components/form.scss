@@ -1,15 +1,16 @@
 .input {
   @extend %form-init;
-  border: 2px solid #e3e3e3;
-  background-color: #f3f3f3;
+  padding: 12px;
+  border: 2px solid $color-border;
+  background-color: $color-background-dark;
   &:focus {
-    border-color: #35a3ff;
-    color: #333;
+    border-color: $color-brand;
+    color: $color-text;
   }
 }
 
 ::-webkit-input-placeholder {
-  color: #aaa;
+  color: $color-border-dark;
 }
 
 .button-wrap {
@@ -23,13 +24,15 @@
 .button {
   @extend %form-init;
   position: relative;
+  padding: 12px;
   border-width: 0 0 2px 0;
   border-style: solid;
-  border-color: #888;
-  background-color: #999;
-  border-radius: 3px;
-  color: #fff;
+  border-color: $color-text-light;
+  background-color: lighten($color-text-light, 8);
+  border-radius: $radius-unit;
+  color: $color-background;
   font-weight: bold;
+  cursor: pointer;
   &:before {
     content: '';
     position: absolute;
@@ -47,7 +50,7 @@
     }
   }
   &.button-primary {
-    border-color: #3296eb;
-    background-color: #35a3ff;
+    border-color: darken($color-brand, 10);
+    background-color: $color-brand;
   }
 }

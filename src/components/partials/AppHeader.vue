@@ -1,13 +1,11 @@
 <template>
   <header class="app__header">
-    <div class="nav-header">
-      <button class="nav-header-button" type="button" @click="$emit('toggleAside')"><span class="hidden">헤더메뉴</span></button>
+    <div class="header-logo">
+      <router-link :to="{name: 'Intro'}" class="header-logo-link">사각사각</router-link>
     </div>
-    <div class="logo">
-      <router-link :to="{name: 'Intro'}" class="logo-link"><span class="hidden">사각사각</span></router-link>
-    </div>
-    <div class="nav-user">
-      <router-link :to="{name: 'Login'}" class="nav-user-button" :class="{active: $store.state.isAuthorized}"><span class="hidden">유저메뉴</span></router-link>
+    <div class="header-button-wrap">
+      <button class="header-button" type="button" @click="$emit('toggleAside')">메뉴</button>
+      <router-link :to="{name: 'Login'}" class="header-button" :class="{active: $store.state.isAuthorized}">로그인</router-link>
     </div>
   </header>
 </template>
@@ -30,53 +28,43 @@
 
   .app__header {
     @include transition (transform);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
     display: flex;
+    padding: 0 $space-unit;
     justify-content: space-between;
     align-items: center;
+    color: $color-brand;
     background-color: $color-background;
     &.with-aside {
       transform: translateX($aside-width);
     }
   }
 
-  .nav-header-button,
-  .nav-user-button,
-  .logo-link {
-    -webkit-appearance: none;
-    display: block;
-    padding: 13px;
-    border: 0;
-    outline: 0;
-    background-color: transparent;
-    &:after {
-      content: '';
-      box-sizing: border-box;
-      display: block;
-      height: 34px;
-    }
+  .header-logo,
+  .header-button-wrap {
+    flex: 1;
   }
 
-  .logo-link:after {
-    @extend .icon-logo;
+  .header-button,
+  .header-logo-link {
+    @extend %form-init;
+    display: inline-block;
+    width: auto;
+    line-height: $space-unit * 4;
+    text-align: left;
+    white-space: nowrap;
+    color: $color-brand;
   }
 
-  .nav-header-button:after {
-    @extend .icon-menu;
+  .header-logo-link {
+    font-size: $font-size * 1.5;
   }
 
-  .nav-user-button {
-    &:after {
-      @extend .icon-user-logged-out;
-    }
-    &.active {
-      &:after {
-        @extend .icon-user-logged-in;
-      }
-    }
+  .header-button-wrap {
+    text-align: right;
+    white-space: nowrap;
   }
 
+  .header-button ~ .header-button {
+    margin-left: $space-unit;
+  }
 </style>
