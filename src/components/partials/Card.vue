@@ -16,10 +16,10 @@
   @import 'init';
 
   .card {
-    margin: $space-unit;
-    padding: $space-unit;
-    background-color: $color-background;
-    border-bottom: 2px solid $color-border;
+    box-sizing: border-box;
+    padding: 0 ($space-unit * 2);
+    margin: ($space-unit * 2) auto;
+    max-width: $site-width;
   }
   .card-title {
     margin-bottom: $space-unit;

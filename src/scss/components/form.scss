@@ -2,7 +2,7 @@
   @extend %form-init;
   padding: 12px;
   border: 2px solid $color-border;
-  background-color: $color-background-dark;
+  background-color: $color-background;
   &:focus {
     border-color: $color-brand;
     color: $color-text;

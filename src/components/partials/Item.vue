@@ -30,8 +30,9 @@
 
   .item-body {
     position: relative;
+    box-sizing: border-box;
     padding-top: 100%;
-    background-color: #fff;
+    background-color: $color-background;
     box-shadow: $box-shadow-unit;
   }
 

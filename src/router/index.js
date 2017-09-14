@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/components/pages/Index'
+import Intro from '@/components/pages/Intro'
 import Login from '@/components/pages/Login'
 import Cut from '@/components/pages/Cut'
 import Comic from '@/components/pages/Comic'
@@ -11,8 +11,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Index',
-      component: Index
+      name: 'Intro',
+      component: Intro
     },
     {
       path: '/user/login',

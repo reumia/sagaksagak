@@ -31,6 +31,6 @@
   .items {
     display: flex;
     flex-wrap: wrap;
-    padding: $space-unit * 1.5
+    margin: $space-unit / -2;
   }
 </style>
