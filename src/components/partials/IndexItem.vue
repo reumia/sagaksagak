@@ -1,7 +1,7 @@
 <template>
-  <router-link :to="{ name: 'Cut', params: { id: 2 } }" class="item">
-    <div class="item-body">
-      <div class="item-text">
+  <router-link :to="{ name: 'Cut', params: { id: 2 } }" class="index-item">
+    <div class="index-item-body">
+      <div class="index-item-text">
         코믹으로 가는 링크. <br/>
         현재는 테스트 용도로 컷으로 가도록 작성.
       </div>
@@ -11,7 +11,7 @@
 
 <script>
   export default {
-    name: 'item',
+    name: 'index-item',
     data () {
       return {
       }
@@ -22,13 +22,13 @@
 <style lang="scss" scoped>
   @import 'init';
 
-  .item {
+  .index-item {
     box-sizing: border-box;
     padding: $space-unit / 2;
     width: 25%;
   }
 
-  .item-body {
+  .index-item-body {
     position: relative;
     box-sizing: border-box;
     padding-top: 100%;
@@ -36,7 +36,7 @@
     box-shadow: $box-shadow-unit;
   }
 
-  .item-text {
+  .index-item-text {
     position: absolute;
     top: 0;
     bottom: 0;

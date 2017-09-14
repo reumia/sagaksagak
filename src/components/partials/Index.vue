@@ -1,23 +1,23 @@
 <template>
   <div class="index">
     <div class="items">
-      <Item></Item>
-      <Item></Item>
-      <Item></Item>
-      <Item></Item>
-      <Item></Item>
-      <Item></Item>
-      <Item></Item>
+      <IndexItem></IndexItem>
+      <IndexItem></IndexItem>
+      <IndexItem></IndexItem>
+      <IndexItem></IndexItem>
+      <IndexItem></IndexItem>
+      <IndexItem></IndexItem>
+      <IndexItem></IndexItem>
     </div>
   </div>
 </template>
 
 <script>
-  import Item from '@/components/partials/Item'
+  import IndexItem from '@/components/partials/IndexItem'
 
   export default {
     name: 'index',
-    components: { Item },
+    components: { IndexItem },
     data () {
       return {
       }

@@ -1,6 +1,6 @@
 <template>
   <Card class="page-taxonomy">
-    <h1>카테고리를 위한 Taxnomy 페이지</h1>
+    <h1>하나의 만화. 여러개의 Cut을 가짐.</h1>
   </Card>
 </template>
 
