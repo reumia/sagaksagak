@@ -4,6 +4,7 @@ import Intro from '@/components/pages/Intro'
 import Login from '@/components/pages/Login'
 import Cut from '@/components/pages/Cut'
 import Comic from '@/components/pages/Comic'
+import User from '@/components/pages/User'
 
 Vue.use(Router)
 
@@ -26,8 +27,8 @@ export default new Router({
     },
     {
       path: '/user',
-      name: 'UserIndex',
-      component: Comic
+      name: 'User',
+      component: User
     },
     {
       path: '/user/password',

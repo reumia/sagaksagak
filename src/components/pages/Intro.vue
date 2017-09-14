@@ -14,7 +14,7 @@
   import Card from '@/components/partials/Card'
 
   export default {
-    name: 'hello',
+    name: 'intro',
     components: { Card, Index },
     data () {
       return {
@@ -24,10 +24,6 @@
   }
 </script>
 
-<style lang="scss" scoped rel="stylesheet/scss">
-@import 'init';
-
-p ~ p {
-  margin-top: $space-unit;
-}
+<style lang="scss" scoped>
+  @import 'init';
 </style>

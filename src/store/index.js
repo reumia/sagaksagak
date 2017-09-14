@@ -10,7 +10,10 @@ const state = {
   isAuthorized: false,
   user: {
     id: 0,
-    name: '이동건'
+    name: '작가명',
+    email: 'sample@awesomedomain.com',
+    profileImageUrl: '/static/example/user_profile.jpg',
+    featuredImageUrl: '/static/example/user_featured.jpg'
   },
   comic: {
     id: 0,

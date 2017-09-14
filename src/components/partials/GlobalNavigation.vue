@@ -1,10 +1,9 @@
 <template>
   <nav class="nav" :class="{active: isShown}" role="navigation">
-    <a href="#" class="nav__item" role="menuitem">메뉴1</a>
-    <a href="#" class="nav__item" role="menuitem">메뉴2</a>
-    <a href="#" class="nav__item" role="menuitem">메뉴3</a>
-    <a href="#" class="nav__item" role="menuitem">메뉴4</a>
-    <a href="#" class="nav__item" role="menuitem">메뉴5</a>
+    <router-link :to="{ name: 'Cut', params: { id: 0 } }" class="nav-item">Cut 0</router-link>
+    <router-link :to="{ name: 'Cut', params: { id: 3 } }" class="nav-item">Cut 3</router-link>
+    <router-link :to="{ name: 'User' }" class="nav-item">User</router-link>
+    <router-link :to="{ name: 'Comic' }" class="nav-item">Comic</router-link>
   </nav>
 </template>
 
@@ -42,7 +41,7 @@
       box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
     }
   }
-  .nav__item {
+  .nav-item {
     display: block;
     padding: ($space-unit / 2) $space-unit;
     text-decoration: none;
