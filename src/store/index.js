@@ -3,6 +3,9 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+// Nice Solutions to connect with DATABASE.
+// https://stackoverflow.com/questions/41609155/vuex-rendering-data-that-is-fetched-from-rest-api
+
 const state = {
   isAuthorized: false,
   user: {
@@ -11,47 +14,20 @@ const state = {
   },
   comic: {
     id: 0,
-    owner: 13,
+    owner: 0,
     title: '유미의 세포들',
     descriptions: '어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 ',
     imageUrl: '/static/example/featured.jpg',
-    data: {}
+    likes: 102,
+    status: 'OPEN'
   },
-  cut: {
-    id: 0,
-    title: '유미의 세포들 #1',
-    descriptions: '',
-    imageUrl: '/static/example/single_02.jpg',
-    prev: {
-      id: 4,
-      title: '유미의 세포들 #0',
-      descriptions: '',
-      imageUrl: '/static/example/single_01.jpg'
-    },
-    next: [
-      {
-        id: 1,
-        title: '유미의 세포들 #2-1',
-        descriptions: '',
-        imageUrl: '/static/example/single_03.jpg'
-      },
-      {
-        id: 2,
-        title: '유미의 세포들 #2-2',
-        descriptions: '',
-        imageUrl: '/static/example/single_04.jpg'
-      },
-      {
-        id: 3,
-        title: '유미의 세포들 #2-3',
-        descriptions: '',
-        imageUrl: '/static/example/single_05.jpg'
-      }
-    ]
+  tree: {
   }
 }
 
-const getters = {}
+const getters = {
+
+}
 
 const mutations = {}
 

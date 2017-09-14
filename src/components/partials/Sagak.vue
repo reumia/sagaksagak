@@ -1,12 +1,13 @@
 <template>
   <div class="sagak">
-    <div class="sagak-body" :style="{ backgroundImage: `url(${$store.state.cut.imageUrl})` }"></div>
+    <div class="sagak-body" :style="{ backgroundImage: `url(${data.imageUrl})` }"></div>
   </div>
 </template>
 
 <script>
   export default {
     name: 'sagak',
+    props: ['data'],
     data () {
       return {
       }

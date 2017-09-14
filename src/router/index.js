@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Intro from '@/components/pages/Intro'
 import Login from '@/components/pages/Login'
-import Single from '@/components/pages/Single'
-import Taxonomy from '@/components/pages/Taxonomy'
+import Cut from '@/components/pages/Cut'
+import Comic from '@/components/pages/Comic'
 
 Vue.use(Router)
 
@@ -27,7 +27,7 @@ export default new Router({
     {
       path: '/user',
       name: 'UserIndex',
-      component: Taxonomy
+      component: Comic
     },
     {
       path: '/user/password',
@@ -35,14 +35,14 @@ export default new Router({
       component: Login
     },
     {
-      path: '/single',
-      name: 'Single',
-      component: Single
+      path: '/cut',
+      name: 'Cut',
+      component: Cut
     },
     {
-      path: '/category',
-      name: 'Category',
-      component: Taxonomy
+      path: '/comic',
+      name: 'Comic',
+      component: Comic
     }
   ]
 })

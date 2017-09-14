@@ -6,19 +6,59 @@
       </div>
     </div>
     <div class="single-body">
-      <Sagak></Sagak>
+      <Sagak :data="getCurrentCut"></Sagak>
     </div>
   </div>
 </template>
 
 <script>
   import Sagak from '@/components/partials/Sagak'
+  import _ from 'lodash'
 
   export default {
     name: 'single',
     components: { Sagak },
+    computed: {
+      getCurrentCut () {
+        const currentCut = _.find(this.siblings, object => object.id === this.id)
+        return currentCut
+      }
+    },
     data () {
       return {
+        id: 2,
+        siblings: [
+          {
+            id: 0,
+            title: '유미의 세포들 #1',
+            descriptions: '',
+            imageUrl: '/static/example/single_02.jpg'
+          },
+          {
+            id: 2,
+            title: '유미의 세포들 #2-2',
+            descriptions: '',
+            imageUrl: '/static/example/single_04.jpg'
+          },
+          {
+            id: 3,
+            title: '유미의 세포들 #2-3',
+            descriptions: '',
+            imageUrl: '/static/example/single_05.jpg'
+          }
+        ],
+        prev: {
+          id: 1,
+          title: '유미의 세포들 #0',
+          descriptions: '',
+          imageUrl: '/static/example/single_01.jpg'
+        },
+        next: {
+          id: 4,
+          title: '유미의 세포들 #2-1',
+          descriptions: '',
+          imageUrl: '/static/example/single_03.jpg'
+        }
       }
     }
   }
@@ -65,18 +105,5 @@
   .single-body {
     position: relative;
     margin-top: $space-unit * -12;
-  }
-
-  .sagak {
-    margin: 0 auto;
-    width: 300px;
-  }
-
-  .sagak-body {
-    padding-top: 100%;
-    box-shadow: 0 2px 8px rgba(0,0,0,.1);
-    background-color: $color-background;
-    background-position: top left;
-    background-size: cover;
   }
 </style>
