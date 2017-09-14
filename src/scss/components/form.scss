@@ -15,9 +15,9 @@
 
 .button-wrap {
   display: flex;
-  margin-top: 5px;
+  margin-top: $space-unit / 2;
   .button ~ .button {
-    margin-left: 5px;
+    margin-left: $space-unit / 2;
   }
 }
 

@@ -21,8 +21,14 @@
     margin: ($space-unit * 2) auto;
     max-width: $site-width;
   }
+
   .card-title {
     margin-bottom: $space-unit;
-    font-weight: bold;
+    color: $color-disabled;
+    font-size: $font-size-small;
+  }
+
+  .card-login {
+    max-width: $site-width / 2.5;
   }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <Card class="section-login">
+  <Card class="card-login" title="로그인">
     <form class="form-login" @submit.prevent="login">
       <div class="input-wrap">
         <input class="input" v-model="email" type="email" placeholder="이메일"/>
@@ -38,13 +38,8 @@
 <style lang="scss" rel="stylesheet/scss" scoped>
   @import 'init';
 
-  .form-login {
-    margin: ($space-unit * 2) auto;
-    max-width: $space-unit * 20;
-  }
-
   .input ~ .input,
   .input ~ .button {
-    margin-top: $space-unit / 4;
+    margin-top: $space-unit / 2;
   }
 </style>
