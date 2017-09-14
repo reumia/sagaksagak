@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <Carousel></Carousel>
+  <div class="page-intro">
     <Card title="인기사각">
       <Index></Index>
     </Card>
@@ -13,11 +12,10 @@
 <script>
   import Index from '@/components/partials/Index'
   import Card from '@/components/partials/Card'
-  import Carousel from '@/components/partials/Carousel'
 
   export default {
     name: 'hello',
-    components: { Card, Carousel, Index },
+    components: { Card, Index },
     data () {
       return {
         title: '사각사각 소개'
