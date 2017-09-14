@@ -1,7 +1,7 @@
 <template>
   <header class="app__header">
     <div class="header-logo">
-      <router-link :to="{name: 'Intro'}" class="header-logo-link">sagaksagak</router-link>
+      <router-link :to="{name: 'Index'}" class="header-logo-link">sagaksagak</router-link>
     </div>
     <div class="header-button-wrap">
       <button class="header-button" type="button" @click="$emit('toggleAside')">menu</button>

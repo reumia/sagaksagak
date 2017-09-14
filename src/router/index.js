@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Intro from '@/components/pages/Intro'
+import Index from '@/components/pages/Index'
 import Login from '@/components/pages/Login'
 import Cut from '@/components/pages/Cut'
 import Comic from '@/components/pages/Comic'
@@ -11,8 +11,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Intro',
-      component: Intro
+      name: 'Index',
+      component: Index
     },
     {
       path: '/user/login',
@@ -35,9 +35,10 @@ export default new Router({
       component: Login
     },
     {
-      path: '/cut',
+      path: '/cut/:id',
       name: 'Cut',
-      component: Cut
+      component: Cut,
+      props: true
     },
     {
       path: '/comic',

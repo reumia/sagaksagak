@@ -5,7 +5,7 @@
     <article class="app__body" :class="{'with-aside': isAsideShown}">
       <router-view></router-view>
     </article>
-    <AppFooter :class="{'with-aside': isAsideShown}"></AppFooter>
+    <!-- <AppFooter :class="{'with-aside': isAsideShown}"></AppFooter> -->
     <transition name="fade">
       <div class="dimmed" v-if="isAsideShown" @click="toggleAside"></div>
     </transition>
@@ -15,12 +15,12 @@
 <script>
   import 'vue'
   import AppHeader from '@/components/partials/AppHeader'
-  import AppFooter from '@/components/partials/AppFooter'
+  // import AppFooter from '@/components/partials/AppFooter'
   import GlobalNavigation from '@/components/partials/GlobalNavigation'
 
   export default {
     name: 'app',
-    components: { AppHeader, AppFooter, GlobalNavigation },
+    components: { AppHeader, GlobalNavigation },
     data () {
       return {
         isAsideShown: false
