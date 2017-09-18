@@ -10,12 +10,12 @@ const state = {
   isAuthorized: false,
   user: {
     id: 0,
-    name: '작가명',
+    name: 'Comic Artist A.K.A カラス',
     email: 'sample@awesomedomain.com',
     site: 'https://dev.zzoman.com',
     profileImageUrl: '/static/example/user_profile.jpg',
     featuredImageUrl: '/static/example/user_featured.jpg',
-    descriptions: '팅팅팅팅 탱탱탱탱 팅팅탱탱 프라이팬놀이 쿵짝 작가명'
+    descriptions: '고동을 끓는 작고 보라. 아니더면, 몸이 아니한 것은 것이다.보라, 기관과 쓸쓸하랴? 같이, 피어나는 사람은 대고, 이는 칼이다. 그들은 설산에서 이는 심장의 생생하며, 눈이 듣는다. 유소년에게서 과실이 광야에서 웅대한 피가 무엇을 우리 미묘한 사랑의 철환하였는가? 끓는 어디 인류의 이것이야말로 관현악이며, 청춘을 교향악이다. 거친 불어 속에서 곧 인간에 영락과 부패뿐이다. 그것을 같은 이상을 그들의 바로 이것은 있는가? 방지하는 스며들어 간에 그들의 봄바람이다. 꽃이 우리 되려니와, 있다.'
   },
   comic: {
     id: 0,

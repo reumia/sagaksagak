@@ -5,13 +5,13 @@
       <div class="user-info">
         <img class="user-image" :src="$store.state.user.profileImageUrl" />
         <div class="user-name">{{ $store.state.user.name }}</div>
-        <div class="user-descriptions">{{ $store.state.user.descriptions }}</div>
         <div class="user-info-item">
           <span class="user-likes">좋아요 1,000</span>
           <span class="user-contents">사각s 326</span>
           <a :href="`mailto:${$store.state.user.email}`" class="user-email">{{ $store.state.user.email }}</a>
           <a :href="$store.state.user.site" class="user-site">{{ $store.state.user.site }}</a>
         </div>
+        <div class="user-descriptions">{{ $store.state.user.descriptions }}</div>
       </div>
     </div>
 
@@ -58,7 +58,7 @@ $user-info-height: $space-unit * 10;
   &:after {
     content: '';
     position: absolute;
-    top: 0;
+    top: $space-unit * 10;
     bottom: 0;
     left: 0;
     right: 0;
@@ -75,7 +75,7 @@ $user-info-height: $space-unit * 10;
 .user-info {
   position: relative;
   box-sizing: border-box;
-  margin: ($space-unit * -6) auto ($space-unit * 3);
+  margin: ($space-unit * -10) auto ($space-unit * 2);
   padding: 0 ($space-unit * 2);
   max-width: $site-width;
 }
@@ -84,8 +84,8 @@ $user-info-height: $space-unit * 10;
   box-sizing: border-box;
   display: block;
   border: 4px solid #fff;
-  width: $space-unit * 8;
-  height: $space-unit * 8;
+  width: $space-unit * 12;
+  height: $space-unit * 12;
   box-shadow: $box-shadow-unit;
 }
 
@@ -99,11 +99,13 @@ $user-info-height: $space-unit * 10;
 
 .user-descriptions {
   margin-top: $space-unit / 2;
+  font-size: $font-size-small;
 }
 
 .user-info-item {
   display: flex;
-  margin: $space-unit / 2 ($space-unit / -4);
+  flex-wrap: wrap;
+  margin: $space-unit / 2 ($space-unit / -2);
   color: $color-text-light;
   font-size: $font-size-small;
 }
@@ -112,7 +114,7 @@ $user-info-height: $space-unit * 10;
 .user-contents,
 .user-email,
 .user-site {
-  margin: 0 $space-unit / 4;
+  margin: 0 ($space-unit / 2);
   color: $color-text-lighter;
   text-decoration: none;
 }
