@@ -58,15 +58,6 @@ $user-info-height: $space-unit * 10;
   background-size: cover;
   background-position: center center;
   color: $color-background;
-  &:after {
-    content: '';
-    position: absolute;
-    top: $space-unit * 6;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, $color-background)
-  }
 }
 
 .user-body {
