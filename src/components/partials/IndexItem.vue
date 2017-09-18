@@ -1,9 +1,8 @@
 <template>
-  <router-link :to="{ name: 'Cut', params: { id: 2 } }" class="index-item">
+  <router-link :to="{ name: 'Comic', params: { id: 2 } }" class="index-item" :style="{ width: width }">
     <div class="index-item-body">
       <div class="index-item-text">
-        코믹으로 가는 링크. <br/>
-        현재는 테스트 용도로 컷으로 가도록 작성.
+        코믹으로 가는 링크.
       </div>
     </div>
   </router-link>
@@ -12,6 +11,7 @@
 <script>
   export default {
     name: 'index-item',
+    props: [ 'width' ],
     data () {
       return {
       }
@@ -25,7 +25,6 @@
   .index-item {
     box-sizing: border-box;
     padding: $space-unit / 2;
-    width: 25%;
     color: $color-text;
   }
 

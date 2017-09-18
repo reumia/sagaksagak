@@ -22,6 +22,8 @@
 <script>
   import Sagak from '@/components/partials/Sagak'
 
+  const spaceUnit = 16
+
   export default {
     name: 'cut',
     props: [ 'id' ],
@@ -33,8 +35,8 @@
     },
     data () {
       return {
-        sagakWidth: 300,
-        sagakMargin: 16,
+        sagakWidth: spaceUnit * 18,
+        sagakMargin: spaceUnit,
         siblings: [
           {
             id: 0,

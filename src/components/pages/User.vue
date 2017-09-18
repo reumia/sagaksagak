@@ -19,7 +19,7 @@
       <Index></Index>
     </Card>
     <Card title="참여중인 사각">
-      <Index></Index>
+      <Index rows="6"></Index>
     </Card>
   </div>
 </template>

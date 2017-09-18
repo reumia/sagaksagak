@@ -1,13 +1,13 @@
 <template>
   <div class="index">
     <div class="items">
-      <IndexItem></IndexItem>
-      <IndexItem></IndexItem>
-      <IndexItem></IndexItem>
-      <IndexItem></IndexItem>
-      <IndexItem></IndexItem>
-      <IndexItem></IndexItem>
-      <IndexItem></IndexItem>
+      <IndexItem :width="`${100 / rowsInColumn}%`"></IndexItem>
+      <IndexItem :width="`${100 / rowsInColumn}%`"></IndexItem>
+      <IndexItem :width="`${100 / rowsInColumn}%`"></IndexItem>
+      <IndexItem :width="`${100 / rowsInColumn}%`"></IndexItem>
+      <IndexItem :width="`${100 / rowsInColumn}%`"></IndexItem>
+      <IndexItem :width="`${100 / rowsInColumn}%`"></IndexItem>
+      <IndexItem :width="`${100 / rowsInColumn}%`"></IndexItem>
     </div>
   </div>
 </template>
@@ -18,8 +18,10 @@
   export default {
     name: 'index',
     components: { IndexItem },
-    data () {
-      return {
+    props: [ 'rows' ],
+    computed: {
+      rowsInColumn () {
+        return typeof this.rows !== 'undefined' ? this.rows : 4
       }
     }
   }
