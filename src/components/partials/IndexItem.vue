@@ -26,6 +26,7 @@
     box-sizing: border-box;
     padding: $space-unit / 2;
     width: 25%;
+    color: $color-text;
   }
 
   .index-item-body {

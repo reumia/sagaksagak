@@ -24,7 +24,7 @@
 
   .card-title {
     margin-bottom: $space-unit;
-    color: $color-disabled;
+    color: $color-text-light;
     font-size: $font-size-small;
   }
 

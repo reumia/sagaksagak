@@ -12,8 +12,10 @@ const state = {
     id: 0,
     name: '작가명',
     email: 'sample@awesomedomain.com',
+    site: 'https://dev.zzoman.com',
     profileImageUrl: '/static/example/user_profile.jpg',
-    featuredImageUrl: '/static/example/user_featured.jpg'
+    featuredImageUrl: '/static/example/user_featured.jpg',
+    descriptions: '팅팅팅팅 탱탱탱탱 팅팅탱탱 프라이팬놀이 쿵짝 작가명'
   },
   comic: {
     id: 0,

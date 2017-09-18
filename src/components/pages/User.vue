@@ -3,10 +3,14 @@
     <div class="user">
       <div class="user-featured" :style="{ backgroundImage: `url(${$store.state.user.featuredImageUrl})` }"></div>
       <div class="user-info">
-        <img class="user-info-image" :src="$store.state.user.profileImageUrl" />
-        <div class="user-info-text">
-          <div class="user-name">{{ $store.state.user.name }}</div>
-          <div class="user-email">{{ $store.state.user.email }}</div>
+        <img class="user-image" :src="$store.state.user.profileImageUrl" />
+        <div class="user-name">{{ $store.state.user.name }}</div>
+        <div class="user-descriptions">{{ $store.state.user.descriptions }}</div>
+        <div class="user-info-item">
+          <span class="user-likes">좋아요 1,000</span>
+          <span class="user-contents">사각s 326</span>
+          <a :href="`mailto:${$store.state.user.email}`" class="user-email">{{ $store.state.user.email }}</a>
+          <a :href="$store.state.user.site" class="user-site">{{ $store.state.user.site }}</a>
         </div>
       </div>
     </div>
@@ -42,15 +46,24 @@ $user-info-height: $space-unit * 10;
 
 .user {
   position: relative;
-  margin-bottom: ($user-info-height / 2) + ($space-unit * 2);
 }
 
 .user-featured {
+  position: relative;
   height: $user-featured-height;
   background-color: $color-brand;
   background-size: cover;
   background-position: center center;
   color: $color-background;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, $color-background-dark)
+  }
 }
 
 .user-body {
@@ -60,29 +73,49 @@ $user-info-height: $space-unit * 10;
 }
 
 .user-info {
-  display: flex;
+  position: relative;
   box-sizing: border-box;
-  border-radius: $space-unit / 2;
-  position: absolute;
-  top: $user-featured-height - ($user-info-height / 2);
-  left: $space-unit * 2;
-  padding: $space-unit / 2;
-  height: $user-info-height;
-  background-color: $color-background;
+  margin: ($space-unit * -6) auto ($space-unit * 3);
+  padding: 0 ($space-unit * 2);
+  max-width: $site-width;
+}
+
+.user-image {
+  box-sizing: border-box;
+  display: block;
+  border: 4px solid #fff;
+  width: $space-unit * 8;
+  height: $space-unit * 8;
   box-shadow: $box-shadow-unit;
 }
 
-.user-info-image {
-  box-sizing: border-box;
-  border-radius: $space-unit / 4;
-  width: auto;
-  height: 100%;
-  background-size: cover;
-  background-position: center center;
+.user-name {
+  display: block;
+  margin-top: $space-unit * 2;
+  color: $color-text;
+  font-size: $font-size-large;
+  font-weight: bolder;
 }
 
-.user-info-text {
-  padding: ($space-unit / 2) $space-unit;
+.user-descriptions {
+  margin-top: $space-unit / 2;
 }
+
+.user-info-item {
+  display: flex;
+  margin: $space-unit / 2 ($space-unit / -4);
+  color: $color-text-light;
+  font-size: $font-size-small;
+}
+
+.user-likes,
+.user-contents,
+.user-email,
+.user-site {
+  margin: 0 $space-unit / 4;
+  color: $color-text-lighter;
+  text-decoration: none;
+}
+
 
 </style>
