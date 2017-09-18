@@ -6,7 +6,11 @@
       </div>
     </div>
     <div class="cut-body">
-      <div class="siblings" :style="{ width: `${getSiblingsWidth}px` }">
+      <div class="siblings" :style="{
+        width: `${getSiblingsWidth}px`,
+        marginTop: `${sagakWidth / -2}px`,
+        transform: `translateX(${getScrollHorizontal}px)`
+      }">
         <Sagak v-for="item in siblings"
           :key="item.id"
           :data="item"
@@ -21,6 +25,7 @@
 
 <script>
   import Sagak from '@/components/partials/Sagak'
+  import _ from 'lodash'
 
   const spaceUnit = 16
 
@@ -31,6 +36,12 @@
     computed: {
       getSiblingsWidth () {
         return (this.sagakWidth + this.sagakMargin) * this.siblings.length
+      },
+      getScrollHorizontal () {
+        const index = _.findIndex(this.siblings, object => object.id === this.id)
+        const itemWidth = this.sagakWidth + this.sagakMargin
+
+        return (window.innerWidth - itemWidth) / 2 - (index * itemWidth)
       }
     },
     data () {
@@ -112,12 +123,19 @@
   @import 'init';
 
   .cut {
-    position: relative;
+    position: fixed;
+    top: $header-height;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 
   .cut-header {
-      position: relative;
-      min-height: $space-unit * 20;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: $space-unit * 20;
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center center;
@@ -138,7 +156,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: transparentize($color-background-dark, .2);
+        background-color: transparentize($color-background-dark, .05);
       }
   }
 
@@ -148,12 +166,12 @@
   }
 
   .cut-body {
-    position: absolute;
-    top: 50%;
   }
 
   .siblings {
-    @extend .clearfix;
-    margin: 0 ($space-unit * 1.5);
+    @include transition(transform);
+    position: absolute;
+    top: 50%;
+    padding: 0;
   }
 </style>

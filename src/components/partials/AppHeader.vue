@@ -35,7 +35,7 @@
     @extend %form-init;
     display: inline-block;
     width: auto;
-    line-height: $space-unit * 4;
+    line-height: $header-height;
     text-align: left;
     white-space: nowrap;
   }
