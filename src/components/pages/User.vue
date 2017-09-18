@@ -6,8 +6,8 @@
         <img class="user-image" :src="$store.state.user.profileImageUrl" />
         <div class="user-name">{{ $store.state.user.name }}</div>
         <div class="user-info-item">
-          <span class="user-likes">좋아요 1,000</span>
-          <span class="user-contents">사각s 326</span>
+          <span class="user-likes">1,000</span>
+          <span class="user-contents">326</span>
           <a :href="`mailto:${$store.state.user.email}`" class="user-email">{{ $store.state.user.email }}</a>
           <a :href="$store.state.user.site" class="user-site">{{ $store.state.user.site }}</a>
         </div>
@@ -46,6 +46,9 @@ $user-info-height: $space-unit * 10;
 
 .user {
   position: relative;
+  overflow: hidden;
+  background-color: $color-background;
+  box-shadow: $box-shadow-unit;
 }
 
 .user-featured {
@@ -58,11 +61,11 @@ $user-info-height: $space-unit * 10;
   &:after {
     content: '';
     position: absolute;
-    top: $space-unit * 10;
+    top: $space-unit * 6;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(transparent, $color-background-dark)
+    background: linear-gradient(transparent, $color-background)
   }
 }
 
@@ -86,7 +89,6 @@ $user-info-height: $space-unit * 10;
   border: 4px solid #fff;
   width: $space-unit * 12;
   height: $space-unit * 12;
-  box-shadow: $box-shadow-unit;
 }
 
 .user-name {
