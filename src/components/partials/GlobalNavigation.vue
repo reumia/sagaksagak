@@ -66,7 +66,7 @@
   }
 
   .with-aside {
-    transform: translateY($aside-height);
+    /* transform: translateY($aside-height); */
   }
 
 </style>
