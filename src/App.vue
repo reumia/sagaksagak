@@ -1,10 +1,10 @@
 <template>
   <div class="app">
     <AppHeader @toggleAside="toggleAside" :class="{'with-aside': isAsideShown}"></AppHeader>
-    <GlobalNavigation :isShown="isAsideShown"></GlobalNavigation>
-    <article class="app__body" :class="{'with-aside': isAsideShown}">
+    <GlobalNavigation :isShown="isAsideShown" @close="toggleAside"></GlobalNavigation>
+    <main class="app__body" :class="{'with-aside': isAsideShown}">
       <router-view></router-view>
-    </article>
+    </main>
     <!-- <AppFooter :class="{'with-aside': isAsideShown}"></AppFooter> -->
     <transition name="fade">
       <div class="dimmed" v-if="isAsideShown" @click="toggleAside"></div>

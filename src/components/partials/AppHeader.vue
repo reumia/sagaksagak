@@ -5,7 +5,6 @@
     </div>
     <div class="header-button-wrap">
       <button class="header-button" type="button" @click="$emit('toggleAside')">menu</button>
-      <router-link :to="{name: 'Login'}" class="header-button" :class="{active: $store.state.isAuthorized}">login</router-link>
     </div>
   </header>
 </template>
@@ -48,6 +47,8 @@
   }
 
   .header-button-wrap {
+    display: flex;
+    justify-content: flex-end;
     text-align: right;
     white-space: nowrap;
   }

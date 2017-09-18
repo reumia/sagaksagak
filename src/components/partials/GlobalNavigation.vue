@@ -1,10 +1,13 @@
 <template>
-  <nav class="nav" :class="{active: isShown}" role="navigation">
-    <router-link :to="{ name: 'Cut', params: { id: 0 } }" class="nav-item">Cut 0</router-link>
-    <router-link :to="{ name: 'Cut', params: { id: 3 } }" class="nav-item">Cut 3</router-link>
-    <router-link :to="{ name: 'User' }" class="nav-item">User</router-link>
-    <router-link :to="{ name: 'Comic' }" class="nav-item">Comic</router-link>
-  </nav>
+  <div class="nav" :class="{active: isShown}" role="navigation">
+    <nav class="nav-list">
+      <router-link :to="{ name: 'Login' }" class="nav-list-item">Login</router-link>
+      <router-link :to="{ name: 'Cut', params: { id: 0 } }" class="nav-list-item">Cut 0</router-link>
+      <router-link :to="{ name: 'Cut', params: { id: 3 } }" class="nav-list-item">Cut 3</router-link>
+      <router-link :to="{ name: 'User' }" class="nav-list-item">User</router-link>
+      <router-link :to="{ name: 'Comic' }" class="nav-list-item">Comic</router-link>
+    </nav>
+  </div>
 </template>
 
 <script>
@@ -26,33 +29,44 @@
     @include transition (transform);
     box-sizing: border-box;
     overflow: hidden;
-    display: block;
     position: fixed;
     top: 0;
-    bottom: 0;
+    left: 0;
     right: 0;
-    padding: $space-unit 0;
-    width: $aside-width;
+    padding: 0 ($space-unit * 2);
     background-color: $color-background;
-    transform: translateX($aside-width);
+    transform: translateY(-$aside-height);
     &.active {
-      display: block;
-      transform: translateX(0);
+      transform: translateY(0);
       box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
     }
   }
-  .nav-item {
-    display: block;
-    padding: ($space-unit / 2) $space-unit;
+
+  .nav-close {
+    @extend %form-init;
+    width: auto;
+    height: $aside-height;
+  }
+
+  .nav-list {
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-list-item {
     text-decoration: none;
+    padding: 0 $space-unit;
     color: $color-text;
+    height: $aside-height;
+    line-height: $aside-height;
+    text-transform: uppercase;
     &.active {
       color: $color-brand;
     }
   }
 
   .with-aside {
-    transform: translateX($aside-width * -1);
+    transform: translateY($aside-height);
   }
 
 </style>
