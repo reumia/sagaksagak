@@ -32,7 +32,7 @@
   @import 'init';
 
   .carousel {
-    color: #fff
+    color: #fff;
   }
   .carousel-body {
     box-sizing: border-box;

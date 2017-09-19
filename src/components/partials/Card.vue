@@ -18,7 +18,7 @@
   .card {
     box-sizing: border-box;
     padding: 0 ($space-unit * 2);
-    margin: ($space-unit * 4) auto;
+    margin: ($space-unit * 3) auto;
     max-width: $site-width;
   }
 
