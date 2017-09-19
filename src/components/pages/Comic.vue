@@ -1,15 +1,52 @@
 <template>
-  <Card class="page-taxonomy">
-    <h1>하나의 만화. 여러개의 Cut을 가짐. 만화에 대한 소개 및 정보와 트리가 노출됨</h1>
-  </Card>
+  <div class="page-comic">
+    <Featured :data="{
+      backgroundImage: $store.state.comic.imageUrl,
+      title: $store.state.comic.title,
+      descriptions: $store.state.comic.descriptions,
+      stickers: [
+        $store.state.comic.status,
+        'MVP_MONTH'
+      ],
+      items: [
+        {
+          icon: 'user',
+          value: $store.state.comic.owner.name,
+          click () {
+          }
+        },
+        {
+          icon: 'heart',
+          value: currency($store.state.comic.likes),
+          click () {
+          }
+        },
+        {
+          icon: 'sagak',
+          value: currency($store.state.comic.totalContents),
+          click () {
+          }
+        }
+      ]
+    }"></Featured>
+
+    <Card>
+      Comic<br/>
+      여러개의 Cut을 가짐.<br/>
+      트리가 노출되는 영역.
+    </Card>
+  </div>
 </template>
 
 <script>
   import Card from '@/components/partials/Card'
+  import Featured from '@/components/partials/Featured'
+  import formatter from '@/mixin/formatter'
 
   export default {
-    name: 'taxonomy',
-    components: { Card },
+    mixins: [ formatter ],
+    name: 'comic',
+    components: { Card, Featured },
     data () {
       return {
       }
@@ -17,5 +54,6 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss" scoped>
+<style lang="scss">
+
 </style>
