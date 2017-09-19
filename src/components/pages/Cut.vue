@@ -52,6 +52,8 @@
 
         this.scrollHorizontal = result
       },
+      // TODO : 키보드 이동
+      // TODO : 부모 자식 이동
       moveTo () {
       }
     },

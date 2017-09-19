@@ -11,24 +11,26 @@
           icon: 'heart',
           value: currency($store.state.user.likes),
           click () {
+            // TODO : 클릭시 행동 지정 : 좋아요
           }
         },
         {
           icon: 'sagak',
           value: currency($store.state.user.totalContents),
-          click () {
-          }
+          click () {}
         },
         {
           icon: 'email',
           value: $store.state.user.email,
           click () {
+            // TODO : 클릭시 행동 지정 : 복사
           }
         },
         {
           icon: 'web',
           value: $store.state.user.site,
           click () {
+            // TODO : 클릭시 행동 지정 : 복사
           }
         }
       ]
