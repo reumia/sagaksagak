@@ -3,9 +3,11 @@
     <div class="featured-background" :style="{ backgroundImage: `url(${data.backgroundImage})` }"></div>
     <div class="featured-body">
       <img v-if="data.foregroundImage" class="featured-foreground" :src="data.foregroundImage" />
+      <div class="featured-stickers">
+        <Sticker v-if="data.stickers" v-for="sticker in data.stickers" :key="sticker" :code="sticker"></Sticker>
+      </div>
       <div class="featured-title">
         {{ data.title }}
-        <Sticker v-if="data.stickers" v-for="sticker in data.stickers" :code="sticker"></Sticker>
       </div>
       <div class="featured-items">
         <button v-for="item in data.items" class="featured-item" @click="item.click">
@@ -54,7 +56,7 @@ $featured-body-height: $space-unit * 10;
   position: relative;
   box-sizing: border-box;
   margin: 0 auto ($space-unit * 2);
-  padding: 0 ($space-unit * 2);
+  padding: ($space-unit * 2) ($space-unit * 2) 0;
   max-width: $site-width;
 }
 
@@ -63,13 +65,19 @@ $featured-body-height: $space-unit * 10;
   display: block;
   border: 4px solid #fff;
   margin-top: ($space-unit * -10);
+  margin-bottom: ($space-unit * 2);
   width: $space-unit * 12;
   height: $space-unit * 12;
 }
 
+.featured-stickers {
+  position: absolute;
+  top: -13px;
+  right: $space-unit * 2;
+}
+
 .featured-title {
   display: block;
-  margin-top: $space-unit * 2;
   color: $color-text;
   font-size: $font-size-large;
   font-weight: bolder;

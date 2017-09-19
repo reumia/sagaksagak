@@ -5,6 +5,7 @@
       foregroundImage: $store.state.user.profileImageUrl,
       title: $store.state.user.name,
       descriptions: $store.state.user.descriptions,
+      stickers: $store.state.user.status,
       items: [
         {
           icon: 'heart',

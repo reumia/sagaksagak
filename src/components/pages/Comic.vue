@@ -4,10 +4,7 @@
       backgroundImage: $store.state.comic.imageUrl,
       title: $store.state.comic.title,
       descriptions: $store.state.comic.descriptions,
-      stickers: [
-        $store.state.comic.status,
-        'MVP_MONTH'
-      ],
+      stickers: $store.state.comic.status,
       items: [
         {
           icon: 'user',

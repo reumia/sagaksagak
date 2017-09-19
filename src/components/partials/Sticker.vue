@@ -22,7 +22,7 @@ export default {
         DEFAULT: { type: 'default', value: '정의되지않은 CODE입니다.' },
         OPEN: { type: 'success', value: '진행중' },
         CLOSE: { type: 'warning', value: '종료' },
-        BLOCKED: { type: 'danger', value: '차단' },
+        BLOCKED: { type: 'danger', value: '정지' },
         MVP_MONTH: { type: 'hot', value: '이달의 사각' }
       }
 
@@ -38,14 +38,17 @@ export default {
 
   [class^=sticker] {
     display: inline-block;
-    margin-left: $space-unit / 2;
+    padding: 2px 6px 0;
+    border: 3px solid;
+    background-color: $color-background;
     color: $color-text;
     font-size: $font-size-smaller;
     font-weight: bold;
-    &:before {
-      content: '\0025AA';
-      display: inline-block;
-    }
+    vertical-align: middle;
+  }
+
+  [class^=sticker] ~ [class^=sticker] {
+    margin-left: $space-unit / 4;
   }
 
   .sticker-default {
