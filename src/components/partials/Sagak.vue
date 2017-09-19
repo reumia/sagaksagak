@@ -1,5 +1,10 @@
 <template>
-  <router-link :to="{ name: 'Cut', params: { id: data.id } }" class="sagak" :class="{ active: isCurrent }" :style="{ width: `${width}px`, margin: `0 ${margin/2}px` }">
+  <router-link
+    :to="{ name: 'Cut', params: { id: data.id } }"
+    class="sagak"
+    :class="{ active: isCurrent }"
+    :style="{ width: `${width}px`, margin: `0 ${margin/2}px` }"
+  >
     <div class="sagak-body" :style="{ backgroundImage: `url(${data.imageUrl})` }"></div>
   </router-link>
 </template>

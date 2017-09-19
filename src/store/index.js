@@ -31,7 +31,9 @@ const state = {
 }
 
 const getters = {
+  getIndex: (state, payload) => {
 
+  }
 }
 
 const mutations = {

@@ -1,5 +1,5 @@
 <template>
-  <div class="cut">
+  <div class="cut" @keyup.right="{}">
     <div class="cut-header" :style="{ backgroundImage: `url(${$store.state.comic.imageUrl})` }">
       <div class="cut-title">
         {{ $store.state.comic.title }}
@@ -9,13 +9,13 @@
       <div class="siblings" :style="{
         width: `${getSiblingsWidth}px`,
         marginTop: `${sagakWidth / -2}px`,
-        transform: `translateX(${getScrollHorizontal}px)`
+        transform: `translateX(${scrollHorizontal}px)`
       }">
         <Sagak v-for="item in siblings"
           :key="item.id"
           :data="item"
           :width="sagakWidth"
-          :isCurrent="item.id === id"
+          :isCurrent="item.id === parseInt(id, 10)"
           :margin="sagakMargin"
         ></Sagak>
       </div>
@@ -25,7 +25,6 @@
 
 <script>
   import Sagak from '@/components/partials/Sagak'
-  import _ from 'lodash'
 
   const spaceUnit = 16
 
@@ -36,18 +35,37 @@
     computed: {
       getSiblingsWidth () {
         return (this.sagakWidth + this.sagakMargin) * this.siblings.length
+      }
+    },
+    methods: {
+      getIndex () {
+        let filtered = this.siblings.findIndex(item => {
+          return item.id === parseInt(this.id, 10)
+        })
+
+        return filtered
       },
       getScrollHorizontal () {
-        const index = _.findIndex(this.siblings, object => object.id === this.id)
+        const index = this.getIndex()
         const itemWidth = this.sagakWidth + this.sagakMargin
+        const result = (window.innerWidth - itemWidth) / 2 - (index * itemWidth)
 
-        return (window.innerWidth - itemWidth) / 2 - (index * itemWidth)
+        this.scrollHorizontal = result
+      },
+      moveTo () {
       }
+    },
+    beforeUpdate () {
+      this.getScrollHorizontal()
+    },
+    mounted () {
+      this.getScrollHorizontal()
     },
     data () {
       return {
         sagakWidth: spaceUnit * 18,
         sagakMargin: spaceUnit,
+        scrollHorizontal: null,
         siblings: [
           {
             id: 0,
@@ -79,7 +97,7 @@
             descriptions: '',
             imageUrl: '/static/example/cut_06.jpg',
             owner: 2,
-            likes: 0
+            likes: 5
           },
           {
             id: 5,
@@ -95,7 +113,7 @@
             descriptions: '',
             imageUrl: '/static/example/cut_08.jpg',
             owner: 2,
-            likes: 9999
+            likes: 0
           }
         ],
         prev: {
