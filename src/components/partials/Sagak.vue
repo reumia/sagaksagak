@@ -26,7 +26,7 @@
   .sagak {
     position: relative;
     float: left;
-    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
     &:after {
       content: '';
       position: absolute;
@@ -37,7 +37,7 @@
       background-color: transparentize($color-background-dark, .3);
     }
     &.active {
-      -webkit-filter: grayscale(0);
+      filter: grayscale(0);
       &:after {
         display: none;
       }

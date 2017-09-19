@@ -149,33 +149,33 @@
   }
 
   .cut-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $space-unit * 20;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    -webkit-filter: grayscale(100%);
+    &:after {
+      content: '';
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
       right: 0;
-      height: $space-unit * 20;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center center;
-      -webkit-filter: grayscale(100%);
-      &:after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 50%;
-        background: linear-gradient(transparent, $color-background-dark);
-      }
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: transparentize($color-background-dark, .05);
-      }
+      height: 50%;
+      background: linear-gradient(transparent, $color-background-dark);
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: transparentize($color-background-dark, .05);
+    }
   }
 
   .cut-title {
