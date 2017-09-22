@@ -30,8 +30,6 @@
       const response = await this.$http.get(`${process.env.API_ENDPOINT}/comics/${this.id}`)
       const comic = response.data
 
-      console.log(comic)
-
       this.backgroundImage = comic.image_url
       this.title = comic.title
       this.descriptions = comic.descriptions
