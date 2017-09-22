@@ -26,9 +26,10 @@ export default new Router({
       component: Login
     },
     {
-      path: '/user',
+      path: '/user/:id',
       name: 'User',
-      component: User
+      component: User,
+      props: true
     },
     {
       path: '/user/password',
@@ -42,9 +43,10 @@ export default new Router({
       props: true
     },
     {
-      path: '/comic',
+      path: '/comic/:id',
       name: 'Comic',
-      component: Comic
+      component: Comic,
+      props: true
     }
   ]
 })

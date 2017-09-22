@@ -1,21 +1,21 @@
 <template>
   <div class="featured">
-    <div class="featured-background" :style="{ backgroundImage: `url(${data.backgroundImage})` }"></div>
+    <div class="featured-background" :style="{ backgroundImage: `url(${backgroundImage})` }"></div>
     <div class="featured-body">
-      <img v-if="data.foregroundImage" class="featured-foreground" :src="data.foregroundImage" />
+      <img v-if="foregroundImage" class="featured-foreground" :src="foregroundImage" />
       <div class="featured-stickers">
-        <Sticker v-if="data.stickers" v-for="sticker in data.stickers" :key="sticker" :code="sticker"></Sticker>
+        <Sticker v-if="stickers" v-for="sticker in stickers" :key="sticker" :code="sticker"></Sticker>
       </div>
       <div class="featured-title">
-        {{ data.title }}
+        {{ title }}
       </div>
       <div class="featured-items">
-        <button v-for="item in data.items" class="featured-item" @click="item.click">
+        <button v-for="item in items" class="featured-item" @click="item.click">
           <i :class="`icon-${item.icon}`"></i>
           {{ item.value }}
         </button>
       </div>
-      <div class="featured-descriptions">{{ data.descriptions }}</div>
+      <div class="featured-descriptions">{{ descriptions }}</div>
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@ import Sticker from '@/components/partials/Sticker'
 
 export default {
   name: 'featured',
-  props: [ 'data' ],
+  props: [ 'backgroundImage', 'foregroundImage', 'title', 'descriptions', 'stickers', 'items' ],
   components: { Sticker }
 }
 </script>

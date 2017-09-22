@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'Comic', params: { id: 2 } }" class="index-item" :style="{ width: width }">
+  <router-link :to="{ name: 'Comic', params: { id: id } }" class="index-item" :style="{ width: width }">
     <div class="index-item-body">
       <div class="index-item-text">
         {{ title }}

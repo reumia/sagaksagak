@@ -1,35 +1,14 @@
 <template>
   <div class="page-comic">
-    <Featured :data="{
-      backgroundImage: $store.state.comic.imageUrl,
-      title: $store.state.comic.title,
-      descriptions: $store.state.comic.descriptions,
-      stickers: $store.state.comic.status,
-      items: [
-        {
-          icon: 'user',
-          value: $store.state.comic.owner.name,
-          click () {
-            // TODO : 클릭시 행동 지정 : 유저페이지 이동
-          }
-        },
-        {
-          icon: 'heart',
-          value: currency($store.state.comic.likes),
-          click () {
-            // TODO : 클릭시 행동 지정 : 좋아요
-          }
-        },
-        {
-          icon: 'sagak',
-          value: currency($store.state.comic.totalContents),
-          click () {}
-        }
-      ]
-    }"></Featured>
+    <Featured
+      :backgroundImage="backgroundImage"
+      :title="title"
+      :descriptions="descriptions"
+      :stickers="stickers"
+      :items="items"
+    ></Featured>
 
     <Card>
-      <!--TODO : TREE 그리기-->
       Comic<br/>
       여러개의 Cut을 가짐.<br/>
       트리가 노출되는 영역.
@@ -45,9 +24,31 @@
   export default {
     mixins: [ formatter ],
     name: 'comic',
+    props: [ 'id' ],
     components: { Card, Featured },
+    async created () {
+      const response = await this.$http.get(`${process.env.API_ENDPOINT}/comics/${this.id}`)
+      const comic = response.data
+
+      console.log(comic)
+
+      this.backgroundImage = comic.image_url
+      this.title = comic.title
+      this.descriptions = comic.descriptions
+      this.stickers = [comic.status]
+      this.items = [
+        { icon: 'person', value: comic.owner.name, click () { /* TODO : 클릭시 행동 지정 : 유저이동 */ } },
+        { icon: 'heart', value: comic.likes, click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
+        { icon: 'sagak', value: comic.cuts, click () {} }
+      ]
+    },
     data () {
       return {
+        backgroundImage: '',
+        title: '',
+        descriptions: '',
+        stickers: '',
+        items: []
       }
     }
   }

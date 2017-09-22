@@ -1,42 +1,16 @@
 <template>
   <div class="page-user">
-    <Featured :data="{
-      backgroundImage: $store.state.user.featured_image_url,
-      foregroundImage: $store.state.user.profile_image_url,
-      title: $store.state.user.name,
-      descriptions: $store.state.user.descriptions,
-      stickers: $store.state.user.stickers,
-      items: [
-        {
-          icon: 'heart',
-          value: currency($store.state.user.likes),
-          click () {
-            // TODO : 클릭시 행동 지정 : 좋아요
-          }
-        },
-        {
-          icon: 'sagak',
-          value: currency($store.state.user.cuts),
-          click () {}
-        },
-        {
-          icon: 'email',
-          value: $store.state.user.email,
-          click () {
-            // TODO : 클릭시 행동 지정 : 복사
-          }
-        },
-        {
-          icon: 'web',
-          value: $store.state.user.site,
-          click () {
-            // TODO : 클릭시 행동 지정 : 복사
-          }
-        }
-      ]
-    }"></Featured>
+    <Featured
+      :backgroundImage="backgroundImage"
+      :foregroundImage="foregroundImage"
+      :title="title"
+      :descriptions="descriptions"
+      :stickers="stickers"
+      :items="items"
+    ></Featured>
+
     <Card title="소유중인 사각">
-      <Index :data="$store.state.user.comics"></Index>
+      <Index :data="comics"></Index>
     </Card>
     <Card title="참여중인 사각">
       <Index :rows="6"></Index>
@@ -53,12 +27,34 @@
   export default {
     mixins: [ formatter ],
     name: 'user',
+    props: [ 'id' ],
     components: { Card, Index, Featured },
-    created () {
-      this.$store.dispatch('GET_USER_BY_ID', { userId: 3 })
+    async created () {
+      const response = await this.$http.get(`${process.env.API_ENDPOINT}/users/${this.id}`)
+      const user = response.data
+
+      this.comics = user.comics
+      this.backgroundImage = user.featured_image_url
+      this.foregroundImage = user.profile_image_url
+      this.title = user.name
+      this.descriptions = user.descriptions
+      this.stickers = [user.status]
+      this.items = [
+        { icon: 'heart', value: user.likes, click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
+        { icon: 'sagak', value: user.cuts, click () {} },
+        { icon: 'email', value: user.email, click () { /* TODO : 클릭시 행동 지정 : 복사 */ } },
+        { icon: 'web', value: user.site, click () { /* TODO : 클릭시 행동 지정 : 복사 */ } }
+      ]
     },
     data () {
       return {
+        backgroundImage: '',
+        foregroundImage: '',
+        title: '',
+        descriptions: '',
+        stickers: '',
+        items: [],
+        comics: []
       }
     }
   }
