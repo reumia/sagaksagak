@@ -6,29 +6,28 @@ Vue.use(Vuex)
 const state = {
   isAuthorized: false,
   authorizedUserId: 3,
-  tree: {
-  }
+  comicsLatest: [],
+  comicsBest: [],
+  tree: {}
 }
 
 const getters = {
 }
 
 const mutations = {
-  // GET_USER (state, user) {
-  //   state.user = user
-  // },
+  GET_COMICS_LATEST (state, comics) {
+    state.comicsLatest = comics
+  }
 }
 
 const actions = {
-  // this.$store.dispatch('GET_USER_BY_ID', { userId: 3 })
-  GET_USER_BY_ID: async ({ commit }, { userId, self }) => {
+  async GET_COMICS_LATEST ({ commit }, { self }) {
     try {
-      const user = await self.$http.get(`/users/${userId}`)
-      const result = user.data
+      const response = await self.$http.get(`/comics`)
+      const comics = response.data
 
-      commit('GET_USER', result)
+      commit('GET_COMICS_LATEST', comics)
     } catch (err) {
-      console.log(err)
     }
   }
 }
