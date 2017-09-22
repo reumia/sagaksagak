@@ -1,24 +1,37 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
-// Nice Solutions to connect with DATABASE.
-// https://stackoverflow.com/questions/41609155/vuex-rendering-data-that-is-fetched-from-rest-api
+const API_ENDPOINT = process.env.API_ENDPOINT
 
 const state = {
   isAuthorized: false,
   user: {
-    id: 0,
-    status: ['BLOCKED'],
-    name: 'Comic Artist A.K.A カラス',
-    descriptions: '고동을 끓는 작고 보라. 아니더면, 몸이 아니한 것은 것이다.보라, 기관과 쓸쓸하랴? 같이, 피어나는 사람은 대고, 이는 칼이다. 그들은 설산에서 이는 심장의 생생하며, 눈이 듣는다. 유소년에게서 과실이 광야에서 웅대한 피가 무엇을 우리 미묘한 사랑의 철환하였는가? 끓는 어디 인류의 이것이야말로 관현악이며, 청춘을 교향악이다. 거친 불어 속에서 곧 인간에 영락과 부패뿐이다. 그것을 같은 이상을 그들의 바로 이것은 있는가? 방지하는 스며들어 간에 그들의 봄바람이다. 꽃이 우리 되려니와, 있다.',
-    likes: 10000,
-    totalContents: 200,
-    email: 'sample@awesomedomain.com',
-    site: 'https://dev.zzoman.com',
-    profileImageUrl: '/static/example/user_profile.jpg',
-    featuredImageUrl: '/static/example/user_featured.jpg'
+    'stickers': [
+      'OPENED'
+    ],
+    'name': '흑흑맨',
+    'descriptions': '흑흑맨은 항상 울고 다닙니다. 그러나 가끔 현자타임이 돠면 후후맨으로 변신하곤 하지요. 세상일 다 세옹지마입니다.',
+    'email': 'zzo.skt@sk.com',
+    'site': 'http://www.ifkiller.com/',
+    'cuts': 10000,
+    'likes': 302395,
+    'profileImageUrl': '/static/example/user_profile.jpg',
+    'featuredImageUrl': '/static/example/user_featured.jpg',
+    'createdAt': '2017-09-20T15:00:00.000Z',
+    'comics': [
+      {
+        'status': 'CLOSED',
+        'title': '흑흑맨의 일기',
+        'descriptions': '항상 우는 흑흑맨의 일기입니다. 자칫 너무 우울할 수 있으니 조심해 X꺄.',
+        'image_url': null,
+        'created_at': '2017-09-20T15:00:00.000Z',
+        'id': 26,
+        'owner_id': 3
+      }
+    ]
   },
   comic: {
     id: 0,
@@ -38,17 +51,30 @@ const state = {
 }
 
 const getters = {
-  getIndex: (state, payload) => {
-
-  }
 }
 
 const mutations = {
+  FETCH_USER (state, user) {
+    state.user = user
+  }
+}
 
+const actions = {
+  async fetchUser ({ commit }, { userId }) {
+    try {
+      const user = await axios.get(`${API_ENDPOINT}/users/${userId}`)
+      const result = user.data
+
+      commit('FETCH_USER', result)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 }
 
 export default new Vuex.Store({
   state,
   getters,
-  mutations
+  mutations,
+  actions
 })

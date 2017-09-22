@@ -5,7 +5,7 @@
       foregroundImage: $store.state.user.profileImageUrl,
       title: $store.state.user.name,
       descriptions: $store.state.user.descriptions,
-      stickers: $store.state.user.status,
+      stickers: $store.state.user.stickers,
       items: [
         {
           icon: 'heart',
@@ -16,7 +16,7 @@
         },
         {
           icon: 'sagak',
-          value: currency($store.state.user.totalContents),
+          value: currency($store.state.user.cuts),
           click () {}
         },
         {
@@ -39,7 +39,7 @@
       <Index></Index>
     </Card>
     <Card title="참여중인 사각">
-      <Index rows="6"></Index>
+      <Index :rows="6"></Index>
     </Card>
   </div>
 </template>
@@ -54,6 +54,9 @@
     mixins: [ formatter ],
     name: 'user',
     components: { Card, Index, Featured },
+    created () {
+      this.$store.dispatch('fetchUser', { userId: 3 })
+    },
     data () {
       return {
       }
