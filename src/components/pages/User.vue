@@ -55,7 +55,7 @@
     name: 'user',
     components: { Card, Index, Featured },
     created () {
-      this.$store.dispatch('fetchUser', { userId: 3 })
+      this.$store.dispatch('GET_USER_BY_ID', { userId: 3 })
     },
     data () {
       return {

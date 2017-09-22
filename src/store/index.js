@@ -8,6 +8,7 @@ const API_ENDPOINT = process.env.API_ENDPOINT
 
 const state = {
   isAuthorized: false,
+  authorizedUserId: 3,
   user: {
     'stickers': [
       'OPENED'
@@ -54,18 +55,21 @@ const getters = {
 }
 
 const mutations = {
-  FETCH_USER (state, user) {
+  GET_USER (state, user) {
     state.user = user
+  },
+  GET_COMIC (state, comic) {
+
   }
 }
 
 const actions = {
-  async fetchUser ({ commit }, { userId }) {
+  GET_USER_BY_ID: async ({ commit }, { userId }) => {
     try {
       const user = await axios.get(`${API_ENDPOINT}/users/${userId}`)
       const result = user.data
 
-      commit('FETCH_USER', result)
+      commit('GET_USER', result)
     } catch (err) {
       console.log(err)
     }
