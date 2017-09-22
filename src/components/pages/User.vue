@@ -1,8 +1,8 @@
 <template>
   <div class="page-user">
     <Featured :data="{
-      backgroundImage: $store.state.user.featuredImageUrl,
-      foregroundImage: $store.state.user.profileImageUrl,
+      backgroundImage: $store.state.user.featured_image_url,
+      foregroundImage: $store.state.user.profile_image_url,
       title: $store.state.user.name,
       descriptions: $store.state.user.descriptions,
       stickers: $store.state.user.stickers,
@@ -36,7 +36,7 @@
       ]
     }"></Featured>
     <Card title="소유중인 사각">
-      <Index></Index>
+      <Index :data="$store.state.user.comics"></Index>
     </Card>
     <Card title="참여중인 사각">
       <Index :rows="6"></Index>

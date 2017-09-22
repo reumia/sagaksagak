@@ -1,13 +1,15 @@
 <template>
   <div class="index">
     <div class="items">
-      <IndexItem :width="`${100 / rowsInColumn}%`"></IndexItem>
-      <IndexItem :width="`${100 / rowsInColumn}%`"></IndexItem>
-      <IndexItem :width="`${100 / rowsInColumn}%`"></IndexItem>
-      <IndexItem :width="`${100 / rowsInColumn}%`"></IndexItem>
-      <IndexItem :width="`${100 / rowsInColumn}%`"></IndexItem>
-      <IndexItem :width="`${100 / rowsInColumn}%`"></IndexItem>
-      <IndexItem :width="`${100 / rowsInColumn}%`"></IndexItem>
+      <IndexItem
+        v-for="item in data"
+        :key="item.id"
+        :id="item.id"
+        :title="item.title"
+        :createdAt="item.created_at"
+        :imageUrl="item.image_url"
+        :width="`${100 / rowsInColumn}%`"
+      ></IndexItem>
     </div>
   </div>
 </template>
@@ -18,7 +20,7 @@
   export default {
     name: 'index',
     components: { IndexItem },
-    props: [ 'rows' ],
+    props: [ 'data', 'rows' ],
     computed: {
       rowsInColumn () {
         return typeof this.rows !== 'undefined' ? this.rows : 4

@@ -19,9 +19,9 @@ const state = {
     'site': 'http://www.ifkiller.com/',
     'cuts': 10000,
     'likes': 302395,
-    'profileImageUrl': '/static/example/user_profile.jpg',
-    'featuredImageUrl': '/static/example/user_featured.jpg',
-    'createdAt': '2017-09-20T15:00:00.000Z',
+    'profile_image_url': '/static/example/user_profile.jpg',
+    'featured_image_url': '/static/example/user_featured.jpg',
+    'created_at': '2017-09-20T15:00:00.000Z',
     'comics': [
       {
         'status': 'CLOSED',

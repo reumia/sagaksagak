@@ -2,7 +2,10 @@
   <router-link :to="{ name: 'Comic', params: { id: 2 } }" class="index-item" :style="{ width: width }">
     <div class="index-item-body">
       <div class="index-item-text">
-        코믹으로 가는 링크.
+        {{ title }}
+        {{ createdAt }}
+        {{ id }}
+        {{ imageUrl }}
       </div>
     </div>
   </router-link>
@@ -11,7 +14,7 @@
 <script>
   export default {
     name: 'index-item',
-    props: [ 'width' ],
+    props: [ 'width', 'id', 'title', 'createdAt', 'imageUrl' ],
     data () {
       return {
       }
