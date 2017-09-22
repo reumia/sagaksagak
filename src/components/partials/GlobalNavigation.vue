@@ -4,8 +4,7 @@
       <router-link :to="{ name: 'Login' }" class="nav-list-item">Login</router-link>
       <router-link :to="{ name: 'Cut', params: { id: 0 } }" class="nav-list-item">Cut 0</router-link>
       <router-link :to="{ name: 'Cut', params: { id: 3 } }" class="nav-list-item">Cut 3</router-link>
-      <router-link :to="{ name: 'User' }" class="nav-list-item">User</router-link>
-      <router-link :to="{ name: 'Comic' }" class="nav-list-item">Comic</router-link>
+      <router-link :to="{ name: 'User', params: { id: 3 } }" class="nav-list-item">User</router-link>
     </nav>
   </div>
 </template>

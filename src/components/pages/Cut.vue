@@ -1,9 +1,7 @@
 <template>
   <div class="cut" @keyup.right="{}">
-    <div class="cut-header" :style="{ backgroundImage: `url(${$store.state.comic.imageUrl})` }">
-      <div class="cut-title">
-        {{ $store.state.comic.title }}
-      </div>
+    <div class="cut-header" :style="{ backgroundImage: `url()` }">
+      <div class="cut-title"></div>
     </div>
     <div class="cut-body">
       <div class="siblings" :style="{
