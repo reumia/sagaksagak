@@ -10,7 +10,7 @@
     ></Featured>
 
     <Card title="소유중인 사각">
-      <Index :data="comics"></Index>
+      <Index :items="comics"></Index>
     </Card>
     <Card title="참여중인 사각">
       <Index :rows="6"></Index>
@@ -40,8 +40,8 @@
       this.descriptions = user.descriptions
       this.stickers = [user.status]
       this.items = [
-        { icon: 'heart', value: user.likes, click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
-        { icon: 'sagak', value: user.cuts, click () {} },
+        { icon: 'heart', value: this.currency(user.likes), click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
+        { icon: 'sagak', value: this.currency(user.cuts), click () {} },
         { icon: 'email', value: user.email, click () { /* TODO : 클릭시 행동 지정 : 복사 */ } },
         { icon: 'web', value: user.site, click () { /* TODO : 클릭시 행동 지정 : 복사 */ } }
       ]

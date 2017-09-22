@@ -2,7 +2,7 @@
   <div class="index">
     <div class="items">
       <IndexItem
-        v-for="item in data"
+        v-for="item in items"
         :key="item.id"
         :id="item.id"
         :title="item.title"
@@ -20,7 +20,7 @@
   export default {
     name: 'index',
     components: { IndexItem },
-    props: [ 'data', 'rows' ],
+    props: [ 'items', 'rows' ],
     computed: {
       rowsInColumn () {
         return typeof this.rows !== 'undefined' ? this.rows : 4
