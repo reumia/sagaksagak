@@ -1,10 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
 
 Vue.use(Vuex)
-
-const API_ENDPOINT = process.env.API_ENDPOINT
 
 const state = {
   isAuthorized: false,
@@ -24,9 +21,9 @@ const mutations = {
 
 const actions = {
   // this.$store.dispatch('GET_USER_BY_ID', { userId: 3 })
-  GET_USER_BY_ID: async ({ commit }, { userId }) => {
+  GET_USER_BY_ID: async ({ commit }, { userId, self }) => {
     try {
-      const user = await axios.get(`${API_ENDPOINT}/users/${userId}`)
+      const user = await self.$http.get(`/users/${userId}`)
       const result = user.data
 
       commit('GET_USER', result)

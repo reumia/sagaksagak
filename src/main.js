@@ -7,7 +7,10 @@ import router from './router'
 import store from './store'
 
 Vue.config.productionTip = false
-Vue.prototype.$http = axios
+Vue.prototype.$http = axios.create({
+  baseURL: process.env.API_ENDPOINT,
+  timeout: 1000
+})
 
 /* eslint-disable no-new */
 new Vue({

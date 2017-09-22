@@ -27,7 +27,7 @@
     props: [ 'id' ],
     components: { Card, Featured },
     async created () {
-      const response = await this.$http.get(`${process.env.API_ENDPOINT}/comics/${this.id}`)
+      const response = await this.$http.get(`/comics/${this.id}`)
       const comic = response.data
 
       this.backgroundImage = comic.image_url

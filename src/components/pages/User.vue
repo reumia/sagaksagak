@@ -30,7 +30,7 @@
     props: [ 'id' ],
     components: { Card, Index, Featured },
     async created () {
-      const response = await this.$http.get(`${process.env.API_ENDPOINT}/users/${this.id}`)
+      const response = await this.$http.get(`/users/${this.id}`)
       const user = response.data
 
       this.comics = user.comics
