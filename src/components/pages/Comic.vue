@@ -36,8 +36,8 @@
       this.stickers = [comic.status]
       this.items = [
         { icon: 'person', value: comic.owner.name, click () { /* TODO : 클릭시 행동 지정 : 유저이동 */ } },
-        { icon: 'heart', value: comic.likes, click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
-        { icon: 'sagak', value: comic.cuts, click () {} }
+        { icon: 'heart', value: this.currency(comic.likes), click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
+        { icon: 'sagak', value: this.currency(comic.cuts), click () {} }
       ]
     },
     data () {
