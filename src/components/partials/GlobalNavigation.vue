@@ -1,7 +1,7 @@
 <template>
   <div class="nav" :class="{active: isShown}" role="navigation">
     <nav class="nav-list">
-      <router-link :to="{ name: 'Login' }" class="nav-list-item">Login</router-link>
+      <router-link :to="{ name: 'SignIn' }" class="nav-list-item">Sign In</router-link>
       <router-link :to="{ name: 'Cut', params: { id: 0 } }" class="nav-list-item">Cut 0</router-link>
       <router-link :to="{ name: 'Cut', params: { id: 3 } }" class="nav-list-item">Cut 3</router-link>
       <router-link :to="{ name: 'User', params: { id: 3 } }" class="nav-list-item">User</router-link>

@@ -7,9 +7,13 @@ import router from './router'
 import store from './store'
 
 Vue.config.productionTip = false
+
+// TODO : process.env 제대로 접근 안됨
+
 Vue.prototype.$http = axios.create({
   baseURL: process.env.API_ENDPOINT,
-  timeout: 1000
+  timeout: 10000,
+  withCredentials: true
 })
 
 /* eslint-disable no-new */

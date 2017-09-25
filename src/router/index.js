@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Intro from '@/components/pages/Intro'
-import Login from '@/components/pages/Login'
+import SignIn from '@/components/pages/SignIn'
+import SignUp from '@/components/pages/SignUp'
 import Cut from '@/components/pages/Cut'
 import Comic from '@/components/pages/Comic'
 import User from '@/components/pages/User'
@@ -16,14 +17,14 @@ export default new Router({
       component: Intro
     },
     {
-      path: '/user/login',
-      name: 'Login',
-      component: Login
+      path: '/user/sign-in',
+      name: 'SignIn',
+      component: SignIn
     },
     {
-      path: '/user/join',
-      name: 'Join',
-      component: Login
+      path: '/user/sign-up',
+      name: 'SignUp',
+      component: SignUp
     },
     {
       path: '/user/:id',
@@ -32,9 +33,9 @@ export default new Router({
       props: true
     },
     {
-      path: '/user/password',
-      name: 'Password',
-      component: Login
+      path: '/user/reset-password',
+      name: 'ResetPassword',
+      component: SignIn
     },
     {
       path: '/cut/:id',

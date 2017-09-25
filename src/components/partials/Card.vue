@@ -27,8 +27,4 @@
     color: $color-text-lighter;
     font-size: $font-size-small;
   }
-
-  .card-login {
-    max-width: $site-width / 2.5;
-  }
 </style>

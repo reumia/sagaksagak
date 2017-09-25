@@ -3,5 +3,5 @@ var prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  API_ENDPOINT: '"http://127.0.0.1:3001"'
+  API_ENDPOINT: '"http://api.sagaksagak.local:3001"'
 })
