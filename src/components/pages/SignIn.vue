@@ -29,7 +29,6 @@
     methods: {
       async signIn () {
         const response = await this.$store.dispatch('SIGN_IN', {
-          self: this,
           email: this.email,
           password: this.password
         })
