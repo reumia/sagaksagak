@@ -30,21 +30,25 @@
     props: [ 'id' ],
     components: { Card, Index, Featured },
     async created () {
-      const response = await this.$http.get(`/users/${this.id}`)
-      const user = response.data
+      try {
+        const response = await this.$http.get(`/users/${this.id}`)
+        const user = response.data
 
-      this.comics = user.comics
-      this.backgroundImage = user.featured_image_url
-      this.foregroundImage = user.profile_image_url
-      this.title = user.name
-      this.descriptions = user.descriptions
-      this.stickers = [user.status]
-      this.items = [
-        { icon: 'heart', value: this.currency(user.likes), click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
-        { icon: 'sagak', value: this.currency(user.cuts), click () {} },
-        { icon: 'email', value: user.email, click () { /* TODO : 클릭시 행동 지정 : 복사 */ } },
-        { icon: 'web', value: user.site, click () { /* TODO : 클릭시 행동 지정 : 복사 */ } }
-      ]
+        this.comics = user.comics
+        this.backgroundImage = user.featured_image_url
+        this.foregroundImage = user.profile_image_url
+        this.title = user.name
+        this.descriptions = user.descriptions
+        this.stickers = [user.status]
+        this.items = [
+          { icon: 'heart', value: this.currency(user.likes), click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
+          { icon: 'sagak', value: this.currency(user.cuts), click () {} },
+          { icon: 'email', value: user.email, click () { /* TODO : 클릭시 행동 지정 : 복사 */ } },
+          { icon: 'web', value: user.site, click () { /* TODO : 클릭시 행동 지정 : 복사 */ } }
+        ]
+      } catch (err) {
+        console.log(err)
+      }
     },
     data () {
       return {

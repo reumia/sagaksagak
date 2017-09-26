@@ -1,4 +1,4 @@
 module.exports = {
   NODE_ENV: '"production"',
-  API_ENDPOINT: '"http://api.sagaksagak.local:3001"'
+  API_ENDPOINT: '"http://api.sagaks.com"'
 }

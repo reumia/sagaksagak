@@ -8,3 +8,5 @@ SAGAKSAGAK : 사각사각 : 릴레이툰 플랫폼
 - [Vue + Vuex — Getting started](https://medium.com/wdstack/vue-vuex-getting-started-f78c03d9f65)
 - [Vuex rendering data that is fetched from REST API](https://stackoverflow.com/questions/41609155/vuex-rendering-data-that-is-fetched-from-rest-api)
 - [Nice Solutions to connect with DATABASE.](https://stackoverflow.com/questions/41609155/vuex-rendering-data-that-is-fetched-from-rest-api)
+- [Vuex preventing refresh](https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh)
+

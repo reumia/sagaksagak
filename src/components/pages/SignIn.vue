@@ -29,15 +29,13 @@
     },
     methods: {
       async signIn () {
-        try {
-          const response = await this.$http.post('/users/sign-in', {
+        if (this.$store.getters.IS_AUTHORIZED) this.$router.push({ name: 'Intro' })
+        else {
+          this.$store.dispatch('SIGN_IN', {
+            self: this,
             email: this.email,
             password: this.password
           })
-
-          console.log(response)
-        } catch (err) {
-          console.warn(err.response.data)
         }
       }
     }
