@@ -29,14 +29,14 @@
     },
     methods: {
       async signIn () {
-        if (this.$store.getters.IS_AUTHORIZED) this.$router.push({ name: 'Intro' })
-        else {
-          this.$store.dispatch('SIGN_IN', {
-            self: this,
-            email: this.email,
-            password: this.password
-          })
-        }
+        const response = await this.$store.dispatch('SIGN_IN', {
+          self: this,
+          email: this.email,
+          password: this.password
+        })
+
+        if (response === 'AUTHORIZED') this.$router.push({ name: 'Intro' })
+        if (response === 'ALREADY_AUTHORIZED') this.$router.push({ name: 'Intro' })
       }
     }
   }

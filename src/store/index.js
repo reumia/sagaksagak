@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from '../../config/axios'
+import axios from '../utils/axios'
+import handleErrors from '../utils/handleErrors'
 
 Vue.use(Vuex)
 
 const state = {
   isAuthorized: false,
-  user: {},
+  currentUser: null,
   comicsLatest: [],
   comicsBest: [],
   tree: {}
@@ -17,11 +18,14 @@ const getters = {
     return state.isAuthorized
   }
 }
-
 const mutations = {
   SIGN_IN (state, user) {
     state.isAuthorized = true
-    if (user) state.user = user
+    if (user) state.currentUser = user
+  },
+  SIGN_OUT (state) {
+    state.isAuthorized = false
+    state.currentUser = null
   },
   GET_COMICS_LATEST (state, comics) {
     state.comicsLatest = comics
@@ -30,16 +34,20 @@ const mutations = {
 
 const actions = {
   async FETCH_AUTH ({commit}) {
-    try {
+    return handleErrors(async () => {
       const response = await axios.get('/auth/check')
 
-      if (response.data.isAuthorized) commit('SIGN_IN')
-    } catch (err) {
-      console.warn(err.response.data)
-    }
+      if (response.data.isAuthorized) {
+        commit('SIGN_IN')
+        return 'AUTHORIZED'
+      } else {
+        commit('SIGN_OUT')
+        return 'UNAUTHORIZED'
+      }
+    }, commit)
   },
   async SIGN_IN ({commit}, {email, password}) {
-    try {
+    return handleErrors(async () => {
       const response = await axios.post('/auth/sign-in', {
         email: email,
         password: password
@@ -47,21 +55,16 @@ const actions = {
       const user = response.data
 
       commit('SIGN_IN', user)
-    } catch (err) {
-      if (err.response.data === 'ALREADY_AUTHORIZED') commit('SIGN_IN')
-
-      console.warn(err.response.data)
-    }
+      return 'AUTHORIZED'
+    }, commit)
   },
   async GET_COMICS_LATEST ({ commit }) {
-    try {
+    handleErrors(async () => {
       const response = await axios.get(`/comics`)
       const comics = response.data
 
       commit('GET_COMICS_LATEST', comics)
-    } catch (err) {
-      console.warn(err.response.data)
-    }
+    }, commit)
   }
 }
 

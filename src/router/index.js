@@ -89,12 +89,22 @@ const router = new Router({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.meta.auth === false) next()
-  else {
-    console.log(`isAuthorized? ${store.getters.IS_AUTHORIZED}`)
+router.beforeEach(async (to, from, next) => {
+  // TODO : 새로고침 시 State 초기화 되면서 권한 필요 페이지 모두다 로그인으로 redirect 되는 문제
+  // https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh
 
-    if (store.state.isAuthorized) next()
+  // 로그인이 불필요한 페이지 : 통과
+  if (to.meta.auth === false) next()
+  // 로그인이 필요한 페이지
+  else {
+    // 인증 동기화
+    const result = await store.dispatch('FETCH_AUTH')
+
+    // 인증된 경우 : 통과
+    if (result === 'AUTHORIZED') next()
+    // 인증해제된 경우 : 로그인
+    else if (result === 'UNAUTHORIZED') next({name: 'SignIn'})
+    // 나머지 경우 : 로그인
     else next({name: 'SignIn'})
   }
 })
