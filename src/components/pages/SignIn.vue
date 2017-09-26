@@ -15,7 +15,6 @@
 </template>
 
 <script>
-  // TODO : 로그인 페이지 구성 https://github.com/jacobwise/vuex-firebase/blob/master/src/components/Login.vue
   import Card from '@/components/partials/Card'
 
   export default {
