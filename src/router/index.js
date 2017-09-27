@@ -90,8 +90,10 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  // 미인증 상태일 경우 인증체크
+  if (store.state.isAuthorized === false) store.dispatch('FETCH_AUTH')
   // 로그인이 불필요한 페이지 : 통과
-  if (to.meta.auth === false) next()
+  if (store.state.isAuthorized === true && to.meta.auth === false) next()
   // 로그인이 필요한 페이지
   else {
     // 인증 동기화
