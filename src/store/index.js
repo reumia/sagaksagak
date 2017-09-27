@@ -13,10 +13,8 @@ const state = {
 }
 
 const getters = {
-  IS_AUTHORIZED (state) {
-    return state.isAuthorized
-  }
 }
+
 const mutations = {
   SIGN_IN (state, user) {
     state.isAuthorized = true
