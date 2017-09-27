@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store'
 
-import Intro from '@/components/pages/Intro'
+import Home from '@/components/pages/Home'
 import SignIn from '@/components/pages/SignIn'
 import SignUp from '@/components/pages/SignUp'
 import Cut from '@/components/pages/Cut'
@@ -16,8 +16,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Intro',
-      component: Intro,
+      name: 'Home',
+      component: Home,
       meta: {
         auth: false
       }

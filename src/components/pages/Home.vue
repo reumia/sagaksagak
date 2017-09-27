@@ -20,7 +20,7 @@
     name: 'intro',
     components: { Carousel, Card, Index },
     created () {
-      this.$store.dispatch('GET_COMICS_LATEST', { self: this })
+      this.$store.dispatch('GET_LATEST_COMICS')
     },
     data () {
       return {

@@ -24,7 +24,7 @@ const mutations = {
     state.isAuthorized = false
     state.currentUser = null
   },
-  GET_COMICS_LATEST (state, comics) {
+  SET_LATEST_COMICS (state, comics) {
     state.comicsLatest = comics
   }
 }
@@ -41,11 +41,11 @@ const actions = {
 
     commit('SIGN_IN', user)
   },
-  async GET_COMICS_LATEST ({ commit }) {
+  async GET_LATEST_COMICS ({ commit }) {
     const response = await axios.get(`/comics`)
     const comics = response.data
 
-    commit('GET_COMICS_LATEST', comics)
+    commit('SET_LATEST_COMICS', comics)
   }
 }
 
