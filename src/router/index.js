@@ -89,19 +89,17 @@ const router = new Router({
   ]
 })
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach((to, from, next) => {
   // 로그인이 불필요한 페이지 : 통과
   if (to.meta.auth === false) next()
   // 로그인이 필요한 페이지
   else {
     // 인증 동기화
-    const result = await store.dispatch('FETCH_AUTH')
-    // 인증된 경우 : 통과
-    if (result === 'AUTHORIZED') next()
-    // 인증해제된 경우 : 로그인
-    else if (result === 'UNAUTHORIZED') next({name: 'SignIn'})
-    // 나머지 경우 : 로그인
-    else next({name: 'SignIn'})
+    store.dispatch('FETCH_AUTH')
+      // 인증된 경우 : 통과
+      .then(() => next())
+      // 미인증/인증만료된 경우 : 로그인
+      .catch(() => next({name: 'SignIn'}))
   }
 })
 

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../utils/axios'
-import handleErrors from '../utils/handleErrors'
 
 Vue.use(Vuex)
 
@@ -34,37 +33,22 @@ const mutations = {
 
 const actions = {
   async FETCH_AUTH ({commit}) {
-    return handleErrors(async () => {
-      const response = await axios.get('/auth/check')
+    const response = await axios.get('/auth/check')
 
-      if (response.data.isAuthorized) {
-        commit('SIGN_IN')
-        return 'AUTHORIZED'
-      } else {
-        commit('SIGN_OUT')
-        return 'UNAUTHORIZED'
-      }
-    }, commit)
+    if (response.data.isAuthorized) commit('SIGN_IN')
+    else commit('SIGN_OUT')
   },
   async SIGN_IN ({commit}, {email, password}) {
-    return handleErrors(async () => {
-      const response = await axios.post('/auth/sign-in', {
-        email: email,
-        password: password
-      })
-      const user = response.data
+    const response = await axios.post('/auth/sign-in', { email: email, password: password })
+    const user = response.data
 
-      commit('SIGN_IN', user)
-      return 'AUTHORIZED'
-    }, commit)
+    commit('SIGN_IN', user)
   },
   async GET_COMICS_LATEST ({ commit }) {
-    handleErrors(async () => {
-      const response = await axios.get(`/comics`)
-      const comics = response.data
+    const response = await axios.get(`/comics`)
+    const comics = response.data
 
-      commit('GET_COMICS_LATEST', comics)
-    }, commit)
+    commit('GET_COMICS_LATEST', comics)
   }
 }
 

@@ -27,14 +27,15 @@
       }
     },
     methods: {
-      async signIn () {
-        const response = await this.$store.dispatch('SIGN_IN', {
-          email: this.email,
-          password: this.password
-        })
-
-        if (response === 'AUTHORIZED') this.$router.push({ name: 'Intro' })
-        if (response === 'ALREADY_AUTHORIZED') this.$router.push({ name: 'Intro' })
+      signIn () {
+        this.$store.dispatch('SIGN_IN', { email: this.email, password: this.password })
+          .then(() => {
+            this.$router.push({ name: 'Intro' })
+          })
+          .catch((err) => {
+            const errorCode = err.response.data
+            console.warn(errorCode)
+          })
       }
     }
   }
