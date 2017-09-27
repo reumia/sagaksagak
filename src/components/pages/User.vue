@@ -22,12 +22,12 @@
   import Index from '@/components/partials/Index'
   import Featured from '@/components/partials/Featured'
   import Card from '@/components/partials/Card'
-  import formatter from '@/mixin/formatter'
+  import filters from '@/utils/filters'
 
   export default {
-    mixins: [ formatter ],
     name: 'user',
     props: [ 'id' ],
+    filters: filters,
     components: { Card, Index, Featured },
     async created () {
       try {
@@ -41,8 +41,8 @@
         this.descriptions = user.descriptions
         this.stickers = [user.status]
         this.items = [
-          { icon: 'heart', value: this.currency(user.likes), click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
-          { icon: 'sagak', value: this.currency(user.cuts), click () {} },
+          { icon: 'heart', value: this.$options.filters.formatCurrency(user.likes), click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
+          { icon: 'sagak', value: this.$options.filters.formatCurrency(user.cuts), click () {} },
           { icon: 'email', value: user.email, click () { /* TODO : 클릭시 행동 지정 : 복사 */ } },
           { icon: 'web', value: user.site, click () { /* TODO : 클릭시 행동 지정 : 복사 */ } }
         ]

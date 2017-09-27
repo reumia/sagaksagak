@@ -2,8 +2,9 @@
   <router-link :to="{ name: 'Comic', params: { id: id } }" class="index-item" :style="{ width: width }">
     <div class="index-item-body">
       <div class="index-item-text">
+        <div class="date">{{ createdAt | formatDate }}</div>
         {{ title }}
-        {{ createdAt }}
+
         {{ id }}
         {{ imageUrl }}
       </div>
@@ -12,9 +13,12 @@
 </template>
 
 <script>
+  import filters from '@/utils/filters'
+
   export default {
     name: 'index-item',
     props: [ 'width', 'id', 'title', 'createdAt', 'imageUrl' ],
+    filters: filters,
     data () {
       return {
       }

@@ -19,12 +19,12 @@
 <script>
   import Card from '@/components/partials/Card'
   import Featured from '@/components/partials/Featured'
-  import formatter from '@/mixin/formatter'
+  import filters from '@/utils/filters'
 
   export default {
-    mixins: [ formatter ],
     name: 'comic',
     props: [ 'id' ],
+    filters: filters,
     components: { Card, Featured },
     async created () {
       const response = await this.$http.get(`/comics/${this.id}`)
@@ -36,8 +36,8 @@
       this.stickers = [comic.status]
       this.items = [
         { icon: 'person', value: comic.owner.name, click () { /* TODO : 클릭시 행동 지정 : 유저이동 */ } },
-        { icon: 'heart', value: this.currency(comic.likes), click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
-        { icon: 'sagak', value: this.currency(comic.cuts), click () {} }
+        { icon: 'heart', value: this.$options.filters.formatCurrency(comic.likes), click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
+        { icon: 'sagak', value: this.$options.filters.formatCurrency(comic.cuts), click () {} }
       ]
     },
     data () {
