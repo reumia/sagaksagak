@@ -28,6 +28,13 @@ const router = new Router({
       component: SignIn,
       meta: {
         auth: false
+      },
+      beforeEnter (to, from, next) {
+        store.dispatch('FETCH_AUTH')
+          // 인증된 경우 : 마이페이지
+          .then(() => next({ name: 'MyPage' }))
+          // 미인증/인증만료된 경우 : 통과
+          .catch(() => next())
       }
     },
     {
@@ -101,10 +108,9 @@ router.beforeEach((to, from, next) => {
       // 인증된 경우 : 통과
       .then(() => next())
       // 미인증/인증만료된 경우 : 로그인
-      .catch(err => {
-        console.log(err)
+      .catch(() => {
         store.dispatch('SIGN_OUT')
-        next({name: 'SignIn'})
+        next({ name: 'SignIn' })
       })
   }
 })
