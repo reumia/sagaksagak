@@ -30,16 +30,19 @@ const mutations = {
 }
 
 const actions = {
-  FETCH_AUTH ({commit}) {
-    axios.get('/auth/check')
-      .then(() => commit('SIGN_IN'))
-      .catch(() => commit('SIGN_OUT'))
+  async FETCH_AUTH ({commit}) {
+    await axios.get('/auth/check')
+
+    commit('SIGN_IN')
   },
   async SIGN_IN ({commit}, {email, password}) {
     const response = await axios.post('/auth/sign-in', { email: email, password: password })
     const user = response.data
 
     commit('SIGN_IN', user)
+  },
+  SIGN_OUT ({commit}) {
+    commit('SIGN_OUT')
   },
   async GET_LATEST_COMICS ({ commit }) {
     const response = await axios.get(`/comics`)
