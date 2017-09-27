@@ -1,11 +1,14 @@
 <template>
   <router-link :to="{ name: 'Comic', params: { id: id } }" class="index-item" :style="{ width: width }">
     <div class="index-item-body">
-      <div v-if="imageUrl" class="image" :style="{ backgroundImage: `url(${imageUrl})`}"></div>
-    </div>
-    <div class="index-item-contents">
-      <div class="title">{{ title }}</div>
-      <div class="date">{{ createdAt | formatDate }}</div>
+      <div class="index-item-contents">
+        <div v-if="imageUrl" class="image" :style="{ backgroundImage: `url(${imageUrl})`}"></div>
+        <div class="texts">
+          <div class="title">{{ title }}</div>
+          <div class="date">{{ createdAt | formatDate }}</div>
+        </div>
+      </div>
+
     </div>
   </router-link>
 </template>
@@ -39,16 +42,7 @@
     box-sizing: border-box;
     padding-top: 100%;
     background-color: $color-background;
-    .image {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-size: cover;
-      background-color: $color-disabled;
-      background-position: center center;
-    }
+    box-shadow: $box-shadow-unit;
     &:after {
       content: '';
       position: absolute;
@@ -56,19 +50,45 @@
       bottom: 0;
       left: 0;
       right: 0;
-      border: 2px solid rgba(0,0,0,.1);
+      border: 1px solid rgba(0,0,0,.1);
     }
   }
 
   .index-item-contents {
-    font-size: $font-size-small;
-    .title {
-      margin-top: $space-unit / 2;
-      font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    .image {
+      position: relative;
+      flex: 1;
+      background-size: cover;
+      background-color: $color-disabled;
+      background-position: center center;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-bottom: 1px solid rgba(0,0,0,.05);
+      }
     }
-    .date {
-      color: $color-text-lighter;
-      font-size: $font-size-smaller;
+    .texts {
+      padding: $space-unit;
+      font-size: $font-size-small;
+      .title {
+        margin-bottom: $space-unit / 4;
+        font-weight: bold;
+      }
+      .date {
+        color: $color-text-lighter;
+        font-size: $font-size-smaller;
+      }
     }
   }
 </style>
