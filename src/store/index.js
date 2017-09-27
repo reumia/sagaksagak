@@ -32,11 +32,10 @@ const mutations = {
 }
 
 const actions = {
-  async FETCH_AUTH ({commit}) {
-    const response = await axios.get('/auth/check')
-
-    if (response.data.isAuthorized) commit('SIGN_IN')
-    else commit('SIGN_OUT')
+  FETCH_AUTH ({commit}) {
+    axios.get('/auth/check')
+      .then(() => commit('SIGN_IN'))
+      .catch(() => commit('SIGN_OUT'))
   },
   async SIGN_IN ({commit}, {email, password}) {
     const response = await axios.post('/auth/sign-in', { email: email, password: password })

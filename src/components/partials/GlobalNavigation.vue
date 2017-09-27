@@ -1,8 +1,8 @@
 <template>
   <div class="nav" :class="{active: isShown}" role="navigation">
     <nav class="nav-list">
-      <router-link v-if="$store.getters.IS_AUTHORIZED" :to="{ name: 'MyPage' }" class="nav-list-item">My Page</router-link>
-      <router-link v-if="$store.getters.IS_AUTHORIZED === false" :to="{ name: 'SignIn' }" class="nav-list-item">Sign In</router-link>
+      <router-link v-if="$store.state.isAuthorized" :to="{ name: 'MyPage' }" class="nav-list-item">My Page</router-link>
+      <router-link v-else :to="{ name: 'SignIn' }" class="nav-list-item">Sign In</router-link>
       <router-link :to="{ name: 'Cut', params: { id: 0 } }" class="nav-list-item">Cut 0</router-link>
       <router-link :to="{ name: 'Cut', params: { id: 3 } }" class="nav-list-item">Cut 3</router-link>
       <router-link :to="{ name: 'User', params: { id: 3 } }" class="nav-list-item">User</router-link>
