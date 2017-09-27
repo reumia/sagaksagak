@@ -2,7 +2,6 @@
   <Card class="my-page" title="My Page">
     <div class="button-wrap">
       <button class="button button-primary" @click.prevent="signOut">로그아웃</button>
-      <button class="button button-danger">비밀번호 재설정</button>
     </div>
   </Card>
 </template>

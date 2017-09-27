@@ -59,7 +59,7 @@ const router = new Router({
       name: 'ResetPassword',
       component: SignIn,
       meta: {
-        auth: true
+        auth: false
       }
     },
     {
