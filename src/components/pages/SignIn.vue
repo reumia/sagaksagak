@@ -30,7 +30,7 @@
       signIn () {
         this.$store.dispatch('SIGN_IN', { email: this.email, password: this.password })
           .then(() => {
-            this.$router.push({ name: 'Intro' })
+            this.$router.push({ name: 'Home' })
           })
           .catch((err) => {
             const errorCode = err.response.data

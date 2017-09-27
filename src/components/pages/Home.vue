@@ -1,5 +1,5 @@
 <template>
-  <div class="page-intro">
+  <div class="page-home">
     <Carousel></Carousel>
 
     <Card title="인기사각">
@@ -17,7 +17,7 @@
   import Card from '@/components/partials/Card'
 
   export default {
-    name: 'intro',
+    name: 'home',
     components: { Carousel, Card, Index },
     created () {
       this.$store.dispatch('GET_LATEST_COMICS')
