@@ -1,18 +1,23 @@
 <template>
-  <form class="my-page" @submit.prevent="updateUser">
-    <Card title="기본 정보">
-      <input class="input" v-model="email" type="email" placeholder="이메일"/>
-      <input class="input" v-model="name" type="text" placeholder="이름"/>
-    </Card>
-    <Card title="비밀번호 변경">
-      <input class="input" v-model="password" type="password" placeholder="기존 비밀번호"/>
-      <input class="input" v-model="newPassword" type="password" placeholder="새 비밀번호"/>
-    </Card>
-    <Card>
-      <button class="button button-primary" type="submit">정보수정</button>
+  <div class="my-page">
+    <Card title="마이페이지">
       <button class="button button-danger" @click.prevent="signOut">로그아웃</button>
     </Card>
-  </form>
+    <Card title="기본 정보">
+      <form class="my-page" @submit.prevent="updateUser">
+        <input class="input" v-model="email" type="email" placeholder="이메일"/>
+        <input class="input" v-model="name" type="text" placeholder="이름"/>
+        <button class="button button-primary" type="submit">정보수정</button>
+      </form>
+    </Card>
+    <Card title="비밀번호 변경">
+      <form class="my-page" @submit.prevent="updatePassword">
+        <input class="input" v-model="password" type="password" placeholder="기존 비밀번호"/>
+        <input class="input" v-model="newPassword" type="password" placeholder="새 비밀번호"/>
+        <button class="button button-primary" type="submit">비밀번호 변경</button>
+      </form>
+    </Card>
+  </div>
 </template>
 
 <script>
@@ -38,6 +43,9 @@
     methods: {
       updateUser () {
         // TODO : 유저 정보 수정
+      },
+      updatePassword () {
+        // TODO : 비밀번호 변경
       },
       signOut () {
         this.$store.dispatch('SIGN_OUT')
