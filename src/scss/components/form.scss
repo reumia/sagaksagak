@@ -53,4 +53,8 @@
     border-color: darken($color-brand, 10);
     background-color: $color-brand;
   }
+  &.button-danger {
+    border-color: darken($color-danger, 10);
+    background-color: $color-danger;
+  }
 }

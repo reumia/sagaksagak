@@ -33,7 +33,7 @@ const router = new Router({
         store.dispatch('FETCH_AUTH')
           // 인증된 경우 : 마이페이지
           .then(() => next({ name: 'MyPage' }))
-          // 미인증/인증만료된 경우 : 통과
+          // 미인증, 인증만료된 경우 : 통과
           .catch(() => next())
       }
     },
@@ -97,8 +97,6 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('isAuthorized', store.state.isAuthorized)
-
   // 로그인이 불필요한 페이지 : 통과
   if (to.meta.auth === false) next()
   // 로그인이 필요한 페이지
@@ -107,10 +105,16 @@ router.beforeEach((to, from, next) => {
     store.dispatch('FETCH_AUTH')
       // 인증된 경우 : 통과
       .then(() => next())
-      // 미인증/인증만료된 경우 : 로그인
+      // 미인증, 인증만료된 경우
       .catch(() => {
+        // 로그아웃, 인증만료 처리
         store.dispatch('SIGN_OUT')
-        next({ name: 'SignIn' })
+          // 로그인 페이지 이동
+          .then(() => next({ name: 'SignIn' }))
+          .catch(err => {
+            console.warn(err.response.data)
+            next({ name: 'SignIn' })
+          })
       })
   }
 })

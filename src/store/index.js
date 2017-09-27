@@ -16,9 +16,8 @@ const getters = {
 }
 
 const mutations = {
-  SIGN_IN (state, user) {
+  SIGN_IN (state) {
     state.isAuthorized = true
-    if (user) state.currentUser = user
   },
   SIGN_OUT (state) {
     state.isAuthorized = false
@@ -26,6 +25,12 @@ const mutations = {
   },
   SET_LATEST_COMICS (state, comics) {
     state.comicsLatest = comics
+  },
+  SET_CURRENT_USER (state, user) {
+    state.currentUser = user
+  },
+  DELETE_CURRENT_USER (state) {
+    state.currentUser = null
   }
 }
 
@@ -39,10 +44,14 @@ const actions = {
     const response = await axios.post('/auth/sign-in', { email: email, password: password })
     const user = response.data
 
-    commit('SIGN_IN', user)
+    commit('SIGN_IN')
+    commit('SET_CURRENT_USER', user)
   },
-  SIGN_OUT ({commit}) {
+  async SIGN_OUT ({commit}) {
+    await axios.post('/auth/sign-out')
+
     commit('SIGN_OUT')
+    commit('DELETE_CURRENT_USER')
   },
   async GET_LATEST_COMICS ({ commit }) {
     const response = await axios.get(`/comics`)
