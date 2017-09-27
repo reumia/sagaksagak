@@ -99,6 +99,8 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  store.dispatch('HIDE_GLOBAL_NAVIGATION')
+
   // 로그인이 불필요한 페이지 : 통과
   if (to.meta.auth === false) next()
   // 로그인이 필요한 페이지

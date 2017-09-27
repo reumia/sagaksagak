@@ -5,17 +5,24 @@ import axios from '../utils/axios'
 Vue.use(Vuex)
 
 const state = {
+  isGlobalNavigationVisible: false,
   isAuthorized: false,
   currentUser: null,
-  comicsLatest: [],
-  comicsBest: [],
-  tree: {}
+  comicsLatest: null,
+  comicsBest: null,
+  tree: null
 }
 
 const getters = {
 }
 
 const mutations = {
+  TOGGLE_GLOBAL_NAVIGATION (state) {
+    state.isGlobalNavigationVisible = state.isGlobalNavigationVisible === false
+  },
+  HIDE_GLOBAL_NAVIGATION (state) {
+    state.isGlobalNavigationVisible = false
+  },
   SIGN_IN (state) {
     state.isAuthorized = true
   },
@@ -35,6 +42,12 @@ const mutations = {
 }
 
 const actions = {
+  TOGGLE_GLOBAL_NAVIGATION ({commit}) {
+    commit('TOGGLE_GLOBAL_NAVIGATION')
+  },
+  HIDE_GLOBAL_NAVIGATION ({commit}) {
+    commit('HIDE_GLOBAL_NAVIGATION')
+  },
   async FETCH_AUTH ({commit}) {
     await axios.get('/auth/check')
 

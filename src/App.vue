@@ -1,34 +1,29 @@
 <template>
   <div class="app">
-    <AppHeader @toggleAside="toggleAside" :class="{'with-aside': isAsideShown}"></AppHeader>
-    <GlobalNavigation :isShown="isAsideShown" @close="toggleAside"></GlobalNavigation>
-    <main class="app__body" :class="{'with-aside': isAsideShown}">
+    <AppHeader @toggleAside="toggleAside" :class="{'with-aside': isGlobalNavigationVisible}"></AppHeader>
+    <GlobalNavigation :isShown="isGlobalNavigationVisible" @close="toggleAside"></GlobalNavigation>
+    <main class="app__body" :class="{'with-aside': isGlobalNavigationVisible}">
       <router-view></router-view>
     </main>
-    <!-- <AppFooter :class="{'with-aside': isAsideShown}"></AppFooter> -->
     <transition name="fade">
-      <div class="dimmed" v-if="isAsideShown" @click="toggleAside"></div>
+      <div class="dimmed" v-if="isGlobalNavigationVisible" @click="toggleAside"></div>
     </transition>
   </div>
 </template>
 
 <script>
   import 'vue'
+  import { mapState } from 'vuex'
   import AppHeader from '@/components/partials/AppHeader'
-  // import AppFooter from '@/components/partials/AppFooter'
   import GlobalNavigation from '@/components/partials/GlobalNavigation'
 
   export default {
     name: 'app',
     components: { AppHeader, GlobalNavigation },
-    data () {
-      return {
-        isAsideShown: false
-      }
-    },
+    computed: mapState([ 'isGlobalNavigationVisible' ]),
     methods: {
       toggleAside () {
-        this.isAsideShown = this.isAsideShown === false
+        this.$store.dispatch('TOGGLE_GLOBAL_NAVIGATION')
       }
     }
   }

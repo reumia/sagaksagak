@@ -1,5 +1,5 @@
 <template>
-  <div class="nav" :class="{active: isShown}" role="navigation">
+  <div class="nav" :class="{active: $store.state.isGlobalNavigationVisible}" role="navigation">
     <nav class="nav-list">
       <router-link v-if="$store.state.isAuthorized" :to="{ name: 'MyPage' }" class="nav-list-item">My Page</router-link>
       <router-link v-else :to="{ name: 'SignIn' }" class="nav-list-item">Sign In</router-link>
@@ -13,7 +13,6 @@
 <script>
   export default {
     name: 'global-navigation',
-    props: ['isShown'],
     data () {
       return {
         msg: ''
