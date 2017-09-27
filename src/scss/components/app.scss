@@ -36,7 +36,7 @@ html {
 }
 
 .app__footer {
-  @include transition (transform)
+  @include transition (transform);
   margin-top: $space-unit * 4;
   padding: $space-unit;
   color: $color-disabled;

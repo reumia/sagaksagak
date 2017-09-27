@@ -53,6 +53,12 @@ const actions = {
     commit('SIGN_OUT')
     commit('DELETE_CURRENT_USER')
   },
+  async GET_CURRENT_USER ({commit}) {
+    const response = await axios.get('/users/@me')
+    const user = response.data
+
+    commit('SET_CURRENT_USER', user)
+  },
   async GET_LATEST_COMICS ({ commit }) {
     const response = await axios.get(`/comics`)
     const comics = response.data

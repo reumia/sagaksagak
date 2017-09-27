@@ -1,15 +1,15 @@
 <template>
-  <Card class="sign-up" title="회원가입">
-    <form class="form-sign-up" @submit.prevent="signUp">
+  <form class="sign-up" @submit.prevent="signUp">
+    <Card title="회원가입">
       <div class="input-wrap">
-        <input class="input" v-model="email" type="email" placeholder="이메일"/>
-        <input class="input" v-model="password" type="password" placeholder="비밀번호"/>
-      </div>
-      <div class="button-wrap">
+        <input class="input" v-model="email" type="email" placeholder="이메일" required/>
+        <input class="input" v-model="password" type="password" placeholder="비밀번호" required/>
+        <input class="input" v-model="name" type="text" placeholder="이름" required/>
         <button class="button button-primary" type="submit">회원가입</button>
+        <button class="button" @click="$router.go(-1)">취소</button>
       </div>
-    </form>
-  </Card>
+    </Card>
+  </form>
 </template>
 
 <script>
@@ -17,25 +17,26 @@
 
   export default {
     name: 'sign-up',
+    metaInfo: {
+      title: '회원가입'
+    },
     components: { Card },
     data () {
       return {
         email: '',
-        password: ''
+        password: '',
+        name: ''
       }
     },
     methods: {
-      async signUp () {
-        try {
-          const response = await this.$http.post(`/users/sign-up`, {
-            email: this.email,
-            password: this.password
-          })
-
-          console.log(response)
-        } catch (err) {
-          console.warn(err.response.data)
-        }
+      signUp () {
+        this.$http.post(`/auth/sign-up`, {
+          email: this.email,
+          password: this.password,
+          name: this.name
+        })
+          .then(() => this.$router.push({ name: 'SignIn' }))
+          .catch(err => console.warn(err.response.data))
       }
     }
   }
@@ -45,11 +46,7 @@
   @import 'init';
 
   .sign-up {
+    margin: 0 auto;
     max-width: $site-width / 2.5;
-  }
-
-  .input ~ .input,
-  .input ~ .button {
-    margin-top: $space-unit / 2;
   }
 </style>

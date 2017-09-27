@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Meta from 'vue-meta'
 import store from '../store'
 
 import Home from '@/components/pages/Home'
@@ -11,6 +12,7 @@ import User from '@/components/pages/User'
 import MyPage from '@/components/pages/MyPage'
 
 Vue.use(Router)
+Vue.use(Meta)
 
 const router = new Router({
   routes: [

@@ -1,9 +1,14 @@
 <template>
-  <Card class="my-page" title="My Page">
-    <div class="button-wrap">
-      <button class="button button-primary" @click.prevent="signOut">로그아웃</button>
-    </div>
-  </Card>
+  <form class="my-page" @submit.prevent="updateUser">
+    <Card title="My Page">
+      <div class="input-wrap">
+        <input class="input" v-model="$store.state.currentUser.email" type="email" placeholder="이메일"/>
+        <input class="input" v-model="$store.state.currentUser.name" type="text" placeholder="이름"/>
+        <button class="button button-primary" type="submit">정보수정</button>
+        <button class="button button-danger" @click.prevent="signOut">로그아웃</button>
+      </div>
+    </Card>
+  </form>
 </template>
 
 <script>
@@ -12,23 +17,13 @@
   export default {
     name: 'mypage',
     components: { Card },
-    async created () {
-      try {
-      } catch (err) {
-      }
-    },
-    data () {
-      return {
-        backgroundImage: '',
-        foregroundImage: '',
-        title: '',
-        descriptions: '',
-        stickers: '',
-        items: [],
-        comics: []
-      }
+    beforeCreate () {
+      this.$store.dispatch('GET_CURRENT_USER')
     },
     methods: {
+      updateUser () {
+        // TODO : 유저 정보 수정
+      },
       signOut () {
         this.$store.dispatch('SIGN_OUT')
           .then(() => {
@@ -47,6 +42,7 @@
   @import 'init';
 
   .my-page {
-    max-width: $site-width / 2.5;
+    margin: 0 auto;
+    max-width: $site-width-narrow;
   }
 </style>

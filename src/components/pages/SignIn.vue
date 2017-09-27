@@ -1,17 +1,17 @@
 <template>
-  <Card class="sign-in" title="로그인">
-    <form class="form-sign-in" @submit.prevent="signIn">
-      <div class="input-wrap">
-        <input class="input" v-model="email" type="email" placeholder="이메일"/>
-        <input class="input" v-model="password" type="password" placeholder="비밀번호"/>
-        <button class="button button-primary" type="submit">로그인</button>
-      </div>
-      <div class="button-wrap">
-        <button class="button" @click.prevent="$router.push({name: 'SignUp'})">회원가입</button>
-        <button class="button" @click.prevent="$router.push({name: 'ResetPassword'})">비밀번호 재설정</button>
-      </div>
-    </form>
-  </Card>
+  <div class="sign-in">
+    <Card title="로그인">
+      <form @submit.prevent="signIn">
+        <div class="input-wrap">
+          <input class="input" v-model="email" type="email" placeholder="이메일"/>
+          <input class="input" v-model="password" type="password" placeholder="비밀번호"/>
+          <button class="button button-primary" type="submit">로그인</button>
+          <button class="button button-success" @click.prevent="$router.push({name: 'SignUp'})">회원가입</button>
+          <button class="button" @click.prevent="$router.push({name: 'ResetPassword'})">비밀번호 재설정</button>
+        </div>
+      </form>
+    </Card>
+  </div>
 </template>
 
 <script>
@@ -19,6 +19,9 @@
 
   export default {
     name: 'sign-in',
+    metaInfo: {
+      title: '로그인'
+    },
     components: { Card },
     data () {
       return {
@@ -45,11 +48,7 @@
   @import 'init';
 
   .sign-in {
-    max-width: $site-width / 2.5;
-  }
-
-  .input ~ .input,
-  .input ~ .button {
-    margin-top: $space-unit / 2;
+    margin: 0 auto;
+    max-width: $site-width-narrow;
   }
 </style>

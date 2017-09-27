@@ -17,7 +17,7 @@
   display: flex;
   margin-top: $space-unit / 2;
   .button ~ .button {
-    margin-left: $space-unit / 2;
+    margin: 0 0 0 $space-unit / 2;
   }
 }
 
@@ -53,8 +53,20 @@
     border-color: darken($color-brand, 10);
     background-color: $color-brand;
   }
+  &.button-success {
+    border-color: darken($color-success, 10);
+    background-color: $color-success;
+  }
   &.button-danger {
     border-color: darken($color-danger, 10);
     background-color: $color-danger;
+  }
+}
+
+form {
+  .input ~ .input,
+  .input ~ .button,
+  .button ~ .button {
+    margin-top: $space-unit / 2;
   }
 }
