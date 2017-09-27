@@ -17,9 +17,6 @@
 
   export default {
     name: 'sign-up',
-    metaInfo: {
-      title: '회원가입'
-    },
     components: { Card },
     data () {
       return {

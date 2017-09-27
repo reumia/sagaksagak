@@ -19,9 +19,6 @@
 
   export default {
     name: 'sign-in',
-    metaInfo: {
-      title: '로그인'
-    },
     components: { Card },
     data () {
       return {
