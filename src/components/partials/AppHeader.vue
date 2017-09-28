@@ -1,7 +1,9 @@
 <template>
   <header class="app__header">
     <div class="header-menu">
-      <button class="header-menu-button" type="button" @click="$emit('toggleAside')">MENU</button>
+      <button class="header-menu-button" type="button" @click="$emit('toggleAside')">
+        <i class="material-icons icon">menu</i>
+      </button>
     </div>
     <div class="header-logo">
       <router-link :to="{name: 'Home'}" class="header-logo-link">SAGAKSAGAK</router-link>
@@ -44,25 +46,17 @@
     @extend %form-init;
     display: inline-block;
     width: auto;
+    font-size: $font-size-large;
     line-height: $header-height;
     text-align: left;
     white-space: nowrap;
+    .icon {
+      color: $color-text-lighter;
+    }
   }
 
   .header-logo-link {
-    font-size: $font-size-large;
     font-weight: bold;
     color: $color-brand;
-  }
-
-  .header-button-wrap {
-    display: flex;
-    justify-content: flex-end;
-    text-align: right;
-    white-space: nowrap;
-  }
-
-  .header-button ~ .header-button {
-    margin-left: $space-unit;
   }
 </style>

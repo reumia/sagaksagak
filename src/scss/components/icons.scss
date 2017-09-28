@@ -1,23 +1,7 @@
-.icon-logo {
-    width: 64px;
-    background-image: url(/static/img/ico-logo.png);
-    background-size: 64px 34px;
-}
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-.icon-menu {
-    width: 34px;
-    background-image: url(/static/img/ico-menu.png);
-    background-size: 34px 34px;
-}
-
-.icon-user-logged-out {
-    width: 34px;
-    background-image: url(/static/img/ico-user-logged-out.png);
-    background-size: 34px 34px;
-}
-
-.icon-user-logged-in {
-    width: 34px;
-    background-image: url(/static/img/ico-user-logged-in.png);
-    background-size: 34px 34px;
+.icon {
+  font-size: 1em;
+  line-height: 1;
+  vertical-align: -1px;
 }

@@ -1,9 +1,9 @@
 <template>
   <div class="featured">
-    <div class="featured-background" :style="{ backgroundImage: `url(${backgroundImage})` }"></div>
+    <div class="featured-background" v-if="backgroundImage" :style="{ backgroundImage: `url(${backgroundImage})` }"></div>
     <div class="featured-body">
       <img v-if="foregroundImage" class="featured-foreground" :src="foregroundImage" />
-      <div class="featured-stickers">
+      <div class="featured-stickers" :class="{ 'active': backgroundImage }">
         <Sticker v-if="stickers" v-for="sticker in stickers" :key="sticker" :code="sticker"></Sticker>
       </div>
       <div class="featured-title">
@@ -72,8 +72,10 @@ $featured-body-height: $space-unit * 10;
 
 .featured-stickers {
   position: absolute;
-  top: -13px;
   right: $space-unit * 2;
+  &.active {
+    top: -13px;
+  }
 }
 
 .featured-title {

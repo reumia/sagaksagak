@@ -49,6 +49,10 @@
       display: block;
     }
   }
+  &.button-small {
+    padding: 6px 10px;
+    font-size: $font-size-small;
+  }
   &.button-primary {
     border-color: darken($color-brand, 10);
     background-color: $color-brand;

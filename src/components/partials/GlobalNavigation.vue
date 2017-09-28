@@ -1,18 +1,32 @@
 <template>
   <div class="nav" :class="{active: $store.state.isGlobalNavigationVisible}" role="navigation">
     <!-- 닫기 버튼 -->
-    <button class="nav-close" @click="$store.dispatch('HIDE_GLOBAL_NAVIGATION')">닫기</button>
-    <!-- 유저 버튼 -->
-    <router-link class="nav-user active" v-if="IS_CURRENT_USER_EXIST" :to="{ name: 'User', params: { id: currentUser.id } }">
-      <button class="button-config" @click="$router.push({ name: 'MyPage' })"><i class="material-icons">settings</i></button>
-      <div class="title">{{ currentUser.name }}</div>
-      <div class="info">
-        <div class="info-email">{{ currentUser.email }}</div>
+    <button class="nav-close" @click="$store.dispatch('HIDE_GLOBAL_NAVIGATION')">
+      <i class="material-icons icon">close</i>
+    </button>
+    <!-- 유저 버튼 : 인증 -->
+    <div class="nav-user active" v-if="IS_CURRENT_USER_EXIST">
+      <router-link class="link" :to="{ name: 'User', params: { id: currentUser.id } }" >
+        <div class="title">{{ currentUser.name }}</div>
+        <div class="info">
+          <div class="info-email">{{ currentUser.email }}</div>
+        </div>
+      </router-link>
+      <div class="button-wrap">
+        <button class="button button-primary button-small" @click="$router.push({ name: 'MyPage' })">
+          <i class="material-icons icon">settings</i> 정보수정
+        </button>
+        <button class="button button-danger button-small" @click="$store.dispatch('SIGN_OUT')">
+          <i class="material-icons icon">exit_to_app</i> 로그아웃
+        </button>
       </div>
-    </router-link>
-    <router-link class="nav-user" v-else :to="{ name: 'SignIn' }">
-      <div class="title">로그인</div>
-    </router-link>
+    </div>
+    <!-- 유저 버튼 : 미인증 -->
+    <div class="nav-user" v-else>
+      <router-link class="link" :to="{ name: 'SignIn' }">
+        <div class="title">로그인</div>
+      </router-link>
+    </div>
     <!-- 네비게이션 버튼 -->
     <nav class="nav-list">
       <router-link :to="{ name: 'Home' }" class="nav-list-item">About SAGAKSAGAK</router-link>
@@ -64,26 +78,23 @@
     @extend %form-init;
     padding: 0 ($space-unit * 2);
     height: $header-height;
-    color: $color-text-lighter;
     text-align: left;
   }
 
   .nav-user {
-    position: relative;
+    overflow: hidden;
     display: block;
-    padding: ($space-unit * 1.5) ($space-unit * 2);
-    background-color: $color-text-lighter;
-    text-decoration: none;
+    background-color: $color-text;
     &.active {
-      background-color: $color-brand;
+      background-color: $color-text;
     }
-    .button-config {
-      @extend %form-init;
-      position: absolute;
-      top: $space-unit * 1.5;
-      right: $space-unit * 2;
-      width: auto;
-      cursor: pointer;
+    .link {
+      display: block;
+      padding: ($space-unit * 1.5) ($space-unit * 2);
+      text-decoration: none;
+    }
+    .button-wrap {
+      margin: ($space-unit * 0.5 * -1) ($space-unit * 2) ($space-unit * 1.5);
     }
     .title {
       color: $color-background;
