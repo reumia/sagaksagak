@@ -33,7 +33,7 @@
       <router-link :to="{ name: 'Home' }" class="nav-list-item">About SAGAKSAGAK</router-link>
       <router-link :to="{ name: 'Cut', params: { id: 0 } }" class="nav-list-item">Cut 0</router-link>
       <router-link :to="{ name: 'Cut', params: { id: 3 } }" class="nav-list-item">Cut 3</router-link>
-      <router-link :to="{ name: 'User', params: { id: 3 } }" class="nav-list-item">User</router-link>
+      <router-link :to="{ name: 'User', params: { id: 3 } }" class="nav-list-item">User 3</router-link>
     </nav>
   </div>
 </template>
@@ -87,8 +87,12 @@
     display: block;
     padding: $space-unit * 2;
     background-color: $color-text;
-    &.active {
-      background-color: $color-text;
+    .title {
+      color: $color-background;
+    }
+    .info {
+      color: transparentize($color-background, .3);
+      font-size: $font-size-small;
     }
     .button-wrap {
       margin-top: $space-unit;
@@ -98,13 +102,6 @@
       .button ~ .button {
         margin-top: ($space-unit / 4);
       }
-    }
-    .title {
-      color: $color-background;
-    }
-    .info {
-      color: transparentize($color-background, .3);
-      font-size: $font-size-small;
     }
   }
 
