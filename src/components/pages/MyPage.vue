@@ -17,8 +17,8 @@
     </Card>
     <Card>
       <div class="button-flex">
-        <button class="button button-primary" type="submit"><i class="icon material-icons">settings</i> 정보수정</button>
-        <button class="button button-danger" @click.prevent="signOut"><i class="icon material-icons">power_settings_new</i> 로그아웃</button>
+        <button class="button button-primary" type="submit"><i class="icon material-icons">check</i> 확인</button>
+        <button class="button" @click.prevent="$router.go(-1)"><i class="icon material-icons">close</i> 취소</button>
       </div>
     </Card>
   </div>

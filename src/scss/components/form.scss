@@ -75,9 +75,9 @@
 }
 
 form {
-  .input ~ .input,
-  .input ~ .button,
-  .button ~ .button {
-    margin-top: $space-unit / 2;
+  .input,
+  .button,
+  .button-flex {
+    margin-bottom: $space-unit / 2;
   }
 }
