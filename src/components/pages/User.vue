@@ -9,7 +9,7 @@
       :items="items"
     ></Featured>
 
-    <Card title="소유중인 사각">
+    <Card title="운영중인 사각">
       <Index :items="comics"></Index>
     </Card>
     <Card title="참여중인 사각">

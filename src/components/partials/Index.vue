@@ -8,7 +8,6 @@
         :title="item.title"
         :createdAt="item.created_at"
         :imageUrl="item.image_url"
-        :width="`${100 / rowsInColumn}%`"
       ></IndexItem>
     </div>
   </div>
@@ -20,12 +19,7 @@
   export default {
     name: 'index',
     components: { IndexItem },
-    props: [ 'items' ],
-    computed: {
-      rowsInColumn () {
-        return 4
-      }
-    }
+    props: [ 'items' ]
   }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'Comic', params: { id: id } }" class="index-item" :style="{ width: width }">
+  <router-link :to="{ name: 'Comic', params: { id: id } }" class="index-item">
     <div class="index-item-body">
       <div class="index-item-contents">
         <div v-if="imageUrl" class="image" :style="{ backgroundImage: `url(${imageUrl})`}"></div>
@@ -32,9 +32,17 @@
 
   .index-item {
     box-sizing: border-box;
+    display: block;
+    width: 100%;
     padding: $space-unit / 2;
     color: $color-text;
     text-decoration: none;
+    @media screen and (min-width: 376px) {
+      width: 50%;
+    }
+    @media screen and (min-width: 769px) {
+      width: 25%;
+    }
   }
 
   .index-item-body {
