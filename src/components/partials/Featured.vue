@@ -10,8 +10,8 @@
         {{ title }}
       </div>
       <div class="featured-items">
-        <button v-for="item in items" class="featured-item" @click="item.click">
-          <i :class="`icon-${item.icon}`"></i>
+        <button v-for="item in items" v-if="item.value" class="featured-item" @click="item.click">
+          <i class="icon material-icons">{{ item.icon }}</i>
           {{ item.value }}
         </button>
       </div>
@@ -104,5 +104,8 @@ $featured-body-height: $space-unit * 10;
   font-size: $font-size-small;
   width: auto;
   text-decoration: none;
+  .icon {
+    vertical-align: -2px;
+  }
 }
 </style>

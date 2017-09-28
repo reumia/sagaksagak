@@ -41,10 +41,10 @@
         this.descriptions = user.descriptions
         this.stickers = [user.status]
         this.items = [
-          { icon: 'heart', value: this.$options.filters.formatCurrency(user.likes), click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
-          { icon: 'sagak', value: this.$options.filters.formatCurrency(user.cuts), click () {} },
+          { icon: 'favorite', value: this.$options.filters.formatCurrency(user.likes), click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
+          { icon: 'crop_square', value: this.$options.filters.formatCurrency(user.cuts), click () {} },
           { icon: 'email', value: user.email, click () { /* TODO : 클릭시 행동 지정 : 복사 */ } },
-          { icon: 'web', value: user.site, click () { /* TODO : 클릭시 행동 지정 : 복사 */ } }
+          { icon: 'web_asset', value: user.site, click () { /* TODO : 클릭시 행동 지정 : 복사 */ } }
         ]
       } catch (err) {
         console.log(err)
