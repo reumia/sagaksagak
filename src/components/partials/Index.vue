@@ -20,10 +20,10 @@
   export default {
     name: 'index',
     components: { IndexItem },
-    props: [ 'items', 'rows' ],
+    props: [ 'items' ],
     computed: {
       rowsInColumn () {
-        return typeof this.rows !== 'undefined' ? this.rows : 4
+        return 4
       }
     }
   }

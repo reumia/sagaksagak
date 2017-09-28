@@ -13,7 +13,7 @@
       <Index :items="comics"></Index>
     </Card>
     <Card title="참여중인 사각">
-      <Index :rows="6"></Index>
+      <Index></Index>
     </Card>
   </div>
 </template>
