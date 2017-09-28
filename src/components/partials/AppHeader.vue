@@ -1,10 +1,10 @@
 <template>
   <header class="app__header">
+    <div class="header-menu">
+      <button class="header-menu-button" type="button" @click="$emit('toggleAside')">MENU</button>
+    </div>
     <div class="header-logo">
       <router-link :to="{name: 'Home'}" class="header-logo-link">SAGAKSAGAK</router-link>
-    </div>
-    <div class="header-button-wrap">
-      <button class="header-button" type="button" @click="$emit('toggleAside')">MENU</button>
     </div>
   </header>
 </template>
@@ -25,12 +25,21 @@
 <style lang="scss" rel="stylesheet/scss" scoped>
   @import 'init';
 
-  .header-logo,
-  .header-button-wrap {
-    flex: 1;
+  .app__header {
+    position: relative;
+    display: flex;
+    padding: 0 $space-unit;
+    color: $color-brand;
+    background-color: $color-background;
+    box-shadow: $box-shadow-unit;
   }
 
-  .header-button,
+  .header-logo,
+  .header-menu {
+    padding-left: $space-unit;
+  }
+
+  .header-menu-button,
   .header-logo-link {
     @extend %form-init;
     display: inline-block;

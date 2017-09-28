@@ -17,4 +17,12 @@
 
 <style lang="scss" scoped rel="stylesheet/scss">
   @import 'init';
+
+  .app__footer {
+    @include transition (padding);
+    margin-top: $space-unit * 4;
+    padding: $space-unit;
+    color: $color-disabled;
+    text-align: center;
+  }
 </style>

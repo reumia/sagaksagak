@@ -1,5 +1,6 @@
 <template>
   <div class="nav" :class="{active: $store.state.isGlobalNavigationVisible}" role="navigation">
+    <button class="nav-close" @click="$store.dispatch('HIDE_GLOBAL_NAVIGATION')">닫기</button>
     <nav class="nav-list">
       <router-link v-if="$store.state.isAuthorized" :to="{ name: 'MyPage' }" class="nav-list-item">My Page</router-link>
       <router-link v-else :to="{ name: 'SignIn' }" class="nav-list-item">Sign In</router-link>
@@ -30,34 +31,35 @@
     overflow: hidden;
     position: fixed;
     top: 0;
+    bottom: 0;
     left: 0;
-    right: 0;
-    padding: 0 ($space-unit * 2);
+    width: $aside-width;
     background-color: $color-background;
-    transform: translateY(-$aside-height);
+    box-shadow: $box-shadow-unit;
+    transform: translateX(-$aside-width);
     &.active {
-      transform: translateY(0);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+      transform: translateX(0);
     }
   }
 
   .nav-close {
     @extend %form-init;
-    width: auto;
-    height: $aside-height;
+    padding: 0 ($space-unit * 2);
+    height: $header-height;
+    background-color: $color-text;
+    color: $color-background;
+    text-align: left;
   }
 
   .nav-list {
-    display: flex;
-    justify-content: center;
+    padding: $space-unit 0;
   }
 
   .nav-list-item {
+    display: block;
     text-decoration: none;
-    padding: 0 $space-unit;
+    padding: $space-unit ($space-unit * 2);
     color: $color-text;
-    height: $aside-height;
-    line-height: $aside-height;
     text-transform: uppercase;
     &.active {
       color: $color-brand;
@@ -65,7 +67,7 @@
   }
 
   .with-aside {
-    /* transform: translateY($aside-height); */
+    padding-right: $aside-width;
   }
 
 </style>

@@ -1,12 +1,12 @@
 <template>
   <div class="app">
-    <AppHeader @toggleAside="toggleAside" :class="{'with-aside': isGlobalNavigationVisible}"></AppHeader>
-    <GlobalNavigation :isShown="isGlobalNavigationVisible" @close="toggleAside"></GlobalNavigation>
-    <main class="app__body" :class="{'with-aside': isGlobalNavigationVisible}">
+    <AppHeader @toggleAside="$store.dispatch('TOGGLE_GLOBAL_NAVIGATION')"></AppHeader>
+    <GlobalNavigation :isShown="isGlobalNavigationVisible" @close="$store.dispatch('TOGGLE_GLOBAL_NAVIGATION')"></GlobalNavigation>
+    <main class="app__body">
       <router-view></router-view>
     </main>
     <transition name="fade">
-      <div class="dimmed" v-if="isGlobalNavigationVisible" @click="toggleAside"></div>
+      <div class="dimmed" v-if="isGlobalNavigationVisible" @click="$store.dispatch('HIDE_GLOBAL_NAVIGATION')"></div>
     </transition>
   </div>
 </template>
@@ -20,15 +20,6 @@
   export default {
     name: 'app',
     components: { AppHeader, GlobalNavigation },
-    computed: mapState([ 'isGlobalNavigationVisible' ]),
-    methods: {
-      toggleAside () {
-        this.$store.dispatch('TOGGLE_GLOBAL_NAVIGATION')
-      }
-    }
+    computed: mapState([ 'isGlobalNavigationVisible' ])
   }
 </script>
-
-<style lang="scss" rel="stylesheet/scss">
-  @import 'init';
-</style>
