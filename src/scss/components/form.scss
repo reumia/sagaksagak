@@ -13,7 +13,7 @@
   color: $color-border-dark;
 }
 
-.button-wrap {
+.button-flex {
   display: flex;
   margin-top: $space-unit / 2;
   .button ~ .button {
