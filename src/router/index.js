@@ -46,7 +46,7 @@ const router = new Router({
       }
     },
     {
-      path: '/user/update',
+      path: '/user/my-page',
       name: 'MyPage',
       component: MyPage,
       props: true,

@@ -5,9 +5,9 @@
       <button class="button button-danger" @click.prevent="signOut">로그아웃</button>
     </Card>
     <Card title="기본 정보">
-      <form class="my-page" @submit.prevent="updateUser">
-        <input class="input" v-model="email" type="email" placeholder="이메일"/>
-        <input class="input" v-model="name" type="text" placeholder="이름"/>
+      <form class="my-page" v-if="IS_CURRENT_USER_EXIST" @submit.prevent="updateUser">
+        <input class="input" v-model="currentUser.email" type="email" placeholder="이메일"/>
+        <input class="input" v-model="currentUser.name" type="text" placeholder="이름"/>
         <button class="button button-primary" type="submit">정보수정</button>
       </form>
     </Card>
@@ -23,7 +23,7 @@
 
 <script>
   import Card from '@/components/partials/Card'
-  import { mapState } from 'vuex'
+  import { mapState, mapGetters } from 'vuex'
 
   export default {
     name: 'mypage',
@@ -37,10 +37,10 @@
         newPassword: ''
       }
     },
-    computed: mapState({
-      email: state => state.currentUser ? state.currentUser.email : '',
-      name: state => state.currentUser ? state.currentUser.name : ''
-    }),
+    computed: {
+      ...mapState([ 'currentUser' ]),
+      ...mapGetters([ 'IS_CURRENT_USER_EXIST' ])
+    },
     methods: {
       updateUser () {
         // TODO : 유저 정보 수정

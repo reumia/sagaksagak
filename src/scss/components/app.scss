@@ -29,8 +29,8 @@ html {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: $color-brand;
-  opacity: .9;
+  background-color: $color-text-lighter;
+  opacity: .8;
   &.fade-enter-active,
   &.fade-leave-active {
     @include transition (opacity);

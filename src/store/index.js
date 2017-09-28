@@ -14,6 +14,7 @@ const state = {
 }
 
 const getters = {
+  IS_CURRENT_USER_EXIST: state => state.currentUser !== null
 }
 
 const mutations = {
