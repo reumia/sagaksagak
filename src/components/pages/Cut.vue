@@ -37,18 +37,15 @@
     },
     methods: {
       getIndex () {
-        let filtered = this.siblings.findIndex(item => {
+        return this.siblings.findIndex(item => {
           return item.id === parseInt(this.id, 10)
         })
-
-        return filtered
       },
       getScrollHorizontal () {
         const index = this.getIndex()
         const itemWidth = this.sagakWidth + this.sagakMargin
-        const result = (window.innerWidth - itemWidth) / 2 - (index * itemWidth)
 
-        this.scrollHorizontal = result
+        this.scrollHorizontal = (window.innerWidth - itemWidth) / 2 - (index * itemWidth)
       },
       // TODO : 키보드 이동
       // TODO : 부모 자식 이동
