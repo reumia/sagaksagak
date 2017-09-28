@@ -3,8 +3,8 @@
     <Card title="로그인">
       <form @submit.prevent="signIn">
         <div class="input-wrap">
-          <input class="input" v-model="email" type="email" placeholder="이메일"/>
-          <input class="input" v-model="password" type="password" placeholder="비밀번호"/>
+          <input class="input" v-model="email" type="email" placeholder="이메일" required/>
+          <input class="input" v-model="password" type="password" placeholder="비밀번호" required/>
           <button class="button button-primary" type="submit">로그인</button>
           <button class="button button-success" @click.prevent="$router.push({name: 'SignUp'})">회원가입</button>
           <button class="button" @click.prevent="$router.push({name: 'ResetPassword'})">비밀번호 재설정</button>
@@ -22,8 +22,8 @@
     components: { Card },
     data () {
       return {
-        email: '',
-        password: ''
+        email: 'test@test.com',
+        password: 'testtest'
       }
     },
     methods: {

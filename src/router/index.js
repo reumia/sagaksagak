@@ -23,7 +23,7 @@ const router = new Router({
       }
     },
     {
-      path: '/user/sign-in',
+      path: '/sign-in',
       name: 'SignIn',
       component: SignIn,
       meta: {
@@ -38,7 +38,7 @@ const router = new Router({
       }
     },
     {
-      path: '/user/sign-up',
+      path: '/sign-up',
       name: 'SignUp',
       component: SignUp,
       meta: {
@@ -46,7 +46,7 @@ const router = new Router({
       }
     },
     {
-      path: '/user/my-page',
+      path: '/user/update',
       name: 'MyPage',
       component: MyPage,
       props: true,

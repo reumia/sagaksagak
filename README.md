@@ -9,4 +9,4 @@ SAGAKSAGAK : 사각사각 : 릴레이툰 플랫폼
 - [Vuex rendering data that is fetched from REST API](https://stackoverflow.com/questions/41609155/vuex-rendering-data-that-is-fetched-from-rest-api)
 - [Nice Solutions to connect with DATABASE.](https://stackoverflow.com/questions/41609155/vuex-rendering-data-that-is-fetched-from-rest-api)
 - [Vuex preventing refresh](https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh)
-
+- [이메일로 로그인 인증 플로우](https://okky.kr/article/276855)

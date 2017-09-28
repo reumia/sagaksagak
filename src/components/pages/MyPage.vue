@@ -1,6 +1,7 @@
 <template>
   <div class="my-page">
     <Card title="마이페이지">
+      {{ $store.state.currentUser }}
       <button class="button button-danger" @click.prevent="signOut">로그아웃</button>
     </Card>
     <Card title="기본 정보">
