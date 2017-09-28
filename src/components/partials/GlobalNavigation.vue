@@ -2,6 +2,7 @@
   <div class="nav" :class="{active: $store.state.isGlobalNavigationVisible}" role="navigation">
     <button class="nav-close" @click="$store.dispatch('HIDE_GLOBAL_NAVIGATION')">닫기</button>
     <nav class="nav-list">
+      <router-link :to="{ name: 'Home' }" class="nav-list-item">About SAGAKSAGAK</router-link>
       <router-link v-if="$store.state.isAuthorized" :to="{ name: 'MyPage' }" class="nav-list-item">My Page</router-link>
       <router-link v-else :to="{ name: 'SignIn' }" class="nav-list-item">Sign In</router-link>
       <router-link :to="{ name: 'Cut', params: { id: 0 } }" class="nav-list-item">Cut 0</router-link>
