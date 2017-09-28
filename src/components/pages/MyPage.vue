@@ -1,22 +1,25 @@
 <template>
   <div class="my-page">
-    <Card title="마이페이지">
-      {{ $store.state.currentUser }}
-      <button class="button button-danger" @click.prevent="signOut">로그아웃</button>
-    </Card>
-    <Card title="기본 정보">
-      <form class="my-page" v-if="IS_CURRENT_USER_EXIST" @submit.prevent="updateUser">
-        <input class="input" v-model="currentUser.email" type="email" placeholder="이메일"/>
-        <input class="input" v-model="currentUser.name" type="text" placeholder="이름"/>
-        <button class="button button-primary" type="submit">정보수정</button>
-      </form>
-    </Card>
     <Card title="비밀번호 변경">
       <form class="my-page" @submit.prevent="updatePassword">
         <input class="input" v-model="password" type="password" placeholder="기존 비밀번호"/>
         <input class="input" v-model="newPassword" type="password" placeholder="새 비밀번호"/>
-        <button class="button button-primary" type="submit">비밀번호 변경</button>
       </form>
+    </Card>
+    <Card title="유저정보 변경">
+      <form class="my-page" v-if="IS_CURRENT_USER_EXIST" @submit.prevent="updateUser">
+        <input class="input" v-model="currentUser.email" type="email" placeholder="이메일" disabled/>
+        <input class="input" v-model="currentUser.name" type="text" placeholder="이름"/>
+        <input class="input" v-model="currentUser.site" type="url" placeholder="웹사이트"/>
+        <input class="input" v-model="currentUser.profile_image_url" type="text" placeholder="프로필 이미지"/>
+        <input class="input" v-model="currentUser.featured_image_url" type="text" placeholder="전경 이미지"/>
+      </form>
+    </Card>
+    <Card>
+      <div class="button-flex">
+        <button class="button button-primary" type="submit"><i class="icon material-icons">settings</i> 정보수정</button>
+        <button class="button button-danger" @click.prevent="signOut"><i class="icon material-icons">power_settings_new</i> 로그아웃</button>
+      </div>
     </Card>
   </div>
 </template>

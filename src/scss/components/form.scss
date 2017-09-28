@@ -7,6 +7,10 @@
     border-color: $color-brand;
     color: $color-text;
   }
+  &[disabled] {
+    background-color: transparent;
+    color: $color-disabled;
+  }
 }
 
 ::-webkit-input-placeholder {
@@ -16,8 +20,11 @@
 .button-flex {
   display: flex;
   margin-top: $space-unit / 2;
+  .input ~ .input,
+  .input ~ .button,
+  .button ~ .input,
   .button ~ .button {
-    margin: 0 0 0 $space-unit / 2;
+    margin: 0 0 0 $space-unit / 2 !important;
   }
 }
 
