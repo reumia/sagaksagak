@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <div class="items">
+    <div class="item-wrap">
       <IndexItem
         v-for="item in items"
         :key="item.id"
@@ -26,7 +26,7 @@
 <style lang="scss" scoped>
   @import 'init';
 
-  .items {
+  .item-wrap {
     display: flex;
     flex-wrap: wrap;
     margin: $space-unit / -2;

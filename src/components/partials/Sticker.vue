@@ -33,18 +33,18 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import 'init';
 
   [class^=sticker] {
     display: inline-block;
-    padding: 2px 6px 0;
-    border: 3px solid;
-    background-color: $color-background;
-    color: $color-text;
+    border-radius: $radius-unit;
+    padding: 3px 6px 1px;
+    background-color: $color-text;
+    color: $color-background;
     font-size: $font-size-smaller;
     font-weight: bold;
-    vertical-align: middle;
+    vertical-align: 5px;
   }
 
   [class^=sticker] ~ [class^=sticker] {
@@ -52,16 +52,16 @@ export default {
   }
 
   .sticker-default {
-    color: $color-text-light;
+    background-color: $color-text-light;
   }
   .sticker-success {
-    color: $color-success;
+    background-color: $color-success;
   }
   .sticker-warning {
-    color: $color-warning;
+    background-color: $color-warning;
   }
   .sticker-danger {
-    color: $color-danger;
+    background-color: $color-danger;
   }
   .sticker-hot {
     color: hotpink;
