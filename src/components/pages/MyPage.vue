@@ -31,9 +31,6 @@
   export default {
     name: 'mypage',
     components: { Card },
-    created () {
-      this.$store.dispatch('GET_CURRENT_USER')
-    },
     data () {
       return {
         password: '',
