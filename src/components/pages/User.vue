@@ -1,6 +1,7 @@
 <template>
   <div class="page-user">
     <Featured
+      :isMine="isMine"
       :backgroundImage="backgroundImage"
       :foregroundImage="foregroundImage"
       :title="title"
@@ -29,6 +30,11 @@
     props: [ 'id' ],
     filters: filters,
     components: { Card, Index, Featured },
+    computed: {
+      isMine () {
+        return this.$store.state.currentUser ? this.id === this.$store.state.currentUser.id : false
+      }
+    },
     async created () {
       try {
         const response = await this.$http.get(`/users/${this.id}`)

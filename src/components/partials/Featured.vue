@@ -1,10 +1,10 @@
 <template>
-  <div class="featured" :class="{ 'active': backgroundImage }">
+  <div class="featured" :class="{ 'with-background': backgroundImage, 'with-functions': isMine }">
     <div class="featured-background" v-if="backgroundImage" :style="{ backgroundImage: `url(${backgroundImage})` }"></div>
     <div class="featured-body">
       <img v-if="foregroundImage" class="image" :src="foregroundImage" />
       <div class="text-wrap">
-        <div class="button-wrap">
+        <div class="function-wrap" v-if="isMine">
           <button class="button button-small button-primary">코믹관리</button>
           <button class="button button-small button-success">컷관리</button>
           <button class="button button-small button-danger">버튼</button>
@@ -16,13 +16,13 @@
           </div>
         </div>
         <div class="info-wrap">
-          <div v-if="descriptions" class="descriptions">{{ descriptions }}</div>
           <div class="item-wrap">
             <button v-for="item in items" v-if="item.value" class="item" @click="item.click">
               <i class="icon material-icons">{{ item.icon }}</i>
               {{ item.value }}
             </button>
           </div>
+          <div v-if="descriptions" class="descriptions">{{ descriptions }}</div>
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@ import Sticker from '@/components/partials/Sticker'
 
 export default {
   name: 'featured',
-  props: [ 'backgroundImage', 'foregroundImage', 'title', 'descriptions', 'stickers', 'items' ],
+  props: [ 'isMine', 'backgroundImage', 'foregroundImage', 'title', 'descriptions', 'stickers', 'items' ],
   components: { Sticker }
 }
 </script>
@@ -63,9 +63,11 @@ $featured-body-height: $space-unit * 10;
   margin: ($space-unit * 2) auto 0;
   padding: 0 ($space-unit * 2);
   max-width: $site-width;
-  min-height: $space-unit * 12;
-
-  .active & {
+  max-height: $space-unit * 12;
+  .with-functions & {
+    margin-top: $space-unit * 4
+  }
+  .with-background & {
     margin-top: ($space-unit * -6)
   }
 
@@ -89,7 +91,7 @@ $featured-body-height: $space-unit * 10;
     flex: 1;
     background-color: #fff;
   }
-  .button-wrap {
+  .function-wrap {
     overflow: hidden;
     position: absolute;
     border-radius: $radius-unit;
@@ -121,15 +123,13 @@ $featured-body-height: $space-unit * 10;
   }
   .info-wrap {
     display: flex;
-    margin: $space-unit ($space-unit / -2);
-    .descriptions,
-    .item-wrap,
-    .button-wrap {
-      padding: 0 ($space-unit / 2);
-    }
-    .descriptions {
-      font-size: $font-size-small;
-    }
+    margin: $space-unit 0;
+  }
+  .descriptions {
+    margin-left: $space-unit * 2;
+    padding-left: $space-unit;
+    border-left: 1px solid $color-border;
+    font-size: $font-size-small;
   }
   .item {
     @extend %form-init;

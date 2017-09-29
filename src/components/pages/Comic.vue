@@ -1,6 +1,7 @@
 <template>
   <div class="page-comic">
     <Featured
+      :isMine="isMine"
       :backgroundImage="backgroundImage"
       :title="title"
       :descriptions="descriptions"
@@ -26,6 +27,12 @@
     props: [ 'id' ],
     filters: filters,
     components: { Card, Featured },
+    computed: {
+      // TODO : 인증한 사용자의 만화인지 아닌지
+      isMine () {
+        return false
+      }
+    },
     async created () {
       const response = await this.$http.get(`/comics/${this.id}`)
       const comic = response.data
