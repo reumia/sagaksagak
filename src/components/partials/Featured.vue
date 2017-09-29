@@ -133,13 +133,18 @@ $featured-body-height: $space-unit * 10;
   }
   .item {
     @extend %form-init;
+    @include transition(color);
     color: $color-text-light;
     font-size: $font-size-small;
     width: auto;
     text-decoration: none;
     white-space: nowrap;
+    cursor: pointer;
     .icon {
       vertical-align: -2px;
+    }
+    &:hover {
+      color: $color-brand;
     }
   }
   .item ~ .item {
