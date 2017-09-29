@@ -47,6 +47,9 @@
       ...mapState([ 'currentUser' ]),
       ...mapGetters([ 'IS_CURRENT_USER_EXIST' ])
     },
+    created () {
+      this.$store.dispatch('GET_CURRENT_USER')
+    },
     data () {
       return {
         msg: ''
