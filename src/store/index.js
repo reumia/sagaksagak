@@ -6,7 +6,6 @@ Vue.use(Vuex)
 
 const state = {
   isGlobalNavigationVisible: false,
-  isAuthorized: false,
   currentUser: null,
   comicsLatest: null,
   comicsBest: null,
@@ -23,13 +22,6 @@ const mutations = {
   },
   HIDE_GLOBAL_NAVIGATION (state) {
     state.isGlobalNavigationVisible = false
-  },
-  SIGN_IN (state) {
-    state.isAuthorized = true
-  },
-  SIGN_OUT (state) {
-    state.isAuthorized = false
-    state.currentUser = null
   },
   SET_LATEST_COMICS (state, comics) {
     state.comicsLatest = comics
@@ -49,31 +41,24 @@ const actions = {
   HIDE_GLOBAL_NAVIGATION ({commit}) {
     commit('HIDE_GLOBAL_NAVIGATION')
   },
-  async FETCH_AUTH ({commit}) {
-    await axios.get('/auth/check')
-
-    commit('SIGN_IN')
-  },
   async SIGN_IN ({commit}, {email, password}) {
     const response = await axios.post('/auth/sign-in', { email: email, password: password })
     const user = response.data
 
-    commit('SIGN_IN')
     commit('SET_CURRENT_USER', user)
   },
   async SIGN_OUT ({commit}) {
     await axios.post('/auth/sign-out')
 
-    commit('SIGN_OUT')
     commit('DELETE_CURRENT_USER')
   },
-  async GET_CURRENT_USER ({commit}) {
+  async GET_CURRENT_USER ({getters, commit}) {
     const response = await axios.get('/users/@me')
     const user = response.data
 
     commit('SET_CURRENT_USER', user)
   },
-  async GET_LATEST_COMICS ({ commit }) {
+  async GET_LATEST_COMICS ({commit}) {
     const response = await axios.get(`/comics`)
     const comics = response.data
 

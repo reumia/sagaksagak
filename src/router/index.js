@@ -30,9 +30,13 @@ const router = new Router({
         auth: false
       },
       beforeEnter (to, from, next) {
-        store.dispatch('FETCH_AUTH')
+        store.dispatch('GET_CURRENT_USER')
           // 인증된 경우 : 마이페이지
-          .then(() => next({ name: 'MyPage' }))
+          .then(() => {
+            console.log()
+            if (from.name) next({ name: from.name })
+            else next({ name: 'Home' })
+          })
           // 미인증, 인증만료된 경우 : 통과
           .catch(() => next())
       }
@@ -97,27 +101,30 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  /* 네비게이션 숨기기 */
   store.dispatch('HIDE_GLOBAL_NAVIGATION')
 
-  // 로그인이 불필요한 페이지 : 통과
-  if (to.meta.auth === false) next()
-  // 로그인이 필요한 페이지
-  else {
-    // 인증 동기화
-    store.dispatch('FETCH_AUTH')
-      // 인증된 경우 : 통과
+  /* 현재유저 체크 */
+  if (store.getters.IS_CURRENT_USER_EXIST === false) {
+    store.dispatch('GET_CURRENT_USER')
       .then(() => next())
-      // 미인증, 인증만료된 경우
       .catch(() => {
-        // 로그아웃, 인증만료 처리
-        store.dispatch('SIGN_OUT')
+        // 로그인이 불필요한 페이지 : 통과
+        if (to.meta.auth === false) next()
+        // 로그인이 필요한 페이지
+        else {
+          // 로그아웃, 인증만료 처리
+          store.dispatch('SIGN_OUT')
           // 로그인 페이지 이동
-          .then(() => next({ name: 'SignIn' }))
-          .catch(err => {
-            console.warn(err.response.data)
-            next({ name: 'SignIn' })
-          })
+            .then(() => next({ name: 'SignIn' }))
+            .catch(err => {
+              console.warn(err.response.data)
+              next({ name: 'SignIn' })
+            })
+        }
       })
+  } else {
+    next()
   }
 })
 

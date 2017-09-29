@@ -24,6 +24,7 @@
   import Featured from '@/components/partials/Featured'
   import Card from '@/components/partials/Card'
   import filters from '@/utils/filters'
+  import { mapState } from 'vuex'
 
   export default {
     name: 'user',
@@ -31,8 +32,9 @@
     filters: filters,
     components: { Card, Index, Featured },
     computed: {
+      ...mapState([ 'currentUser' ]),
       isMine () {
-        return this.$store.state.currentUser ? this.id === this.$store.state.currentUser.id : false
+        return this.$store.getters.IS_CURRENT_USER_EXIST && this.currentUser.id === parseInt(this.id, 10)
       }
     },
     async created () {
