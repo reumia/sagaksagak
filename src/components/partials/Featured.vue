@@ -1,6 +1,6 @@
 <template>
-  <div class="featured" :class="{ 'with-background': backgroundImage, 'with-functions': isMine }">
-    <div class="featured-background" v-if="backgroundImage" :style="{ backgroundImage: `url(${backgroundImage})` }"></div>
+  <div class="featured" :class="{ 'with-functions': isMine }">
+    <div class="featured-background" :style="{ backgroundImage: `url(${backgroundImage})` }"></div>
     <div class="featured-body">
       <img v-if="foregroundImage" class="image" :src="foregroundImage" />
       <div class="text-wrap">
@@ -50,27 +50,19 @@ $featured-body-height: $space-unit * 10;
 
 .featured-background {
   height: $featured-background-height;
-  background-color: $color-brand;
+  background-color: $color-border;
   background-size: cover;
   background-position: center center;
-  box-shadow: $box-shadow-unit;
   color: $color-background;
 }
 
 .featured-body {
   display: flex;
   box-sizing: border-box;
-  margin: ($space-unit * 2) auto 0;
+  margin: ($space-unit * -6) auto 0;
   padding: 0 ($space-unit * 2);
   max-width: $site-width;
   max-height: $space-unit * 12;
-  .with-functions & {
-    margin-top: $space-unit * 4
-  }
-  .with-background & {
-    margin-top: ($space-unit * -6)
-  }
-
   .image,
   .text-wrap {
     box-shadow: $box-shadow-unit;
