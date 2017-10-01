@@ -52,7 +52,7 @@ const actions = {
 
     commit('DELETE_CURRENT_USER')
   },
-  async GET_CURRENT_USER ({getters, commit}) {
+  async GET_CURRENT_USER ({commit}) {
     const response = await axios.get('/users/@me')
     const user = response.data
 
