@@ -1,7 +1,18 @@
 <template>
   <div class="page-comic">
-
     {{ comic }}
+
+    <Card v-if="comic">
+      <button class="function"><i class="icon material-icons">favorite</i> {{ comic.likes | formatCurrency }}</button>
+      <button class="function"><i class="icon material-icons">crop_square</i> {{ comic.cuts | formatCurrency }}</button>
+      <router-link :to="{ name: 'User', params: { id: comic.owner_id } }" class="function"><i class="icon material-icons">person</i> {{ comic.owner_id }}</router-link>
+    </Card>
+
+    <Card v-if="isMine" class="button-flex">
+      <button class="button button-small button-primary">코믹관리</button>
+      <button class="button button-small button-success">컷관리</button>
+      <button class="button button-small button-danger">버튼</button>
+    </Card>
 
     <Card>
       Comic<br/>
@@ -14,6 +25,7 @@
 <script>
   import Card from '@/components/partials/Card'
   import filters from '@/utils/filters'
+  import { mapState } from 'vuex'
 
   export default {
     name: 'comic',
@@ -21,20 +33,17 @@
     filters: filters,
     components: { Card },
     computed: {
-      // TODO : 인증한 사용자의 만화인지 아닌지
+      ...mapState([ 'currentUser' ]),
       isMine () {
-        return false
+        return this.comic && this.comic.owner_id === parseInt(this.currentUser.id, 10)
       }
     },
-    async created () {
-      const response = await this.$http.get(`/comics/${this.id}`)
-
-      this.comic = response.data
-//      this.items = [
-//        { icon: 'person', value: comic.owner.name, click () { /* TODO : 클릭시 행동 지정 : 유저이동 */ } },
-//        { icon: 'favorite', value: this.$options.filters.formatCurrency(comic.likes), click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
-//        { icon: 'crop_square', value: this.$options.filters.formatCurrency(comic.cuts), click () {} }
-//      ]
+    created () {
+      this.$http.get(`/comics/${this.id}`)
+        .then(response => {
+          this.comic = response.data
+        })
+        .catch(err => console.warn(err))
     },
     data () {
       return {

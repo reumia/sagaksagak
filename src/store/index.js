@@ -6,7 +6,6 @@ Vue.use(Vuex)
 
 const state = {
   isGlobalNavigationVisible: false,
-  user: null,
   currentUser: null,
   comicsLatest: null,
   comicsBest: null,
@@ -22,9 +21,6 @@ const mutations = {
   },
   SET_LATEST_COMICS (state, comics) {
     state.comicsLatest = comics
-  },
-  SET_USER (state, user) {
-    state.user = user
   },
   SET_CURRENT_USER (state, user) {
     state.currentUser = user
@@ -45,12 +41,6 @@ const actions = {
     await axios.post('/auth/sign-out')
 
     commit('DELETE_CURRENT_USER')
-  },
-  async GET_USER ({commit}, {id}) {
-    const response = await axios.get(`/users/${id}`)
-    const user = response.data
-
-    commit('SET_USER', user)
   },
   async GET_CURRENT_USER ({commit}) {
     const response = await axios.get('/users/@me')

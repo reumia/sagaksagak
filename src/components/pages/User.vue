@@ -6,10 +6,10 @@
       <button class="function"><i class="icon material-icons">favorite</i> {{ user.likes | formatCurrency }}</button>
       <button class="function"><i class="icon material-icons">crop_square</i> {{ user.cuts | formatCurrency }}</button>
       <a :href="`mailto:${user.email}`" class="function"><i class="icon material-icons">email</i> {{ user.email }}</a>
-      <a v-if="user.site" :href="user.site" class="function"><i class="icon material-icons">web_asset</i> {{ user.site }}</a>
+      <a v-if="user.site" :href="user.site" class="function" target="_blank"><i class="icon material-icons">web_asset</i> {{ user.site }}</a>
     </Card>
 
-    <Card v-if="isMine">
+    <Card v-if="isMine" class="button-flex">
       <button class="button button-small button-primary">코믹관리</button>
       <button class="button button-small button-success">컷관리</button>
       <button class="button button-small button-danger">버튼</button>
@@ -37,13 +37,22 @@
     filters: filters,
     components: { Card, Index },
     computed: {
-      ...mapState([ 'currentUser', 'user' ]),
+      ...mapState([ 'currentUser' ]),
       isMine () {
         return this.currentUser && this.currentUser.id === parseInt(this.id, 10)
       }
     },
     created () {
-      this.$store.dispatch('GET_USER', {id: this.id})
+      this.$http.get(`/users/${this.id}`)
+        .then(response => {
+          this.user = response.data
+        })
+        .catch(err => console.warn(err))
+    },
+    data () {
+      return {
+        user: null
+      }
     }
   }
 </script>
