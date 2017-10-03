@@ -1,13 +1,7 @@
 <template>
   <div class="page-comic">
-    <Featured
-      :isMine="isMine"
-      :backgroundImage="backgroundImage"
-      :title="title"
-      :descriptions="descriptions"
-      :stickers="stickers"
-      :items="items"
-    ></Featured>
+
+    {{ comic }}
 
     <Card>
       Comic<br/>
@@ -34,25 +28,17 @@
     },
     async created () {
       const response = await this.$http.get(`/comics/${this.id}`)
-      const comic = response.data
 
-      this.backgroundImage = comic.image_url
-      this.title = comic.title
-      this.descriptions = comic.descriptions
-      this.stickers = [comic.status]
-      this.items = [
-        { icon: 'person', value: comic.owner.name, click () { /* TODO : 클릭시 행동 지정 : 유저이동 */ } },
-        { icon: 'favorite', value: this.$options.filters.formatCurrency(comic.likes), click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
-        { icon: 'crop_square', value: this.$options.filters.formatCurrency(comic.cuts), click () {} }
-      ]
+      this.comic = response.data
+//      this.items = [
+//        { icon: 'person', value: comic.owner.name, click () { /* TODO : 클릭시 행동 지정 : 유저이동 */ } },
+//        { icon: 'favorite', value: this.$options.filters.formatCurrency(comic.likes), click () { /* TODO : 클릭시 행동 지정 : 좋아요 */ } },
+//        { icon: 'crop_square', value: this.$options.filters.formatCurrency(comic.cuts), click () {} }
+//      ]
     },
     data () {
       return {
-        backgroundImage: '',
-        title: '',
-        descriptions: '',
-        stickers: '',
-        items: []
+        comic: null
       }
     }
   }
