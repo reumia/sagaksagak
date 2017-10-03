@@ -28,17 +28,6 @@ const router = new Router({
       component: SignIn,
       meta: {
         auth: false
-      },
-      beforeEnter (to, from, next) {
-        store.dispatch('GET_CURRENT_USER')
-          // 인증된 경우 : 마이페이지
-          .then(() => {
-            console.log()
-            if (from.name) next({ name: from.name })
-            else next({ name: 'Home' })
-          })
-          // 미인증, 인증만료된 경우 : 통과
-          .catch(() => next())
       }
     },
     {
