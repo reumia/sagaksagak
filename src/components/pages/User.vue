@@ -3,10 +3,12 @@
     {{ user }}
 
     <Card v-if="user">
-      <button class="function"><i class="icon material-icons">favorite</i> {{ user.likes.length | formatCurrency }}</button>
-      <button class="function"><i class="icon material-icons">crop_square</i> {{ user.cuts.length | formatCurrency }}</button>
-      <a :href="`mailto:${user.email}`" class="function"><i class="icon material-icons">email</i> {{ user.email }}</a>
-      <a v-if="user.site" :href="user.site" class="function" target="_blank"><i class="icon material-icons">web_asset</i> {{ user.site }}</a>
+      <Functions>
+        <button class="function"><i class="icon material-icons color-danger">favorite</i> {{ user.likes.length | formatCurrency }}</button>
+        <button class="function"><i class="icon material-icons">crop_square</i> {{ user.cuts.length | formatCurrency }}</button>
+        <a :href="`mailto:${user.email}`" class="function"><i class="icon material-icons">email</i> {{ user.email }}</a>
+        <a v-if="user.site" :href="user.site" class="function" target="_blank"><i class="icon material-icons">web_asset</i> {{ user.site }}</a>
+      </Functions>
     </Card>
 
     <Card v-if="isMine" class="button-flex">
@@ -28,6 +30,7 @@
 <script>
   import Index from '@/components/partials/Index'
   import Card from '@/components/partials/Card'
+  import Functions from '@/components/partials/Functions'
   import filters from '@/utils/filters'
   import { mapState } from 'vuex'
 
@@ -35,7 +38,7 @@
     name: 'user',
     props: [ 'id' ],
     filters: filters,
-    components: { Card, Index },
+    components: { Card, Index, Functions },
     computed: {
       ...mapState([ 'currentUser' ]),
       isMine () {

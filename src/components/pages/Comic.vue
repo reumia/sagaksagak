@@ -3,9 +3,11 @@
     {{ comic }}
 
     <Card v-if="comic">
-      <button class="function"><i class="icon material-icons">favorite</i> {{ comic.likes.length | formatCurrency }}</button>
-      <button class="function"><i class="icon material-icons">crop_square</i> {{ comic.cuts.length | formatCurrency }}</button>
-      <router-link :to="{ name: 'User', params: { id: comic.owner_id } }" class="function"><i class="icon material-icons">person</i> {{ comic.owner.name }}</router-link>
+      <Functions>
+        <button class="function"><i class="icon material-icons color-danger">favorite</i> {{ comic.likes.length | formatCurrency }}</button>
+        <button class="function"><i class="icon material-icons">crop_square</i> {{ comic.cuts.length | formatCurrency }}</button>
+        <router-link :to="{ name: 'User', params: { id: comic.owner_id } }" class="function"><i class="icon material-icons">person</i> {{ comic.owner.name }}</router-link>
+      </Functions>
     </Card>
 
     <Card v-if="isMine" class="button-flex">
@@ -24,6 +26,7 @@
 
 <script>
   import Card from '@/components/partials/Card'
+  import Functions from '@/components/partials/Functions'
   import filters from '@/utils/filters'
   import { mapState } from 'vuex'
 
@@ -31,7 +34,7 @@
     name: 'comic',
     props: [ 'id' ],
     filters: filters,
-    components: { Card },
+    components: { Card, Functions },
     computed: {
       ...mapState([ 'currentUser' ]),
       isMine () {
