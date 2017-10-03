@@ -1,7 +1,7 @@
 <template>
   <header class="app__header">
     <div class="header-menu">
-      <button class="header-menu-button" type="button" @click="$emit('toggleAside')">
+      <button class="header-menu-button" type="button" @click="TOGGLE_GLOBAL_NAVIGATION">
         <i class="material-icons icon">menu</i>
       </button>
     </div>
@@ -12,10 +12,11 @@
 </template>
 
 <script>
-  import 'vue'
+  import { mapMutations } from 'vuex'
 
   export default {
     name: 'app-header',
+    methods: mapMutations([ 'TOGGLE_GLOBAL_NAVIGATION' ]),
     data () {
       return {
         msg: 'Welcome to Your Vue.js App'

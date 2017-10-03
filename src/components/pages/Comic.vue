@@ -19,14 +19,13 @@
 
 <script>
   import Card from '@/components/partials/Card'
-  import Featured from '@/components/partials/Featured'
   import filters from '@/utils/filters'
 
   export default {
     name: 'comic',
     props: [ 'id' ],
     filters: filters,
-    components: { Card, Featured },
+    components: { Card },
     computed: {
       // TODO : 인증한 사용자의 만화인지 아닌지
       isMine () {

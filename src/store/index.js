@@ -6,14 +6,11 @@ Vue.use(Vuex)
 
 const state = {
   isGlobalNavigationVisible: false,
+  user: null,
   currentUser: null,
   comicsLatest: null,
   comicsBest: null,
   tree: null
-}
-
-const getters = {
-  IS_CURRENT_USER_EXIST: state => state.currentUser !== null
 }
 
 const mutations = {
@@ -26,6 +23,9 @@ const mutations = {
   SET_LATEST_COMICS (state, comics) {
     state.comicsLatest = comics
   },
+  SET_USER (state, user) {
+    state.user = user
+  },
   SET_CURRENT_USER (state, user) {
     state.currentUser = user
   },
@@ -35,12 +35,6 @@ const mutations = {
 }
 
 const actions = {
-  TOGGLE_GLOBAL_NAVIGATION ({commit}) {
-    commit('TOGGLE_GLOBAL_NAVIGATION')
-  },
-  HIDE_GLOBAL_NAVIGATION ({commit}) {
-    commit('HIDE_GLOBAL_NAVIGATION')
-  },
   async SIGN_IN ({commit}, {email, password}) {
     const response = await axios.post('/auth/sign-in', { email: email, password: password })
     const user = response.data
@@ -51,6 +45,12 @@ const actions = {
     await axios.post('/auth/sign-out')
 
     commit('DELETE_CURRENT_USER')
+  },
+  async GET_USER ({commit}, {id}) {
+    const response = await axios.get(`/users/${id}`)
+    const user = response.data
+
+    commit('SET_USER', user)
   },
   async GET_CURRENT_USER ({commit}) {
     const response = await axios.get('/users/@me')
@@ -68,7 +68,6 @@ const actions = {
 
 const store = {
   state,
-  getters,
   mutations,
   actions
 }

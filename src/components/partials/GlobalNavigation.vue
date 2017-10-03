@@ -1,11 +1,11 @@
 <template>
   <div class="nav" :class="{active: $store.state.isGlobalNavigationVisible}" role="navigation">
     <!-- 닫기 버튼 -->
-    <button class="nav-close" @click="$store.dispatch('HIDE_GLOBAL_NAVIGATION')">
+    <button class="nav-close" @click="HIDE_GLOBAL_NAVIGATION">
       <i class="material-icons icon">close</i>
     </button>
     <!-- 유저 버튼 : 인증 -->
-    <div class="nav-user active" v-if="IS_CURRENT_USER_EXIST">
+    <div class="nav-user active" v-if="currentUser">
       <div class="title">{{ currentUser.name }}</div>
       <div class="info">
         <div class="info-email">{{ currentUser.email }}</div>
@@ -39,13 +39,15 @@
 </template>
 
 <script>
-  import { mapState, mapGetters } from 'vuex'
+  import { mapState, mapMutations } from 'vuex'
 
   export default {
     name: 'global-navigation',
     computed: {
-      ...mapState([ 'currentUser' ]),
-      ...mapGetters([ 'IS_CURRENT_USER_EXIST' ])
+      ...mapState([ 'currentUser' ])
+    },
+    methods: {
+      ...mapMutations([ 'HIDE_GLOBAL_NAVIGATION' ])
     },
     data () {
       return {

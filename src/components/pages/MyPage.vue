@@ -7,7 +7,7 @@
       </form>
     </Card>
     <Card title="유저정보 변경">
-      <form class="my-page" v-if="IS_CURRENT_USER_EXIST" @submit.prevent="updateUser">
+      <form class="my-page" v-if="currentUser" @submit.prevent="updateUser">
         <input class="input" v-model="currentUser.email" type="email" placeholder="이메일" disabled/>
         <input class="input" v-model="currentUser.name" type="text" placeholder="이름"/>
         <input class="input" v-model="currentUser.site" type="url" placeholder="웹사이트"/>
@@ -26,7 +26,7 @@
 
 <script>
   import Card from '@/components/partials/Card'
-  import { mapState, mapGetters } from 'vuex'
+  import { mapState } from 'vuex'
 
   export default {
     name: 'mypage',
@@ -38,8 +38,7 @@
       }
     },
     computed: {
-      ...mapState([ 'currentUser' ]),
-      ...mapGetters([ 'IS_CURRENT_USER_EXIST' ])
+      ...mapState([ 'currentUser' ])
     },
     methods: {
       updateUser () {
