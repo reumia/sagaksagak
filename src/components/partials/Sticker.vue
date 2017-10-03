@@ -42,7 +42,7 @@ export default {
     padding: 3px 6px 1px;
     background-color: $color-text;
     color: $color-background;
-    font-size: $font-size-smaller;
+    font-size: $font-size-smallest;
     font-weight: bold;
     vertical-align: 5px;
   }

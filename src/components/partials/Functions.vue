@@ -15,26 +15,21 @@
 
   .function-wrap {
     display: flex;
+    justify-content: center;
   }
 
   .function {
     @extend %form-init;
     display: inline-block;
-    padding: 2px ($space-unit / 2) 0;
+    padding: 0 ($space-unit / 2);
     width: auto;
-    border-radius: $radius-unit;
     background-color: #fff;
     color: $color-text-light;
     font-size: $font-size-smaller;
-    line-height: 20px;
-    box-shadow: $box-shadow-unit;
+    line-height: $space-unit * 3;
     cursor: pointer;
     .icon {
       vertical-align: -2px;
     }
-  }
-
-  .function ~ .function {
-    margin-left: $space-unit / 2;
   }
 </style>
