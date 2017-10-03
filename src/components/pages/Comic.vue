@@ -3,9 +3,9 @@
     {{ comic }}
 
     <Card v-if="comic">
-      <button class="function"><i class="icon material-icons">favorite</i> {{ comic.likes | formatCurrency }}</button>
-      <button class="function"><i class="icon material-icons">crop_square</i> {{ comic.cuts | formatCurrency }}</button>
-      <router-link :to="{ name: 'User', params: { id: comic.owner_id } }" class="function"><i class="icon material-icons">person</i> {{ comic.owner_id }}</router-link>
+      <button class="function"><i class="icon material-icons">favorite</i> {{ comic.likes.length | formatCurrency }}</button>
+      <button class="function"><i class="icon material-icons">crop_square</i> {{ comic.cuts.length | formatCurrency }}</button>
+      <router-link :to="{ name: 'User', params: { id: comic.owner_id } }" class="function"><i class="icon material-icons">person</i> {{ comic.owner.name }}</router-link>
     </Card>
 
     <Card v-if="isMine" class="button-flex">

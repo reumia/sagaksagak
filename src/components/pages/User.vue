@@ -3,8 +3,8 @@
     {{ user }}
 
     <Card v-if="user">
-      <button class="function"><i class="icon material-icons">favorite</i> {{ user.likes | formatCurrency }}</button>
-      <button class="function"><i class="icon material-icons">crop_square</i> {{ user.cuts | formatCurrency }}</button>
+      <button class="function"><i class="icon material-icons">favorite</i> {{ user.likes.length | formatCurrency }}</button>
+      <button class="function"><i class="icon material-icons">crop_square</i> {{ user.cuts.length | formatCurrency }}</button>
       <a :href="`mailto:${user.email}`" class="function"><i class="icon material-icons">email</i> {{ user.email }}</a>
       <a v-if="user.site" :href="user.site" class="function" target="_blank"><i class="icon material-icons">web_asset</i> {{ user.site }}</a>
     </Card>
