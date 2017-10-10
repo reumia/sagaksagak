@@ -1,32 +1,42 @@
 <template>
   <div class="page-comic">
-    {{ comic }}
-
-    <Card v-if="comic">
+    <div class="comic-background" v-if="comic" :style="{ backgroundImage: `url(${comic.image_url})` }"></div>
+    <div class="comic" v-if="comic">
+      <div class="comic-title">
+        {{ comic.title }}
+        <Sticker :code="comic.status"></Sticker>
+      </div>
+      <div class="comic-descriptions">{{ comic.descriptions }}</div>
       <Functions>
-        <button class="function"><i class="icon material-icons color-danger">favorite</i> {{ comic.likes.length | formatCurrency }}</button>
-        <button class="function"><i class="icon material-icons">crop_square</i> {{ comic.cuts.length | formatCurrency }}</button>
+        <span class="function"><i class="icon material-icons">access_time</i> {{ comic.created_at | formatDate }}</span>
         <router-link :to="{ name: 'User', params: { id: comic.owner_id } }" class="function"><i class="icon material-icons">person</i> {{ comic.owner.name }}</router-link>
+        <button class="function color-danger"><i class="icon material-icons">favorite</i> {{ comic.likes.length | formatCurrency }}</button>
+        <button class="function"><i class="icon material-icons">crop_square</i> {{ comic.cuts.length | formatCurrency }}</button>
       </Functions>
-    </Card>
+    </div>
 
-    <Card v-if="isMine" class="button-flex">
+    <OwnerButtons v-if="isMine">
       <button class="button button-small button-primary">코믹관리</button>
       <button class="button button-small button-success">컷관리</button>
       <button class="button button-small button-danger">버튼</button>
-    </Card>
+    </OwnerButtons>
 
-    <Card>
-      Comic<br/>
-      여러개의 Cut을 가짐.<br/>
-      트리가 노출되는 영역.
-    </Card>
+    <article class="comic-body">
+      <Card>
+        Comic<br/>
+        여러개의 Cut을 가짐.<br/>
+        트리가 노출되는 영역.<br/>
+        <blockquote :style="{ whiteSpace: 'pre' }">{{ comic }}</blockquote>
+      </Card>
+    </article>
   </div>
 </template>
 
 <script>
   import Card from '@/components/partials/Card'
   import Functions from '@/components/partials/Functions'
+  import OwnerButtons from '@/components/partials/OwnerButtons'
+  import Sticker from '@/components/partials/Sticker'
   import filters from '@/utils/filters'
   import { mapState } from 'vuex'
 
@@ -34,7 +44,7 @@
     name: 'comic',
     props: [ 'id' ],
     filters: filters,
-    components: { Card, Functions },
+    components: { Card, Functions, OwnerButtons, Sticker },
     computed: {
       ...mapState([ 'currentUser' ]),
       isMine () {
@@ -57,5 +67,53 @@
 </script>
 
 <style lang="scss">
+  @import 'init';
 
+  .page-comic {
+    overflow: hidden;
+    position: relative;
+  }
+  .comic-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background-size: cover;
+    background-position: center center;
+    filter: grayscale(100);
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparentize($color-background-dark, .4), $color-background-dark);
+    }
+  }
+  .comic {
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    margin: ($space-unit * 3) auto;
+    padding: $space-unit ($space-unit * 2) 0;
+    max-width: $space-unit * 24;
+    background-color: $color-background;
+    border-radius: $radius-unit;
+    box-shadow: $box-shadow-unit;
+  }
+  .comic-title {
+    font-size: $font-size-large;
+    font-weight: bold;
+  }
+  .comic-descriptions {
+    margin-top: $space-unit / 2;
+    color: $color-text-light;
+    font-size: $font-size-small;
+  }
+  .comic-body {
+    position: relative;
+    z-index: 1;
+  }
 </style>

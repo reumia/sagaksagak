@@ -7,19 +7,19 @@
         <Sticker :code="user.status"></Sticker>
       </div>
       <div class="user-descriptions">{{ user.descriptions }}</div>
-      <Functions :style="{ position: 'absolute', bottom: 0, left: 0, right: 0}">
-        <button class="function color-danger"><i class="icon material-icons">favorite</i> {{ user.likes.length | formatCurrency }}</button>
-        <button class="function"><i class="icon material-icons">crop_square</i> {{ user.cuts.length | formatCurrency }}</button>
+      <Functions>
         <a :href="`mailto:${user.email}`" class="function"><i class="icon material-icons">email</i></a>
         <a v-if="user.site" :href="user.site" class="function" target="_blank"><i class="icon material-icons">web_asset</i></a>
+        <button class="function color-danger"><i class="icon material-icons">favorite</i> {{ user.likes.length | formatCurrency }}</button>
+        <button class="function"><i class="icon material-icons">crop_square</i> {{ user.cuts.length | formatCurrency }}</button>
       </Functions>
     </div>
 
-    <div v-if="isMine" class="button-wrap button-flex">
+    <OwnerButtons v-if="isMine">
       <button class="button button-small button-primary">코믹관리</button>
       <button class="button button-small button-success">컷관리</button>
       <button class="button button-small button-danger">버튼</button>
-    </div>
+    </OwnerButtons>
 
     <Card v-if="user" title="운영중인 사각">
       <Index :items="user.comics"></Index>
@@ -36,6 +36,7 @@
   import Card from '@/components/partials/Card'
   import Sticker from '@/components/partials/Sticker'
   import Functions from '@/components/partials/Functions'
+  import OwnerButtons from '@/components/partials/OwnerButtons'
   import filters from '@/utils/filters'
   import { mapState } from 'vuex'
 
@@ -43,7 +44,7 @@
     name: 'user',
     props: [ 'id' ],
     filters: filters,
-    components: { Card, Index, Functions, Sticker },
+    components: { Card, Index, Functions, Sticker, OwnerButtons },
     computed: {
       ...mapState([ 'currentUser' ]),
       isMine () {
@@ -68,19 +69,13 @@
 <style lang="scss">
   @import 'init';
 
-  .page-user {
-    .button-wrap {
-      margin: 0 auto;
-      max-width: 320px + ($space-unit * 4);
-    }
-  }
-
   .user {
+    box-sizing: border-box;
     position: relative;
     overflow: hidden;
     margin: ($space-unit * 3) auto;
-    padding: $space-unit ($space-unit * 2) ($space-unit * 3);
-    max-width: 320px;
+    padding: $space-unit ($space-unit * 2) 0;
+    max-width: $space-unit * 24;
     background-color: $color-background;
     border-radius: $radius-unit;
     box-shadow: $box-shadow-unit;

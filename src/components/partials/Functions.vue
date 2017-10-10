@@ -23,10 +23,9 @@
     display: inline-block;
     padding: 0 ($space-unit / 2);
     width: auto;
-    background-color: #fff;
     color: $color-text-light;
     font-size: $font-size-smaller;
-    line-height: $space-unit * 3;
+    line-height: $space-unit * 3.5;
     cursor: pointer;
     .icon {
       vertical-align: -2px;
