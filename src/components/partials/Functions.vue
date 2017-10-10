@@ -27,9 +27,6 @@
     font-size: $font-size-smaller;
     line-height: $space-unit * 3.5;
     cursor: default;
-    .icon {
-      vertical-align: -2px;
-    }
   }
 
   button.function,

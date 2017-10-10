@@ -5,8 +5,8 @@
       <Functions>
         <span class="function"><i class="icon material-icons">access_time</i> {{ comic.created_at | formatDate }}</span>
         <router-link :to="{ name: 'User', params: { id: comic.owner_id } }" class="function"><i class="icon material-icons">person</i> {{ comic.owner.name }}</router-link>
+        <span class="function"><i class="icon material-icons">crop_din</i> {{ comic.cuts.length | formatCurrency }}</span>
         <button class="function color-danger"><i class="icon material-icons">favorite</i> {{ comic.likes.length | formatCurrency }}</button>
-        <span class="function"><i class="icon material-icons">crop_square</i> {{ comic.cuts.length | formatCurrency }}</span>
       </Functions>
     </Introduction>
 

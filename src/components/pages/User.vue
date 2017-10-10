@@ -2,10 +2,10 @@
   <div class="page-user">
     <Introduction v-if="user" :title="user.name" :descriptions="user.descriptions" :status="user.status" :imageUrl="user.profile_image_url">
       <Functions>
-        <a :href="`mailto:${user.email}`" class="function"><i class="icon material-icons">email</i></a>
-        <a v-if="user.site" :href="user.site" class="function" target="_blank"><i class="icon material-icons">web_asset</i></a>
+        <a :href="`mailto:${user.email}`" class="function"><i class="icon material-icons">mail_outline</i></a>
+        <a v-if="user.site" :href="user.site" class="function" target="_blank"><i class="icon material-icons">open_in_browser</i></a>
+        <span class="function"><i class="icon material-icons">crop_din</i> {{ user.cuts.length | formatCurrency }}</span>
         <button class="function color-danger"><i class="icon material-icons">favorite</i> {{ user.likes.length | formatCurrency }}</button>
-        <span class="function"><i class="icon material-icons">crop_square</i> {{ user.cuts.length | formatCurrency }}</span>
       </Functions>
     </Introduction>
 
