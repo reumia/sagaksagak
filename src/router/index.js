@@ -78,6 +78,14 @@ const router = new Router({
       path: '/comic/add',
       name: 'AddComic',
       component: AddComic,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/comic/:id/update',
+      name: 'UpdateComic',
+      component: AddComic,
       props: true,
       meta: {
         auth: true
