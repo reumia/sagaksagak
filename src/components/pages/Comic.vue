@@ -1,19 +1,14 @@
 <template>
   <div class="page-comic">
     <div class="comic-background" v-if="comic" :style="{ backgroundImage: `url(${comic.image_url})` }"></div>
-    <div class="comic" v-if="comic">
-      <div class="comic-title">
-        {{ comic.title }}
-        <Sticker :code="comic.status"></Sticker>
-      </div>
-      <div class="comic-descriptions">{{ comic.descriptions }}</div>
+    <Introduction v-if="comic" :title="comic.title" :descriptions="comic.descriptions" :status="comic.status">
       <Functions>
         <span class="function"><i class="icon material-icons">access_time</i> {{ comic.created_at | formatDate }}</span>
         <router-link :to="{ name: 'User', params: { id: comic.owner_id } }" class="function"><i class="icon material-icons">person</i> {{ comic.owner.name }}</router-link>
         <button class="function color-danger"><i class="icon material-icons">favorite</i> {{ comic.likes.length | formatCurrency }}</button>
         <button class="function"><i class="icon material-icons">crop_square</i> {{ comic.cuts.length | formatCurrency }}</button>
       </Functions>
-    </div>
+    </Introduction>
 
     <OwnerButtons v-if="isMine">
       <button class="button button-small button-primary">코믹관리</button>
@@ -36,7 +31,7 @@
   import Card from '@/components/partials/Card'
   import Functions from '@/components/partials/Functions'
   import OwnerButtons from '@/components/partials/OwnerButtons'
-  import Sticker from '@/components/partials/Sticker'
+  import Introduction from '@/components/partials/Introduction'
   import filters from '@/utils/filters'
   import { mapState } from 'vuex'
 
@@ -44,7 +39,7 @@
     name: 'comic',
     props: [ 'id' ],
     filters: filters,
-    components: { Card, Functions, OwnerButtons, Sticker },
+    components: { Card, Functions, OwnerButtons, Introduction },
     computed: {
       ...mapState([ 'currentUser' ]),
       isMine () {
@@ -91,26 +86,6 @@
       right: 0;
       background: linear-gradient(transparentize($color-background-dark, .4), $color-background-dark);
     }
-  }
-  .comic {
-    box-sizing: border-box;
-    position: relative;
-    overflow: hidden;
-    margin: ($space-unit * 3) auto;
-    padding: $space-unit ($space-unit * 2) 0;
-    max-width: $space-unit * 24;
-    background-color: $color-background;
-    border-radius: $radius-unit;
-    box-shadow: $box-shadow-unit;
-  }
-  .comic-title {
-    font-size: $font-size-large;
-    font-weight: bold;
-  }
-  .comic-descriptions {
-    margin-top: $space-unit / 2;
-    color: $color-text-light;
-    font-size: $font-size-small;
   }
   .comic-body {
     position: relative;

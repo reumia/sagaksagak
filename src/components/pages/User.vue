@@ -1,19 +1,13 @@
 <template>
   <div class="page-user">
-    <div class="user" v-if="user">
-      <div class="user-profile" v-if="user.profile_image_url" :style="{ backgroundImage: `url(${user.profile_image_url})`}"></div>
-      <div class="user-name">
-        {{ user.name }}
-        <Sticker :code="user.status"></Sticker>
-      </div>
-      <div class="user-descriptions">{{ user.descriptions }}</div>
+    <Introduction v-if="user" :title="user.name" :descriptions="user.descriptions" :status="user.status" :imageUrl="user.profile_image_url">
       <Functions>
         <a :href="`mailto:${user.email}`" class="function"><i class="icon material-icons">email</i></a>
         <a v-if="user.site" :href="user.site" class="function" target="_blank"><i class="icon material-icons">web_asset</i></a>
         <button class="function color-danger"><i class="icon material-icons">favorite</i> {{ user.likes.length | formatCurrency }}</button>
         <button class="function"><i class="icon material-icons">crop_square</i> {{ user.cuts.length | formatCurrency }}</button>
       </Functions>
-    </div>
+    </Introduction>
 
     <OwnerButtons v-if="isMine">
       <button class="button button-small button-primary">코믹관리</button>
@@ -37,6 +31,7 @@
   import Sticker from '@/components/partials/Sticker'
   import Functions from '@/components/partials/Functions'
   import OwnerButtons from '@/components/partials/OwnerButtons'
+  import Introduction from '@/components/partials/Introduction'
   import filters from '@/utils/filters'
   import { mapState } from 'vuex'
 
@@ -44,7 +39,7 @@
     name: 'user',
     props: [ 'id' ],
     filters: filters,
-    components: { Card, Index, Functions, Sticker, OwnerButtons },
+    components: { Card, Index, Functions, Sticker, OwnerButtons, Introduction },
     computed: {
       ...mapState([ 'currentUser' ]),
       isMine () {
@@ -68,31 +63,4 @@
 
 <style lang="scss">
   @import 'init';
-
-  .user {
-    box-sizing: border-box;
-    position: relative;
-    overflow: hidden;
-    margin: ($space-unit * 3) auto;
-    padding: $space-unit ($space-unit * 2) 0;
-    max-width: $space-unit * 24;
-    background-color: $color-background;
-    border-radius: $radius-unit;
-    box-shadow: $box-shadow-unit;
-  }
-  .user-profile {
-    margin: ($space-unit * -1) ($space-unit * -2) ($space-unit * 1.5);
-    height: 100px;
-    background-position: center center;
-    background-size: cover;
-  }
-  .user-name {
-    font-size: $font-size-large;
-    font-weight: bold;
-  }
-  .user-descriptions {
-    margin-top: $space-unit / 2;
-    color: $color-text-light;
-    font-size: $font-size-small;
-  }
 </style>
