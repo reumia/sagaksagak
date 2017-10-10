@@ -5,7 +5,7 @@
         <a :href="`mailto:${user.email}`" class="function"><i class="icon material-icons">email</i></a>
         <a v-if="user.site" :href="user.site" class="function" target="_blank"><i class="icon material-icons">web_asset</i></a>
         <button class="function color-danger"><i class="icon material-icons">favorite</i> {{ user.likes.length | formatCurrency }}</button>
-        <button class="function"><i class="icon material-icons">crop_square</i> {{ user.cuts.length | formatCurrency }}</button>
+        <span class="function"><i class="icon material-icons">crop_square</i> {{ user.cuts.length | formatCurrency }}</span>
       </Functions>
     </Introduction>
 

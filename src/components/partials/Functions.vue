@@ -26,9 +26,14 @@
     color: $color-text-light;
     font-size: $font-size-smaller;
     line-height: $space-unit * 3.5;
-    cursor: pointer;
+    cursor: default;
     .icon {
       vertical-align: -2px;
     }
+  }
+
+  button.function,
+  a.function {
+    cursor: pointer;
   }
 </style>

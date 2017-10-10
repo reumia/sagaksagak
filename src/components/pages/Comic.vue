@@ -6,14 +6,13 @@
         <span class="function"><i class="icon material-icons">access_time</i> {{ comic.created_at | formatDate }}</span>
         <router-link :to="{ name: 'User', params: { id: comic.owner_id } }" class="function"><i class="icon material-icons">person</i> {{ comic.owner.name }}</router-link>
         <button class="function color-danger"><i class="icon material-icons">favorite</i> {{ comic.likes.length | formatCurrency }}</button>
-        <button class="function"><i class="icon material-icons">crop_square</i> {{ comic.cuts.length | formatCurrency }}</button>
+        <span class="function"><i class="icon material-icons">crop_square</i> {{ comic.cuts.length | formatCurrency }}</span>
       </Functions>
     </Introduction>
 
     <OwnerButtons v-if="isMine">
-      <button class="button button-small button-primary">코믹관리</button>
-      <button class="button button-small button-success">컷관리</button>
-      <button class="button button-small button-danger">버튼</button>
+      <button class="button button-small button-success">버튼 1</button>
+      <button class="button button-small button-danger">버튼 2</button>
     </OwnerButtons>
 
     <article class="comic-body">
