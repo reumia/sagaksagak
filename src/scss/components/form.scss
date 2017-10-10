@@ -13,6 +13,11 @@
   }
 }
 
+textarea.input {
+  min-height: $space-unit * 10;
+  resize: vertical;
+}
+
 ::-webkit-input-placeholder {
   color: $color-border-dark;
 }
@@ -79,5 +84,8 @@ form {
   .button,
   .button-flex {
     margin-bottom: $space-unit / 2;
+    > .button {
+      margin-bottom: 0;
+    }
   }
 }

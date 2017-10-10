@@ -7,6 +7,7 @@ import SignIn from '@/components/pages/SignIn'
 import SignUp from '@/components/pages/SignUp'
 import Cut from '@/components/pages/Cut'
 import Comic from '@/components/pages/Comic'
+import AddComic from '@/components/pages/AddComic'
 import User from '@/components/pages/User'
 import MyPage from '@/components/pages/MyPage'
 
@@ -71,6 +72,15 @@ const router = new Router({
       props: true,
       meta: {
         auth: false
+      }
+    },
+    {
+      path: '/comic/add',
+      name: 'AddComic',
+      component: AddComic,
+      props: true,
+      meta: {
+        auth: true
       }
     },
     {

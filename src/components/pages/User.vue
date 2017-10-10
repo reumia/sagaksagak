@@ -10,9 +10,7 @@
     </Introduction>
 
     <OwnerButtons v-if="isMine">
-      <button class="button button-small button-primary">코믹관리</button>
-      <button class="button button-small button-success">컷관리</button>
-      <button class="button button-small button-danger">버튼</button>
+      <router-link :to="{ name: 'AddComic' }" class="button button-small button-primary"><i class="icon material-icons">add_circle</i> 새 코믹</router-link>
     </OwnerButtons>
 
     <Card v-if="user" title="운영중인 사각">
