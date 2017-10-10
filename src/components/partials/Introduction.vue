@@ -27,15 +27,18 @@
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
-    margin: ($space-unit * 3) auto;
-    padding: $space-unit ($space-unit * 2) 0;
+    margin-bottom: $space-unit * 3;
+    padding: ($space-unit * 1.5) ($space-unit * 2) 0;
     max-width: $space-unit * 24;
-    background-color: $color-background;
-    border-radius: $radius-unit;
-    box-shadow: $box-shadow-unit;
+    @media screen and (min-width: 376px) {
+      border-radius: $radius-unit;
+      margin: ($space-unit * 3) auto;
+      background-color: $color-background;
+      box-shadow: $box-shadow-unit;
+    }
   }
   .introduction-image {
-    margin: ($space-unit * -1) ($space-unit * -2) ($space-unit * 1.5);
+    margin: ($space-unit * -1.5) ($space-unit * -2) ($space-unit * 1.5);
     height: 100px;
     background-position: center center;
     background-size: cover;

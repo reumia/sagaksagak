@@ -16,11 +16,8 @@
     </OwnerButtons>
 
     <article class="comic-body">
-      <Card>
-        Comic<br/>
-        여러개의 Cut을 가짐.<br/>
-        트리가 노출되는 영역.<br/>
-        <blockquote :style="{ whiteSpace: 'pre' }">{{ comic }}</blockquote>
+      <Card title="트리" v-if="comic">
+        {{ comic.tree }}
       </Card>
     </article>
   </div>

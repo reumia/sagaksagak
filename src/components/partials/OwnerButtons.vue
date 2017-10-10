@@ -15,7 +15,11 @@
 
   .owner-buttons {
     box-sizing: border-box;
+    padding: 0 ($space-unit * 2);
     margin: ($space-unit * -2) auto ($space-unit * 3);
     max-width: $space-unit * 24;
+    @media screen and (min-width: 376px) {
+      padding: 0;
+    }
   }
 </style>
