@@ -4,6 +4,9 @@
       <input class="input" v-model="title" type="text" placeholder="제목"/>
       <textarea class="input" v-model="descriptions" type="text" placeholder="설명"></textarea>
     </Card>
+    <Card title="소개 이미지">
+      <FileUploader></FileUploader>
+    </Card>
     <Card>
       <div class="button-flex">
         <button class="button button-primary" type="submit"><i class="icon material-icons">check</i> 확인</button>
@@ -15,11 +18,12 @@
 
 <script>
   import Card from '@/components/partials/Card'
-  import {mapState} from 'vuex'
+  import FileUploader from '@/components/partials/FileUploader'
+  import { mapState } from 'vuex'
 
   export default {
     name: 'add-comic',
-    components: { Card },
+    components: { Card, FileUploader },
     data () {
       return {
         title: '',
