@@ -76,7 +76,7 @@
     height: 300px;
     background-size: cover;
     background-position: center center;
-    filter: grayscale(100);
+    filter: blur(2px);
     &:after {
       content: '';
       position: absolute;
@@ -84,7 +84,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: linear-gradient(transparentize($color-background-dark, .4), $color-background-dark);
+      background: linear-gradient(transparentize($color-background-dark, .2), $color-background-dark);
     }
   }
   .comic-body {
