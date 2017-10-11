@@ -53,6 +53,12 @@ const actions = {
     const comics = response.data
 
     commit('SET_LATEST_COMICS', comics)
+  },
+  async ADD_COMIC ({commit}, {title, descriptions, imageUrl}) {
+    const response = await axios.post('/comics', {title: title, descriptions: descriptions, imageUrl: imageUrl})
+    const comic = response.data
+
+    return comic
   }
 }
 

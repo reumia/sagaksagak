@@ -1,20 +1,17 @@
 <template>
-  <form class="add-comic" @submit.prevent="addComic">
+  <div class="add-comic">
     <Card title="새 코믹">
-      <input class="input" v-model="title" type="text" placeholder="제목"/>
-      <textarea class="input" v-model="descriptions" placeholder="설명"></textarea>
-    </Card>
-    <Card title="소개 이미지">
-      {{ image }}
       <FileUploader @fileUploaded="addFile"></FileUploader>
+      <form @submit.prevent="handleSubmit">
+        <input class="input" v-model="title" type="text" placeholder="제목"/>
+        <textarea class="input" v-model="descriptions" placeholder="설명"></textarea>
+        <div class="button-flex">
+          <button class="button button-primary" type="submit"><i class="icon material-icons">check</i> 확인</button>
+          <button class="button" @click.prevent="$router.go(-1)"><i class="icon material-icons">close</i> 취소</button>
+        </div>
+      </form>
     </Card>
-    <Card>
-      <div class="button-flex">
-        <button class="button button-primary" type="submit"><i class="icon material-icons">check</i> 확인</button>
-        <button class="button" @click.prevent="$router.go(-1)"><i class="icon material-icons">close</i> 취소</button>
-      </div>
-    </Card>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -29,17 +26,24 @@
       return {
         title: null,
         descriptions: null,
-        image: null
+        imageUrl: null
       }
     },
     computed: {
       ...mapState([ 'currentUser' ])
     },
     methods: {
-      addComic () {
+      handleSubmit () {
+        this.$store.dispatch('ADD_COMIC', {
+          title: this.title,
+          descriptions: this.descriptions,
+          image: null
+        })
+          .then(comic => this.$router.push({ name: 'Comic', params: { id: comic.id } }))
+          .catch(err => console.warn(err.response.data))
       },
       addFile (file) {
-        this.image = file
+        this.imageUrl = file.url
       }
     }
   }

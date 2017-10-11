@@ -38,7 +38,6 @@
           maxFiles: 1,
           uploadMultiple: false,
           clickable: false,
-          withCredentials: true,
           thumbnailWidth: 320,
           thumbnailHeight: 160,
           dictMaxFilesExceeded: '파일은 하나만 업로드할 수 있습니다.'
@@ -53,16 +52,12 @@
       },
       onSuccess (file, res) {
         console.log(res)
-        file.src = res.url
+        file.url = res.downloadUrl
         this.$emit('fileUploaded', file)
       },
       onError (file, errorMsg) {
         // TODO : 에러 UI 처리
         console.warn(errorMsg, file)
-        // [Emit Test]
-        // Emit은 Success 시에만 실행됩니다.
-        // 파일스토리지 서비스 연동 이후에 emit 코드는 삭제합니다.
-        this.$emit('fileUploaded', file)
       }
     },
     filters: {
@@ -78,6 +73,7 @@
 
   .file-uploader {
     padding: ($space-unit * 4) 0;
+    margin: ($space-unit / 2) 0;
     border: 2px dashed $color-border;
     background: $color-background-darker;
     &.is-dragging {
@@ -96,12 +92,10 @@
   }
 
   .uploaded {
-    overflow: hidden;
   }
   .uploaded-item {
-    overflow: hidden;
     position: relative;
-    margin: $space-unit auto;
+    margin: ($space-unit / 2) 0;
     background-color: $color-background;
     .button-close {
       position: absolute;
