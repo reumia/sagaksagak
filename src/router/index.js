@@ -97,7 +97,7 @@ const router = new Router({
       component: Comic,
       props: true,
       meta: {
-        auth: true
+        auth: false
       }
     },
     {

@@ -39,7 +39,7 @@
     computed: {
       ...mapState([ 'currentUser' ]),
       isMine () {
-        return this.comic && this.comic.owner_id === parseInt(this.currentUser.id, 10)
+        return this.currentUser && this.comic && this.comic.owner_id === parseInt(this.currentUser.id, 10)
       }
     },
     created () {
