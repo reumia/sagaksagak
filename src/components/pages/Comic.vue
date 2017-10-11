@@ -11,8 +11,8 @@
     </Introduction>
 
     <OwnerButtons v-if="isMine">
-      <button class="button button-small button-success">버튼 1</button>
-      <button class="button button-small button-danger">버튼 2</button>
+      <button class="button button-success">버튼 1</button>
+      <button class="button button-danger">버튼 2</button>
     </OwnerButtons>
 
     <article class="comic-body">
