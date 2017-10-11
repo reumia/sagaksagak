@@ -61,22 +61,22 @@ textarea.input {
       display: block;
     }
   }
-  &.button-small {
-    padding: 6px 10px;
-    font-size: $font-size-small;
-  }
-  &.button-primary {
-    border-color: darken($color-brand, 10);
-    background-color: $color-brand;
-  }
-  &.button-success {
-    border-color: darken($color-success, 10);
-    background-color: $color-success;
-  }
-  &.button-danger {
-    border-color: darken($color-danger, 10);
-    background-color: $color-danger;
-  }
+}
+.button-small {
+  padding: 6px 10px;
+  font-size: $font-size-small;
+}
+.button-primary {
+  border-color: darken($color-brand, 10);
+  background-color: $color-brand;
+}
+.button-success {
+  border-color: darken($color-success, 10);
+  background-color: $color-success;
+}
+.button-danger {
+  border-color: darken($color-danger, 10);
+  background-color: $color-danger;
 }
 
 form {

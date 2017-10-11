@@ -2,10 +2,11 @@
   <form class="add-comic" @submit.prevent="addComic">
     <Card title="새 코믹">
       <input class="input" v-model="title" type="text" placeholder="제목"/>
-      <textarea class="input" v-model="descriptions" type="text" placeholder="설명"></textarea>
+      <textarea class="input" v-model="descriptions" placeholder="설명"></textarea>
     </Card>
     <Card title="소개 이미지">
-      <FileUploader></FileUploader>
+      {{ image }}
+      <FileUploader @fileUploaded="addFile"></FileUploader>
     </Card>
     <Card>
       <div class="button-flex">
@@ -26,9 +27,9 @@
     components: { Card, FileUploader },
     data () {
       return {
-        title: '',
-        descriptions: '',
-        imageUrl: ''
+        title: null,
+        descriptions: null,
+        image: null
       }
     },
     computed: {
@@ -36,6 +37,9 @@
     },
     methods: {
       addComic () {
+      },
+      addFile (file) {
+        this.image = file
       }
     }
   }

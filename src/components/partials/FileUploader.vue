@@ -1,17 +1,24 @@
 <template>
-  <vue-transmit v-bind="options" drop-zone-classes="bg-faded" ref="uploader">
+  <vue-transmit
+    v-bind="options"
+    drop-zone-classes="bg-faded"
+    ref="uploader"
+    @success="onSuccess"
+    @error="onError"
+  >
     <button class="button button-success" @click="triggerBrowse"><i class="icon material-icons">file_upload</i> 파일 업로드</button>
     <!-- Result Template -->
     <template slot="files" scope="props">
       <div v-for="(file, i) in props.files" :key="file.id" class="uploaded">
-        <div class="uploaded-item">
-          <div class="progress"><div class="progress-bar" :style="{width: file.upload.progress + '%'}"></div></div>
+        <div class="uploaded-item" v-if="file.accepted" :class="{ 'is-error': file.status === 'error', 'is-success': file.status === 'success' }">
+          <button class="button button-small button-danger button-close" type="button" @click.prevent="$refs.uploader.removeAllFiles"><i class="icon material-icons">close</i></button>
           <img :src="file.dataUrl" class="uploaded-item-image"/>
+          <div class="progress"><div class="progress-bar" :style="{width: file.upload.progress + '%'}"></div></div>
           <div class="uploaded-item-body">
-            <div class="name">{{ file.name }}</div>
+            <span class="status">{{ file.status }}</span>
+            <span class="name">{{ file.name }}</span>
           </div>
         </div>
-        <pre style="font-size: 10px;">{{ file | json }}</pre>
       </div>
     </template>
   </vue-transmit>
@@ -19,22 +26,11 @@
 
 <script>
   export default {
-    'name': 'file-uploader',
-    methods: {
-      addComic () {
-      },
-      triggerBrowse () {
-        this.$refs.uploader.triggerBrowseFiles()
-      }
-    },
-    filters: {
-      json (value) {
-        return JSON.stringify(value, null, 2)
-      }
-    },
+    name: 'file-uploader',
     data () {
       return {
         options: {
+          // TODO : 파일스토리지 서비스 연동필요.
           url: `${process.env.API_ENDPOINT}/upload`,
           acceptedFileTypes: ['image/*'],
           uploadAreaClasses: 'file-uploader',
@@ -42,9 +38,36 @@
           maxFiles: 1,
           uploadMultiple: false,
           clickable: false,
+          withCredentials: true,
           thumbnailWidth: 320,
-          thumbnailHeight: 160
+          thumbnailHeight: 160,
+          dictMaxFilesExceeded: '파일은 하나만 업로드할 수 있습니다.'
         }
+      }
+    },
+    methods: {
+      addComic () {
+      },
+      triggerBrowse () {
+        this.$refs.uploader.triggerBrowseFiles()
+      },
+      onSuccess (file, res) {
+        console.log(res)
+        file.src = res.url
+        this.$emit('fileUploaded', file)
+      },
+      onError (file, errorMsg) {
+        // TODO : 에러 UI 처리
+        console.warn(errorMsg, file)
+        // [Emit Test]
+        // Emit은 Success 시에만 실행됩니다.
+        // 파일스토리지 서비스 연동 이후에 emit 코드는 삭제합니다.
+        this.$emit('fileUploaded', file)
+      }
+    },
+    filters: {
+      json (value) {
+        return JSON.stringify(value, null, 2)
       }
     }
   }
@@ -76,7 +99,38 @@
     overflow: hidden;
   }
   .uploaded-item {
+    overflow: hidden;
+    position: relative;
     margin: $space-unit auto;
+    background-color: $color-background;
+    .button-close {
+      position: absolute;
+      z-index: 1;
+      top: $space-unit / 2;
+      right: $space-unit / 2;
+      padding: 4px 6px 2px;
+      width: auto;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border: 2px solid rgba(0,0,0,.1);
+    }
+    &.is-error {
+      .status,
+      .progress-bar {
+        background-color: $color-danger;
+      }
+    }
+    &.is-success {
+      .status {
+        background-color: $color-success;
+      }
+    }
   }
   .uploaded-item-image {
     display: block;
@@ -84,8 +138,21 @@
     height: auto;
   }
   .uploaded-item-body {
+    padding: ($space-unit / 2) $space-unit;
+    .status {
+      display: inline-block;
+      border-radius: $radius-unit;
+      padding: 2px 6px 0;
+      margin-right: 4px;
+      background-color: $color-text-light;
+      color: $color-background;
+      font-size: $font-size-smallest;
+      vertical-align: middle;
+      text-transform: capitalize;
+    }
     .name {
-
+      color: $color-text-light;
+      font-size: $font-size-smaller;
     }
   }
 
