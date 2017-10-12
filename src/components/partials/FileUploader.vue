@@ -39,14 +39,12 @@
           uploadMultiple: false,
           clickable: false,
           thumbnailWidth: 320,
-          thumbnailHeight: 160,
+          thumbnailHeight: 120,
           dictMaxFilesExceeded: '파일은 하나만 업로드할 수 있습니다.'
         }
       }
     },
     methods: {
-      addComic () {
-      },
       triggerBrowse () {
         this.$refs.uploader.triggerBrowseFiles()
       },
