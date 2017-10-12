@@ -11,13 +11,15 @@
     </Introduction>
 
     <OwnerButtons v-if="isMine">
-      <button class="button button-success">버튼 1</button>
+      <router-link :to="{ name: 'AddCut' }" v-if="comic.cuts.length === 0" class="button button-success">
+        <i class="icon material-icons">add_circle</i> 첫번째 컷 추가
+      </router-link>
       <button class="button button-danger">버튼 2</button>
     </OwnerButtons>
 
     <article class="comic-body">
       <Card title="트리" v-if="comic">
-        {{ comic.tree }}
+        {{ comic }}
       </Card>
     </article>
   </div>
