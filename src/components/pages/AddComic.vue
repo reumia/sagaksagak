@@ -1,6 +1,6 @@
 <template>
   <div class="add-comic">
-    <Card title="새 코믹">
+    <Card :title="id ? '코믹 수정' : '새 코믹'">
       <FileUploader @fileUploaded="addFile"></FileUploader>
       <form @submit.prevent="handleSubmit">
         <input class="input" v-model="title" type="text" placeholder="제목" required/>
@@ -22,11 +22,23 @@
   export default {
     name: 'add-comic',
     components: { Card, FileUploader },
+    props: [ 'id' ],
     data () {
       return {
         title: null,
         descriptions: null,
         imageUrl: null
+      }
+    },
+    created () {
+      if (this.id) {
+        this.$http.get(`/comics/${this.id}`)
+          .then(response => {
+            this.title = response.data.title
+            this.descriptions = response.data.descriptions
+            this.imageUrl = response.data.imageUrl
+          })
+          .catch(err => console.warn(err.response.data))
       }
     },
     computed: {

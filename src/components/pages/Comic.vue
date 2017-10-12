@@ -12,9 +12,11 @@
 
     <OwnerButtons v-if="isMine">
       <router-link :to="{ name: 'AddCut' }" v-if="comic.cuts.length === 0" class="button button-success">
-        <i class="icon material-icons">add_circle</i> 첫번째 컷 추가
+        첫번째 컷 작성
       </router-link>
-      <button class="button button-danger">버튼 2</button>
+      <router-link :to="{ name: 'UpdateComic', params: { id: comic.id } }" class="button button-primary">
+        코믹 수정
+      </router-link>
     </OwnerButtons>
 
     <article class="comic-body">
