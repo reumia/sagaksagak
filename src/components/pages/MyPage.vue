@@ -10,17 +10,8 @@
     </Card>
 
     <Card title="유저 정보">
-      <div v-if="image_url" class="image-wrap" :style="{ backgroundImage: `url(${image_url})` }">
-        <div class="button-flex">
-          <router-link :to="{ name: 'ChangeProfileImage' }" class="button button-extra-small button-primary">
-            <i class="icon material-icons">edit</i> 수정
-          </router-link>
-          <button class="button button-extra-small button-danger" @click="deleteImage">
-            <i class="icon material-icons">delete</i> 삭제
-          </button>
-        </div>
-      </div>
-      <FileUploader></FileUploader>
+      <ExistsImage :image_url="image_url" @onDelete="deleteImage"></ExistsImage>
+      <FileUploader @onUpload="addFile"></FileUploader>
       <form @submit.prevent="updateUser">
         <input class="input" v-model="name" type="text" placeholder="이름"/>
         <textarea class="input" v-model="descriptions" placeholder="설명" required></textarea>
@@ -34,11 +25,12 @@
 <script>
   import Card from '@/components/partials/Card'
   import FileUploader from '@/components/partials/FileUploader'
+  import ExistsImage from '@/components/partials/ExistsImage'
   import { mapState } from 'vuex'
 
   export default {
     name: 'mypage',
-    components: { Card, FileUploader },
+    components: { Card, FileUploader, ExistsImage },
     data () {
       return {
         name: null,
@@ -59,15 +51,20 @@
       this.site = this.currentUser.site
     },
     methods: {
+      addFile (file) {
+        this.image_url = file.url
+      },
       deleteImage () {
+        this.image_url = null
       },
       updateUser () {
+        // TODO : 유저 업데이트 API 작성 및 적용
         this.$http.post(`/user/${this.currentUser.id}/update`, {
           name: this.name,
           descriptions: this.descriptions,
           site: this.site
         })
-          .then(() => this.$router.push({ name: 'SignIn' }))
+          .then()
           .catch(err => console.warn(err.response.data))
       }
     }
@@ -80,21 +77,5 @@
   .my-page {
     margin: 0 auto;
     max-width: $site-width-narrow;
-    .image-wrap {
-      @include transition(height);
-      position: relative;
-      border-radius: $radius-unit;
-      margin: ($space-unit / 2) auto;
-      height: 120px;
-      background-size: cover;
-      background-position: center center;
-      &.active {
-        height: 39px;
-      }
-    }
-    .button-flex {
-      justify-content: flex-end;
-      padding: $space-unit / 2;
-    }
   }
 </style>

@@ -1,32 +1,36 @@
 <template>
-  <vue-transmit
-    v-bind="options"
-    drop-zone-classes="bg-faded"
-    ref="uploader"
-    @success="onSuccess"
-    @error="onError"
-  >
-    <button class="button button-success" @click="triggerBrowse"><i class="icon material-icons">file_upload</i> 파일 업로드</button>
-    <!-- Result Template -->
-    <template slot="files" scope="props">
-      <div v-for="(file, i) in props.files" :key="file.id" class="uploaded">
-        <div class="uploaded-item" v-if="file.accepted" :class="{ 'is-error': file.status === 'error', 'is-success': file.status === 'success' }">
-          <button class="button button-extra-small button-danger button-close" type="button" @click.prevent="$refs.uploader.removeAllFiles"><i class="icon material-icons">close</i></button>
-          <img :src="file.dataUrl" class="uploaded-item-image"/>
-          <div class="progress"><div class="progress-bar" :style="{width: file.upload.progress + '%'}"></div></div>
-          <div class="uploaded-item-body">
-            <span class="status">{{ file.status }}</span>
-            <span class="name">{{ file.name }}</span>
+  <div class="file-uploader-wrap">
+    <!-- Vue Transmit -->
+    <vue-transmit
+      v-bind="options"
+      drop-zone-classes="bg-faded"
+      ref="uploader"
+      @success="onSuccess"
+      @error="onError"
+    >
+      <button class="button button-success" @click="triggerBrowse"><i class="icon material-icons">file_upload</i> 파일 업로드</button>
+      <!-- Result Template -->
+      <template slot="files" scope="props">
+        <div v-for="(file, i) in props.files" :key="file.id" class="uploaded">
+          <div class="uploaded-item" v-if="file.accepted" :class="{ 'is-error': file.status === 'error', 'is-success': file.status === 'success' }">
+            <button class="button button-extra-small button-danger button-close" type="button" @click.prevent="$refs.uploader.removeAllFiles"><i class="icon material-icons">close</i></button>
+            <img :src="file.dataUrl" class="uploaded-item-image"/>
+            <div class="progress"><div class="progress-bar" :style="{width: file.upload.progress + '%'}"></div></div>
+            <div class="uploaded-item-body">
+              <span class="status">{{ file.status }}</span>
+              <span class="name">{{ file.name }}</span>
+            </div>
           </div>
         </div>
-      </div>
-    </template>
-  </vue-transmit>
+      </template>
+    </vue-transmit>
+  </div>
 </template>
 
 <script>
   export default {
     name: 'file-uploader',
+    props: [ 'image_url' ],
     data () {
       return {
         options: {
@@ -51,7 +55,7 @@
       onSuccess (file, res) {
         console.log(res)
         file.url = res.downloadUrl
-        this.$emit('fileUploaded', file)
+        this.$emit('onUpload', file)
       },
       onError (file, errorMsg) {
         // TODO : 에러 UI 처리

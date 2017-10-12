@@ -1,7 +1,8 @@
 <template>
   <div class="add-comic">
     <Card :title="id ? '코믹 수정' : '새 코믹'">
-      <FileUploader @fileUploaded="addFile"></FileUploader>
+      <ExistsImage :image_url="image_url" @onDelete="deleteImage"></ExistsImage>
+      <FileUploader @onUpload="addFile"></FileUploader>
       <form @submit.prevent="handleSubmit">
         <input class="input" v-model="title" type="text" placeholder="제목" required/>
         <textarea class="input" v-model="descriptions" placeholder="설명" required></textarea>
@@ -17,11 +18,12 @@
 <script>
   import Card from '@/components/partials/Card'
   import FileUploader from '@/components/partials/FileUploader'
+  import ExistsImage from '@/components/partials/ExistsImage'
   import { mapState } from 'vuex'
 
   export default {
     name: 'add-comic',
-    components: { Card, FileUploader },
+    components: { Card, FileUploader, ExistsImage },
     props: [ 'id' ],
     data () {
       return {
@@ -70,6 +72,9 @@
       },
       addFile (file) {
         this.image_url = file.url
+      },
+      deleteImage () {
+        this.image_url = null
       }
     }
   }
@@ -81,5 +86,22 @@
   .add-comic {
     margin: 0 auto;
     max-width: $site-width-narrow;
+  }
+
+  .exists-image {
+    @include transition(height);
+    position: relative;
+    border-radius: $radius-unit;
+    margin: ($space-unit / 2) auto;
+    height: 120px;
+    background-size: cover;
+    background-position: center center;
+    &.active {
+      height: 39px;
+    }
+    .button-flex {
+      justify-content: flex-end;
+      padding: $space-unit / 2;
+    }
   }
 </style>
