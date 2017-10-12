@@ -20,6 +20,7 @@ export default {
     resolveCode (value) {
       const map = {
         DEFAULT: { type: 'default', value: '정의되지않은 CODE입니다.' },
+        READY: { type: 'default', value: '준비중' },
         OPENED: { type: 'success', value: '진행중' },
         CLOSED: { type: 'warning', value: '종료' },
         BLOCKED: { type: 'danger', value: '정지' },
