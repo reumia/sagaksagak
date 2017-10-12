@@ -49,7 +49,7 @@ const actions = {
     commit('SET_CURRENT_USER', user)
   },
   async GET_LATEST_COMICS ({commit}) {
-    const response = await axios.get(`/comics`)
+    const response = await axios.get(`/comics/latest`)
     const comics = response.data
 
     commit('SET_LATEST_COMICS', comics)
