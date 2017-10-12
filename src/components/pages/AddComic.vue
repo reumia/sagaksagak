@@ -37,7 +37,7 @@
         this.$store.dispatch('ADD_COMIC', {
           title: this.title,
           descriptions: this.descriptions,
-          image: null
+          imageUrl: this.imageUrl
         })
           .then(comic => this.$router.push({ name: 'Comic', params: { id: comic.id } }))
           .catch(err => console.warn(err.response.data))
