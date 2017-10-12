@@ -27,7 +27,7 @@
       return {
         title: null,
         descriptions: null,
-        imageUrl: null
+        image_url: null
       }
     },
     created () {
@@ -36,7 +36,7 @@
           .then(response => {
             this.title = response.data.title
             this.descriptions = response.data.descriptions
-            this.imageUrl = response.data.imageUrl
+            this.image_url = response.data.image_url
           })
           .catch(err => console.warn(err.response.data))
       }
@@ -45,17 +45,31 @@
       ...mapState([ 'currentUser' ])
     },
     methods: {
-      handleSubmit () {
+      addUser () {
         this.$store.dispatch('ADD_COMIC', {
           title: this.title,
           descriptions: this.descriptions,
-          imageUrl: this.imageUrl
+          image_url: this.image_url
         })
           .then(comic => this.$router.push({ name: 'Comic', params: { id: comic.id } }))
           .catch(err => console.warn(err.response.data))
       },
+      updateUser () {
+        this.$store.dispatch('UPDATE_COMIC', {
+          id: this.id,
+          title: this.title,
+          descriptions: this.descriptions,
+          image_url: this.image_url
+        })
+          .then(comic => this.$router.push({ name: 'Comic', params: { id: comic.id } }))
+          .catch(err => console.warn(err.response.data))
+      },
+      handleSubmit () {
+        if (this.id) this.updateUser()
+        else this.addUser()
+      },
       addFile (file) {
-        this.imageUrl = file.url
+        this.image_url = file.url
       }
     }
   }

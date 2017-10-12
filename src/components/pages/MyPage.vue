@@ -10,7 +10,7 @@
     </Card>
 
     <Card title="유저 정보">
-      <div class="image-wrap" :style="{ backgroundImage: `url(${currentUser.image_url})` }">
+      <div v-if="image_url" class="image-wrap" :style="{ backgroundImage: `url(${image_url})` }">
         <div class="button-flex">
           <router-link :to="{ name: 'ChangeProfileImage' }" class="button button-extra-small button-primary">
             <i class="icon material-icons">edit</i> 수정
@@ -20,9 +20,11 @@
           </button>
         </div>
       </div>
-      <form @submit.prevent="handleSubmit">
-        <input class="input" v-model="currentUser.name" type="text" placeholder="이름"/>
-        <input class="input" v-model="currentUser.site" type="url" placeholder="웹사이트"/>
+      <FileUploader></FileUploader>
+      <form @submit.prevent="updateUser">
+        <input class="input" v-model="name" type="text" placeholder="이름"/>
+        <textarea class="input" v-model="descriptions" placeholder="설명" required></textarea>
+        <input class="input" v-model="site" type="url" placeholder="웹사이트"/>
         <button class="button button-primary" type="submit"><i class="icon material-icons">check</i> 유저 정보 변경</button>
       </form>
     </Card>
@@ -39,6 +41,10 @@
     components: { Card, FileUploader },
     data () {
       return {
+        name: null,
+        descriptions: null,
+        image_url: null,
+        site: null,
         password: null,
         passwordConfirm: null
       }
@@ -46,10 +52,23 @@
     computed: {
       ...mapState([ 'currentUser' ])
     },
+    created () {
+      this.name = this.currentUser.name
+      this.descriptions = this.currentUser.descriptions
+      this.image_url = this.currentUser.image_url
+      this.site = this.currentUser.site
+    },
     methods: {
       deleteImage () {
       },
-      handleSubmit () {
+      updateUser () {
+        this.$http.post(`/user/${this.currentUser.id}/update`, {
+          name: this.name,
+          descriptions: this.descriptions,
+          site: this.site
+        })
+          .then(() => this.$router.push({ name: 'SignIn' }))
+          .catch(err => console.warn(err.response.data))
       }
     }
   }

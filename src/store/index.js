@@ -31,8 +31,12 @@ const mutations = {
 }
 
 const actions = {
-  async SIGN_IN ({commit}, {email, password}) {
-    const response = await axios.post('/auth/sign-in', { email: email, password: password })
+  async SIGN_IN ({commit}, {email, password, descriptions}) {
+    const response = await axios.post('/auth/sign-in', {
+      email: email,
+      password: password,
+      descriptions: descriptions
+    })
     const user = response.data
 
     commit('SET_CURRENT_USER', user)
@@ -54,8 +58,14 @@ const actions = {
 
     commit('SET_LATEST_COMICS', comics)
   },
-  async ADD_COMIC ({commit}, {title, descriptions, imageUrl}) {
-    const response = await axios.post('/comics', {title: title, descriptions: descriptions, imageUrl: imageUrl})
+  async ADD_COMIC ({commit}, {title, descriptions, image_url}) {
+    const response = await axios.post('/comics', {title: title, descriptions: descriptions, image_url: image_url})
+    const comic = response.data
+
+    return comic
+  },
+  async UPDATE_COMIC ({commit}, {id, title, descriptions, image_url}) {
+    const response = await axios.post(`/comics/${id}/update`, {title: title, descriptions: descriptions, image_url: image_url})
     const comic = response.data
 
     return comic

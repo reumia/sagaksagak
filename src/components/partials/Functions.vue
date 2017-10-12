@@ -15,7 +15,8 @@
 
   .function-wrap {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    margin: 0 ($space-unit / -2);
   }
 
   .function {

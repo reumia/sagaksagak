@@ -21,6 +21,9 @@
     components: { Carousel, Card, Index },
     created () {
       this.$store.dispatch('GET_LATEST_COMICS')
+        .catch((err) => {
+          console.warn(err.response.data)
+        })
     },
     data () {
       return {

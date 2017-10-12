@@ -7,7 +7,7 @@
         :id="item.id"
         :title="item.title"
         :createdAt="item.created_at"
-        :imageUrl="item.image_url"
+        :image_url="item.image_url"
       ></IndexItem>
     </div>
   </div>
