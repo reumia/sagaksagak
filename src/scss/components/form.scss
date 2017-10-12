@@ -45,6 +45,7 @@ textarea.input {
   color: $color-background;
   font-weight: bold;
   cursor: pointer;
+  text-align: center;
   &:before {
     content: '';
     position: absolute;
@@ -65,6 +66,12 @@ textarea.input {
 .button-small {
   padding: 6px 10px;
   font-size: $font-size-small;
+}
+.button-extra-small {
+  padding: 4px 6px 2px;
+  width: auto;
+  font-size: $font-size-smaller;
+  font-weight: normal;
 }
 .button-primary {
   border-color: darken($color-brand, 10);

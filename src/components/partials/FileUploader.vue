@@ -11,7 +11,7 @@
     <template slot="files" scope="props">
       <div v-for="(file, i) in props.files" :key="file.id" class="uploaded">
         <div class="uploaded-item" v-if="file.accepted" :class="{ 'is-error': file.status === 'error', 'is-success': file.status === 'success' }">
-          <button class="button button-small button-danger button-close" type="button" @click.prevent="$refs.uploader.removeAllFiles"><i class="icon material-icons">close</i></button>
+          <button class="button button-extra-small button-danger button-close" type="button" @click.prevent="$refs.uploader.removeAllFiles"><i class="icon material-icons">close</i></button>
           <img :src="file.dataUrl" class="uploaded-item-image"/>
           <div class="progress"><div class="progress-bar" :style="{width: file.upload.progress + '%'}"></div></div>
           <div class="uploaded-item-body">
@@ -102,8 +102,6 @@
       z-index: 1;
       top: $space-unit / 2;
       right: $space-unit / 2;
-      padding: 4px 6px 2px;
-      width: auto;
     }
     &:after {
       content: '';

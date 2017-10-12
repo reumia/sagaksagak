@@ -1,6 +1,6 @@
 <template>
   <div class="page-user">
-    <Introduction v-if="user" :title="user.name" :descriptions="user.descriptions" :status="user.status" :imageUrl="user.profile_image_url">
+    <Introduction v-if="user" :title="user.name" :descriptions="user.descriptions" :status="user.status" :imageUrl="user.image_url">
       <Functions>
         <a :href="`mailto:${user.email}`" class="function"><i class="icon material-icons">mail_outline</i></a>
         <a v-if="user.site" :href="user.site" class="function" target="_blank"><i class="icon material-icons">open_in_browser</i></a>
