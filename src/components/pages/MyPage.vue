@@ -53,8 +53,7 @@
             this.$router.push({ name: 'Home' })
           })
           .catch((err) => {
-            const errorCode = err.response.data
-            console.warn(errorCode)
+            console.warn(err.response.data)
           })
       }
     }

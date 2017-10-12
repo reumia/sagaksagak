@@ -47,7 +47,7 @@
         .then(response => {
           this.comic = response.data
         })
-        .catch(err => console.warn(err))
+        .catch(err => console.warn(err.response.data))
     },
     data () {
       return {

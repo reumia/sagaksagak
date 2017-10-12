@@ -40,7 +40,7 @@
           image: null
         })
           .then(comic => this.$router.push({ name: 'Comic', params: { id: comic.id } }))
-          .catch(err => console.warn(err))
+          .catch(err => console.warn(err.response.data))
       },
       addFile (file) {
         this.imageUrl = file.url
