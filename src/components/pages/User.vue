@@ -41,7 +41,7 @@
     computed: {
       ...mapState([ 'currentUser' ]),
       isMine () {
-        return this.currentUser && this.currentUser.id === parseInt(this.id, 10)
+        return this.currentUser && this.user && this.currentUser.id === parseInt(this.id, 10)
       }
     },
     created () {
