@@ -1,7 +1,10 @@
 <template>
   <div class="my-page" v-if="currentUser">
     <Card :title="`${currentUser.name} 수정`">
-      <FileUploader @onUpload="addFile"></FileUploader>
+      <FileUploader
+        @onAdded="addFile"
+        @onDeleted="deleteFile"
+      ></FileUploader>
       <form @submit.prevent="updateUser">
         <input class="input" v-model="name" type="text" placeholder="이름"/>
         <textarea class="input" v-model="descriptions" placeholder="설명" required></textarea>
@@ -41,7 +44,7 @@
       addFile (file) {
         this.image_url = file.url
       },
-      deleteImage () {
+      deleteFile () {
         this.image_url = null
       },
       updateUser () {

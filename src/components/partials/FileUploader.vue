@@ -1,27 +1,63 @@
 <template>
   <div class="file-uploader-wrap">
-    <ExistsImage></ExistsImage>
+    <!-- Exists Image -->
+    <div class="exists-image" v-if="exists" :style="{ backgroundImage: `url(${exists})` }">
+      <div class="button-flex">
+        <button class="button button-extra-small button-danger" @click="deleteImage"><i class="icon material-icons">delete</i> 삭제</button>
+      </div>
+    </div>
     <!-- Uploader -->
+    <div class="file-uploader" v-else>
+      파일 업로더
+    </div>
   </div>
 </template>
 
 <script>
-  import ExistsImage from '@/components/partials/ExistsImage'
+  import { mapState } from 'vuex'
 
   export default {
     name: 'file-uploader',
-    components: { ExistsImage },
     data () {
       return {
+        exists: null
       }
     },
+    created () {
+      this.exists = this.currentUser.image_url
+    },
+    computed: mapState([ 'currentUser' ]),
     methods: {
+      addImage () {
+        this.$emit('onAdded')
+      },
+      deleteImage () {
+        this.exists = null
+        this.$emit('onDeleted')
+      }
     }
   }
 </script>
 
 <style lang="scss">
   @import 'init';
+
+  .exists-image {
+    @include transition(height);
+    position: relative;
+    border-radius: $radius-unit;
+    margin: ($space-unit / 2) auto;
+    height: 120px;
+    background-size: cover;
+    background-position: center center;
+    &.active {
+      height: 39px;
+    }
+    .button-flex {
+      justify-content: flex-end;
+      padding: $space-unit / 2;
+    }
+  }
 
   .file-uploader {
     padding: ($space-unit * 4) 0;

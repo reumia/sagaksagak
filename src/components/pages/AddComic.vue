@@ -1,14 +1,14 @@
 <template>
   <div class="add-comic">
     <Card :title="id ? '코믹 수정' : '새 코믹'">
-      <FileUploader @onUpload="addFile"></FileUploader>
+      <FileUploader
+        @onAdded="addFile"
+        @onDeleted="deleteFile"
+      ></FileUploader>
       <form @submit.prevent="handleSubmit">
         <input class="input" v-model="title" type="text" placeholder="제목" required/>
         <textarea class="input" v-model="descriptions" placeholder="설명" required></textarea>
-        <div class="button-flex">
-          <button class="button button-primary" type="submit"><i class="icon material-icons">check</i> 확인</button>
-          <button class="button" @click.prevent="$router.go(-1)"><i class="icon material-icons">close</i> 취소</button>
-        </div>
+        <button class="button button-primary" type="submit"><i class="icon material-icons">check</i> 변경내용 적용</button>
       </form>
     </Card>
   </div>
@@ -71,7 +71,7 @@
       addFile (file) {
         this.image_url = file.url
       },
-      deleteImage () {
+      deleteFile () {
         this.image_url = null
       }
     }
