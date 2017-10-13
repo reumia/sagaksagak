@@ -1,6 +1,6 @@
 <template>
   <div class="my-page" v-if="currentUser">
-    <Card title="유저 정보">
+    <Card :title="`${currentUser.name} 수정`">
       <ExistsImage :image_url="image_url" @onDelete="deleteImage"></ExistsImage>
       <FileUploader @onUpload="addFile"></FileUploader>
       <form @submit.prevent="updateUser">
