@@ -87,21 +87,4 @@
     margin: 0 auto;
     max-width: $site-width-narrow;
   }
-
-  .exists-image {
-    @include transition(height);
-    position: relative;
-    border-radius: $radius-unit;
-    margin: ($space-unit / 2) auto;
-    height: 120px;
-    background-size: cover;
-    background-position: center center;
-    &.active {
-      height: 39px;
-    }
-    .button-flex {
-      justify-content: flex-end;
-      padding: $space-unit / 2;
-    }
-  }
 </style>
