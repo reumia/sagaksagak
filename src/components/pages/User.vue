@@ -1,6 +1,12 @@
 <template>
   <div class="page-user">
-    <Introduction v-if="user" :title="user.name" :descriptions="user.descriptions" :status="user.status" :image_url="user.image_url">
+    <Introduction
+      v-if="user"
+      :title="user.name"
+      :descriptions="user.descriptions"
+      :status="user.status"
+      :image_url="user.image_url"
+    >
       <Functions>
         <a :href="`mailto:${user.email}`" class="function"><i class="icon material-icons">mail_outline</i></a>
         <a v-if="user.site" :href="user.site" class="function" target="_blank"><i class="icon material-icons">open_in_browser</i></a>
@@ -10,7 +16,8 @@
     </Introduction>
 
     <OwnerButtons v-if="isMine">
-      <router-link :to="{ name: 'AddComic' }" class="button button-primary"><i class="icon material-icons">add_circle</i> 새 코믹</router-link>
+      <router-link :to="{ name: 'AddComic' }" class="button button-success">새 코믹</router-link>
+      <router-link :to="{ name: 'MyPage' }" class="button button-primary">유저 정보 수정</router-link>
     </OwnerButtons>
 
     <Card v-if="user" title="운영중인 사각">

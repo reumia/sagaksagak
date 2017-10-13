@@ -1,7 +1,12 @@
 <template>
   <div class="page-comic">
     <div class="comic-background" v-if="comic" :style="{ backgroundImage: `url(${comic.image_url})` }"></div>
-    <Introduction v-if="comic" :title="comic.title" :descriptions="comic.descriptions" :status="comic.status">
+    <Introduction
+      v-if="comic"
+      :title="comic.title"
+      :descriptions="comic.descriptions"
+      :status="comic.status"
+    >
       <Functions>
         <span class="function"><i class="icon material-icons">access_time</i> {{ comic.created_at | formatDate }}</span>
         <router-link :to="{ name: 'User', params: { id: comic.owner_id } }" class="function"><i class="icon material-icons">person</i> {{ comic.owner.name }}</router-link>
@@ -11,12 +16,7 @@
     </Introduction>
 
     <OwnerButtons v-if="isMine">
-      <router-link :to="{ name: 'AddCut' }" v-if="comic.cuts.length === 0" class="button button-success">
-        첫번째 컷 작성
-      </router-link>
-      <router-link :to="{ name: 'UpdateComic', params: { id: comic.id } }" class="button button-primary">
-        코믹 수정
-      </router-link>
+      <router-link :to="{ name: 'AddCut' }" v-if="comic.cuts.length === 0" class="button button-success">첫번째 컷 작성</router-link>
     </OwnerButtons>
 
     <article class="comic-body">
