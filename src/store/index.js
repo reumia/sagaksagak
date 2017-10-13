@@ -6,10 +6,11 @@ Vue.use(Vuex)
 
 const state = {
   isGlobalNavigationVisible: false,
-  currentUser: null,
   comicsLatest: null,
   comicsBest: null,
-  tree: null
+  currentUser: null,
+  comic: null,
+  user: null
 }
 
 const mutations = {
@@ -27,6 +28,12 @@ const mutations = {
   },
   DELETE_CURRENT_USER (state) {
     state.currentUser = null
+  },
+  SET_COMIC (state, comic) {
+    state.comic = comic
+  },
+  DELETE_COMIC (state) {
+    state.comic = null
   }
 }
 
@@ -73,21 +80,31 @@ const actions = {
 
     commit('SET_LATEST_COMICS', comics)
   },
-  async ADD_COMIC ({commit}, {title, descriptions, image_url}) {
+  async GET_COMIC_BY_ID ({commit}, {id}) {
+    if (id) {
+      const response = await axios.get(`/comics/${id}`)
+      const comic = response.data
+
+      commit('SET_COMIC', comic)
+    } else {
+      commit('DELETE_COMIC')
+    }
+  },
+  async ADD_COMIC ({commit, state}) {
     const response = await axios.post('/comics', {
-      title: title,
-      descriptions: descriptions,
-      image_url: image_url
+      title: state.comic.title,
+      descriptions: state.comic.descriptions,
+      image_url: state.comic.image_url
     })
     const comic = response.data
 
     return comic
   },
-  async UPDATE_COMIC ({commit}, {id, title, descriptions, image_url}) {
+  async UPDATE_COMIC ({commit, state}, {id}) {
     const response = await axios.put(`/comics/${id}/update`, {
-      title: title,
-      descriptions: descriptions,
-      image_url: image_url
+      title: state.comic.title,
+      descriptions: state.comic.descriptions,
+      image_url: state.comic.image_url
     })
     const comic = response.data
 

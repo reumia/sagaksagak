@@ -42,22 +42,14 @@
     filters: filters,
     components: { Card, Functions, OwnerButtons, Introduction },
     computed: {
-      ...mapState([ 'currentUser' ]),
+      ...mapState([ 'currentUser', 'comic' ]),
       isMine () {
         return this.currentUser && this.comic && this.comic.owner_id === parseInt(this.currentUser.id, 10)
       }
     },
     created () {
-      this.$http.get(`/comics/${this.id}`)
-        .then(response => {
-          this.comic = response.data
-        })
+      this.$store.dispatch('GET_COMIC_BY_ID', { id: this.id })
         .catch(err => console.warn(err.response.data))
-    },
-    data () {
-      return {
-        comic: null
-      }
     }
   }
 </script>

@@ -1,14 +1,14 @@
 <template>
   <div class="my-page" v-if="currentUser">
-    <Card :title="`${currentUser.name} 수정`">
+    <Card :title="`${newName} 수정`">
       <FileUploader
         @onAdded="addFile"
         @onDeleted="deleteFile"
       ></FileUploader>
       <form @submit.prevent="updateUser">
-        <input class="input" v-model="name" type="text" placeholder="이름"/>
-        <textarea class="input" v-model="descriptions" placeholder="설명" required></textarea>
-        <input class="input" v-model="site" type="url" placeholder="웹사이트"/>
+        <input class="input" v-model="newName" type="text" placeholder="이름"/>
+        <textarea class="input" v-model="newDescriptions" placeholder="설명" required></textarea>
+        <input class="input" v-model="newSite" type="url" placeholder="웹사이트"/>
         <button class="button button-primary" type="submit"><i class="icon material-icons">check</i> 유저 정보 변경</button>
       </form>
     </Card>
@@ -23,29 +23,41 @@
   export default {
     name: 'mypage',
     components: { Card, FileUploader },
-    data () {
-      return {
-        name: null,
-        descriptions: null,
-        image_url: null,
-        site: null
-      }
-    },
     computed: {
-      ...mapState([ 'currentUser' ])
-    },
-    created () {
-      this.name = this.currentUser.name
-      this.descriptions = this.currentUser.descriptions
-      this.image_url = this.currentUser.image_url
-      this.site = this.currentUser.site
+      ...mapState([ 'currentUser' ]),
+      newName: {
+        get () {
+          return this.currentUser.name
+        },
+        set () {
+          // TODO
+        }
+      },
+      newDescriptions: {
+        get () {
+          return this.currentUser.descriptions
+        },
+        set () {
+          // TODO
+        }
+      },
+      newSite: {
+        get () {
+          return this.currentUser.site
+        },
+        set () {
+          // TODO
+        }
+      }
     },
     methods: {
       addFile (file) {
-        this.image_url = file.url
+        // TODO
+        // this.image_url = file.url
       },
       deleteFile () {
-        this.image_url = null
+        // TODO
+        // this.image_url = null
       },
       updateUser () {
         this.$store.dispatch('UPDATE_USER', {

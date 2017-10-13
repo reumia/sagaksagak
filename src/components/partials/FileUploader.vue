@@ -1,12 +1,12 @@
 <template>
   <div class="file-uploader-wrap">
     <!-- Exists Image -->
-    <div class="exists-image" v-if="exists" :style="{ backgroundImage: `url(${exists})` }">
+    <div class="exists-image" v-if="newImageUrl" :style="{ backgroundImage: `url(${newImageUrl})` }">
       <div class="button-flex">
         <button class="button button-extra-small button-danger" @click="deleteImage"><i class="icon material-icons">delete</i> 삭제</button>
       </div>
     </div>
-    <!-- Uploader -->
+    <!-- TODO : Uploader -->
     <div class="file-uploader" v-else>
       파일 업로더
     </div>
@@ -23,10 +23,16 @@
         exists: null
       }
     },
-    created () {
-      this.exists = this.currentUser.image_url
+    computed: {
+      ...mapState([ 'comic', 'currentUser' ]),
+      newImageUrl () {
+        const currentRouterName = this.$router.history.current.name
+
+        // 현재 라우터 위치에 따라 기존 이미지 다르게 설정
+        if (currentRouterName === 'MyPage') return this.currentUser ? this.currentUser.image_url : null
+        if (currentRouterName === 'UpdateComic') return this.comic ? this.comic.image_url : null
+      }
     },
-    computed: mapState([ 'currentUser' ]),
     methods: {
       addImage () {
         this.$emit('onAdded')
