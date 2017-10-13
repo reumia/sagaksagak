@@ -1,7 +1,6 @@
 <template>
   <div class="my-page" v-if="currentUser">
     <Card :title="`${currentUser.name} 수정`">
-      <ExistsImage :image_url="image_url" @onDelete="deleteImage"></ExistsImage>
       <FileUploader @onUpload="addFile"></FileUploader>
       <form @submit.prevent="updateUser">
         <input class="input" v-model="name" type="text" placeholder="이름"/>
@@ -16,12 +15,11 @@
 <script>
   import Card from '@/components/partials/Card'
   import FileUploader from '@/components/partials/FileUploader'
-  import ExistsImage from '@/components/partials/ExistsImage'
   import { mapState } from 'vuex'
 
   export default {
     name: 'mypage',
-    components: { Card, FileUploader, ExistsImage },
+    components: { Card, FileUploader },
     data () {
       return {
         name: null,

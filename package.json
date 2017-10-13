@@ -24,7 +24,7 @@
     "reset-css": "^2.2.0",
     "vue": "^2.2.6",
     "vue-router": "^2.3.1",
-    "vue-transmit": "^6.0.7",
+    "vue-upload-component": "^2.6.0-beta.3",
     "vuefire": "^1.4.2",
     "vuex": "^2.3.1"
   },

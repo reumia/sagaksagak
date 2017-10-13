@@ -1,19 +1,20 @@
 <template>
-  <div class="exists-image" v-if="image_url" :style="{ backgroundImage: `url(${image_url})` }">
+  <div class="exists-image" v-if="currentUser.image_url" :style="{ backgroundImage: `url(${currentUser.image_url})` }">
     <div class="button-flex">
-      <router-link :to="{ name: 'ChangeProfileImage' }" class="button button-extra-small button-primary"><i class="icon material-icons">edit</i> 수정</router-link>
-      <button class="button button-extra-small button-danger" @click="handleClick"><i class="icon material-icons">delete</i> 삭제</button>
+      <button class="button button-extra-small button-danger" @click="deleteImage"><i class="icon material-icons">delete</i> 삭제</button>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
     name: 'exists-image',
-    props: [ 'image_url' ],
+    computed: mapState([ 'currentUser' ]),
     methods: {
-      handleClick () {
-        this.$emit('onDelete')
+      deleteImage () {
+        // TODO : Store currentUser의 image_url 제거
       }
     }
   }

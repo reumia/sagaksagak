@@ -1,70 +1,21 @@
 <template>
   <div class="file-uploader-wrap">
-    <!-- Vue Transmit -->
-    <vue-transmit
-      v-bind="options"
-      drop-zone-classes="bg-faded"
-      ref="uploader"
-      @success="onSuccess"
-      @error="onError"
-    >
-      <button class="button button-success" @click="triggerBrowse"><i class="icon material-icons">file_upload</i> 파일 업로드</button>
-      <!-- Result Template -->
-      <template slot="files" scope="props">
-        <div v-for="(file, i) in props.files" :key="file.id" class="uploaded">
-          <div class="uploaded-item" v-if="file.accepted" :class="{ 'is-error': file.status === 'error', 'is-success': file.status === 'success' }">
-            <button class="button button-extra-small button-danger button-close" type="button" @click.prevent="$refs.uploader.removeAllFiles"><i class="icon material-icons">close</i></button>
-            <img :src="file.dataUrl" class="uploaded-item-image"/>
-            <div class="progress"><div class="progress-bar" :style="{width: file.upload.progress + '%'}"></div></div>
-            <div class="uploaded-item-body">
-              <span class="status">{{ file.status }}</span>
-              <span class="name">{{ file.name }}</span>
-            </div>
-          </div>
-        </div>
-      </template>
-    </vue-transmit>
+    <ExistsImage></ExistsImage>
+    <!-- Uploader -->
   </div>
 </template>
 
 <script>
+  import ExistsImage from '@/components/partials/ExistsImage'
+
   export default {
     name: 'file-uploader',
+    components: { ExistsImage },
     data () {
       return {
-        options: {
-          // TODO : 파일스토리지 서비스 연동필요.
-          url: `${process.env.API_ENDPOINT}/upload`,
-          acceptedFileTypes: ['image/*'],
-          uploadAreaClasses: 'file-uploader',
-          dragClass: 'is-dragging',
-          maxFiles: 1,
-          uploadMultiple: false,
-          clickable: false,
-          thumbnailWidth: 320,
-          thumbnailHeight: 120,
-          dictMaxFilesExceeded: '파일은 하나만 업로드할 수 있습니다.'
-        }
       }
     },
     methods: {
-      triggerBrowse () {
-        this.$refs.uploader.triggerBrowseFiles()
-      },
-      onSuccess (file, res) {
-        console.log(res)
-        file.url = res.downloadUrl
-        this.$emit('onUpload', file)
-      },
-      onError (file, errorMsg) {
-        // TODO : 에러 UI 처리
-        console.warn(errorMsg, file)
-      }
-    },
-    filters: {
-      json (value) {
-        return JSON.stringify(value, null, 2)
-      }
     }
   }
 </script>

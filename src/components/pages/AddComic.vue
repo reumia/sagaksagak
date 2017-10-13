@@ -1,7 +1,6 @@
 <template>
   <div class="add-comic">
     <Card :title="id ? '코믹 수정' : '새 코믹'">
-      <ExistsImage :image_url="image_url" @onDelete="deleteImage"></ExistsImage>
       <FileUploader @onUpload="addFile"></FileUploader>
       <form @submit.prevent="handleSubmit">
         <input class="input" v-model="title" type="text" placeholder="제목" required/>
@@ -18,12 +17,11 @@
 <script>
   import Card from '@/components/partials/Card'
   import FileUploader from '@/components/partials/FileUploader'
-  import ExistsImage from '@/components/partials/ExistsImage'
   import { mapState } from 'vuex'
 
   export default {
     name: 'add-comic',
-    components: { Card, FileUploader, ExistsImage },
+    components: { Card, FileUploader },
     props: [ 'id' ],
     data () {
       return {

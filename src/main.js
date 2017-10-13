@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueTransmit from 'vue-transmit'
+import VueUploadComponent from 'vue-upload-component'
 
 import App from './App'
 import router from './router'
@@ -8,7 +8,7 @@ import axios from './utils/axios'
 
 // Vue.config.productionTip = false
 Vue.prototype.$http = axios
-Vue.use(VueTransmit)
+Vue.component('file-upload', VueUploadComponent)
 
 /* eslint-disable no-new */
 new Vue({
