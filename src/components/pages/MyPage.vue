@@ -58,13 +58,14 @@
         this.image_url = null
       },
       updateUser () {
-        // TODO : 유저 업데이트 API 작성 및 적용
-        this.$http.post(`/user/${this.currentUser.id}/update`, {
+        this.$store.dispatch('UPDATE_USER', {
+          id: this.currentUser.id,
           name: this.name,
           descriptions: this.descriptions,
+          image_url: this.image_url,
           site: this.site
         })
-          .then()
+          .then(user => this.$router.push({ name: 'User', params: { id: user.id } }))
           .catch(err => console.warn(err.response.data))
       }
     }

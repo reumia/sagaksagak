@@ -46,6 +46,21 @@ const actions = {
 
     commit('DELETE_CURRENT_USER')
   },
+  async ADD_USER () {
+  },
+  async UPDATE_USER ({commit}, {id, name, descriptions, site, image_url}) {
+    const response = await axios.put(`/users/${id}/update`, {
+      name: name,
+      descriptions: descriptions,
+      site: site,
+      image_url: image_url
+    })
+    const user = response.data
+
+    commit('SET_CURRENT_USER', user)
+
+    return user
+  },
   async GET_CURRENT_USER ({commit}) {
     const response = await axios.get('/users/@me')
     const user = response.data
@@ -59,13 +74,21 @@ const actions = {
     commit('SET_LATEST_COMICS', comics)
   },
   async ADD_COMIC ({commit}, {title, descriptions, image_url}) {
-    const response = await axios.post('/comics', {title: title, descriptions: descriptions, image_url: image_url})
+    const response = await axios.post('/comics', {
+      title: title,
+      descriptions: descriptions,
+      image_url: image_url
+    })
     const comic = response.data
 
     return comic
   },
   async UPDATE_COMIC ({commit}, {id, title, descriptions, image_url}) {
-    const response = await axios.post(`/comics/${id}/update`, {title: title, descriptions: descriptions, image_url: image_url})
+    const response = await axios.put(`/comics/${id}/update`, {
+      title: title,
+      descriptions: descriptions,
+      image_url: image_url
+    })
     const comic = response.data
 
     return comic

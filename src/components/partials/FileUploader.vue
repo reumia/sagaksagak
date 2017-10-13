@@ -30,7 +30,6 @@
 <script>
   export default {
     name: 'file-uploader',
-    props: [ 'image_url' ],
     data () {
       return {
         options: {
