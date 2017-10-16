@@ -11,7 +11,8 @@ const state = {
   comicsBest: null,
   currentUser: null,
   comic: null,
-  user: null
+  user: null,
+  cut: null
 }
 
 const mutations = {
@@ -41,6 +42,12 @@ const mutations = {
   },
   SET_LATEST_COMICS (state, comics) {
     state.comicsLatest = comics
+  },
+  SET_CUT (state, cut) {
+    state.cut = _.assignIn(state.cut, cut)
+  },
+  DELETE_CUT (state) {
+    state.cut = null
   }
 }
 

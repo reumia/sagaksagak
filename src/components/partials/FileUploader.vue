@@ -1,7 +1,10 @@
 <template>
   <div class="file-uploader-wrap">
     <!-- Exists Image -->
-    <div class="exists-image" v-if="base && base.imageUrl" :style="{ backgroundImage: `url(${base.imageUrl})` }">
+    <div class="exists-image" v-if="base && base.imageUrl" :style="{
+      backgroundImage: `url(${base.imageUrl})`,
+      paddingTop: `${(100 / cropRatio)}%`
+    }">
       <div class="button-flex">
         <button class="button button-extra-small button-danger" @click="deleteExists"><i class="icon material-icons">delete</i> 삭제</button>
       </div>
@@ -17,7 +20,9 @@
         <img :src="files.length ? files[0].url : null" class="image" />
       </div>
       <!-- Uploader -->
-      <div class="file-uploader-upload" v-show="!edit && !files.length">
+      <div class="file-uploader-upload" v-show="!edit && !files.length" :style="{
+        paddingTop: `${(100 / cropRatio)}%`
+      }">
         <!--<label class="label-upload" for="file">Drag & Drop 하여 파일을 업로드하세요.</label>-->
         <file-upload
           extensions="gif,jpg,jpeg,png,webp"
@@ -58,6 +63,7 @@
 
   export default {
     name: 'file-uploader',
+    props: [ 'ratio' ],
     data () {
       return {
         files: [],
@@ -73,6 +79,9 @@
 
         if (currentRouterName === 'UpdateUser') return this.user
         if (currentRouterName === 'UpdateComic') return this.comic
+      },
+      cropRatio () {
+        return this.ratio ? this.ratio : (3 / 1)
       }
     },
     methods: {
@@ -138,7 +147,7 @@
           this.$nextTick(function () {
             if (!this.$refs.editImage) return
             this.cropper = new Cropper(this.$refs.editImage, {
-              aspectRatio: 3 / 1,
+              aspectRatio: this.cropRatio,
               viewMode: 1
             })
           })

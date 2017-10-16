@@ -6,6 +6,7 @@ import Home from '@/components/pages/Home'
 import SignIn from '@/components/pages/SignIn'
 import SignUp from '@/components/pages/SignUp'
 import Cut from '@/components/pages/Cut'
+import AddCut from '@/components/pages/AddCut'
 import Comic from '@/components/pages/Comic'
 import AddComic from '@/components/pages/AddComic'
 import User from '@/components/pages/User'
@@ -63,6 +64,14 @@ const router = new Router({
       props: true,
       meta: {
         auth: false
+      }
+    },
+    {
+      path: '/cut/add',
+      name: 'AddCut',
+      component: AddCut,
+      meta: {
+        auth: true
       }
     },
     {
