@@ -5,7 +5,7 @@
       :title="user.name"
       :descriptions="user.descriptions"
       :status="user.status"
-      :image_url="user.image_url"
+      :imageUrl="user.imageUrl"
     >
       <Functions>
         <a :href="`mailto:${user.email}`" class="function"><i class="icon material-icons">mail_outline</i></a>

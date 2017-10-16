@@ -63,14 +63,14 @@
           id: this.currentUser.id,
           name: this.name,
           descriptions: this.descriptions,
-          image_url: this.image_url,
+          imageUrl: this.imageUrl,
           site: this.site
         })
           .then(user => this.$router.push({ name: 'User', params: { id: user.id } }))
           .catch(err => console.warn(err.response.data))
       },
       addFile (response) {
-        this.SET_USER({image_url: response.image_url})
+        this.SET_USER({imageUrl: response.imageUrl})
       }
     }
   }

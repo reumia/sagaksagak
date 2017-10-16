@@ -1,7 +1,7 @@
 <template>
   <div class="file-uploader-wrap">
     <!-- Exists Image -->
-    <div class="exists-image" v-if="base && base.image_url" :style="{ backgroundImage: `url(${base.image_url})` }">
+    <div class="exists-image" v-if="base && base.imageUrl" :style="{ backgroundImage: `url(${base.imageUrl})` }">
       <div class="button-flex">
         <button class="button button-extra-small button-danger" @click="deleteExists"><i class="icon material-icons">delete</i> 삭제</button>
       </div>
@@ -128,7 +128,7 @@
         console.warn(err)
       },
       deleteExists () {
-        this.base.image_url = null
+        this.base.imageUrl = null
         this.files = []
       }
     },

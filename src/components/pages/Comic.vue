@@ -1,6 +1,6 @@
 <template>
   <div class="page-comic">
-    <div class="comic-background" v-if="comic" :style="{ backgroundImage: `url(${comic.image_url})` }"></div>
+    <div class="comic-background" v-if="comic" :style="{ backgroundImage: `url(${comic.imageUrl})` }"></div>
     <Introduction
       v-if="comic"
       :title="comic.title"
@@ -8,7 +8,7 @@
       :status="comic.status"
     >
       <Functions>
-        <span class="function"><i class="icon material-icons">access_time</i> {{ comic.created_at | formatDate }}</span>
+        <span class="function"><i class="icon material-icons">access_time</i> {{ comic.createdAt | formatDate }}</span>
         <router-link :to="{ name: 'User', params: { id: comic.owner_id } }" class="function"><i class="icon material-icons">person</i> {{ comic.owner.name }}</router-link>
         <span class="function"><i class="icon material-icons">crop_din</i> {{ comic.cuts.length | formatCurrency }}</span>
         <button class="function color-danger"><i class="icon material-icons">favorite</i> {{ comic.likes.length | formatCurrency }}</button>

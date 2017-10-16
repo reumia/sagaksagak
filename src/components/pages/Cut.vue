@@ -68,7 +68,7 @@
             id: 0,
             title: '유미의 세포들 #1',
             descriptions: '',
-            image_url: '/static/example/cut_02.jpg',
+            imageUrl: '/static/example/cut_02.jpg',
             owner: 0,
             likes: 100
           },
@@ -76,7 +76,7 @@
             id: 2,
             title: '유미의 세포들 #2-2',
             descriptions: '',
-            image_url: '/static/example/cut_04.jpg',
+            imageUrl: '/static/example/cut_04.jpg',
             owner: 1,
             likes: 20
           },
@@ -84,7 +84,7 @@
             id: 3,
             title: '유미의 세포들 #2-3',
             descriptions: '',
-            image_url: '/static/example/cut_05.jpg',
+            imageUrl: '/static/example/cut_05.jpg',
             owner: 1,
             likes: 10
           },
@@ -92,7 +92,7 @@
             id: 4,
             title: '유미의 세포들 #2-3',
             descriptions: '',
-            image_url: '/static/example/cut_06.jpg',
+            imageUrl: '/static/example/cut_06.jpg',
             owner: 2,
             likes: 5
           },
@@ -100,7 +100,7 @@
             id: 5,
             title: '유미의 세포들 #2-3',
             descriptions: '',
-            image_url: '/static/example/cut_07.jpg',
+            imageUrl: '/static/example/cut_07.jpg',
             owner: 2,
             likes: 1
           },
@@ -108,7 +108,7 @@
             id: 6,
             title: '유미의 세포들 #2-3',
             descriptions: '',
-            image_url: '/static/example/cut_08.jpg',
+            imageUrl: '/static/example/cut_08.jpg',
             owner: 2,
             likes: 0
           }
@@ -117,7 +117,7 @@
           id: 1,
           title: '유미의 세포들 #0',
           descriptions: '',
-          image_url: '/static/example/cut_01.jpg',
+          imageUrl: '/static/example/cut_01.jpg',
           owner: 0,
           likes: 241
         },
@@ -125,7 +125,7 @@
           id: 4,
           title: '유미의 세포들 #2-1',
           descriptions: '',
-          image_url: '/static/example/cut_03.jpg',
+          imageUrl: '/static/example/cut_03.jpg',
           owner: 2,
           likes: 13
         }

@@ -6,8 +6,8 @@
         :key="item.id"
         :id="item.id"
         :title="item.title"
-        :createdAt="item.created_at"
-        :image_url="item.image_url"
+        :createdAt="item.createdAt"
+        :imageUrl="item.imageUrl"
       ></IndexItem>
     </div>
   </div>

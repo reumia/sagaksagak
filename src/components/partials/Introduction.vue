@@ -1,6 +1,6 @@
 <template>
   <div class="introduction">
-    <div class="introduction-image" v-if="image_url" :style="{ backgroundImage: `url(${image_url})`}"></div>
+    <div class="introduction-image" v-if="imageUrl" :style="{ backgroundImage: `url(${imageUrl})`}"></div>
     <div class="introduction-title">
       {{ title }}
       <Sticker :code="status"></Sticker>
@@ -15,7 +15,7 @@
 
   export default {
     name: 'introduction',
-    props: [ 'title', 'status', 'descriptions', 'image_url' ],
+    props: [ 'title', 'status', 'descriptions', 'imageUrl' ],
     components: { Sticker }
   }
 </script>

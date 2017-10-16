@@ -82,7 +82,7 @@ const actions = {
     const response = await axios.put(`/users/${id}/update`, {
       name: state.user.name,
       descriptions: state.user.descriptions,
-      image_url: state.user.image_url,
+      imageUrl: state.user.imageUrl,
       site: state.user.site
     })
     const user = response.data
@@ -105,7 +105,7 @@ const actions = {
     const response = await axios.post('/comics', {
       title: state.comic.title,
       descriptions: state.comic.descriptions,
-      image_url: state.comic.image_url
+      imageUrl: state.comic.imageUrl
     })
     const comic = response.data
 
@@ -115,7 +115,7 @@ const actions = {
     const response = await axios.put(`/comics/${id}/update`, {
       title: state.comic.title,
       descriptions: state.comic.descriptions,
-      image_url: state.comic.image_url
+      imageUrl: state.comic.imageUrl
     })
     const comic = response.data
 

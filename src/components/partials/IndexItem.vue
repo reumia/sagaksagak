@@ -2,7 +2,7 @@
   <router-link :to="{ name: 'Comic', params: { id: id } }" class="index-item">
     <div class="index-item-body">
       <div class="index-item-contents">
-        <div v-if="image_url" class="image" :style="{ backgroundImage: `url(${image_url})`}"></div>
+        <div v-if="imageUrl" class="image" :style="{ backgroundImage: `url(${imageUrl})`}"></div>
         <div class="texts">
           <div class="title">{{ title }}</div>
           <div class="date">{{ createdAt | formatDate }}</div>
@@ -18,7 +18,7 @@
 
   export default {
     name: 'index-item',
-    props: [ 'width', 'id', 'title', 'createdAt', 'image_url' ],
+    props: [ 'width', 'id', 'title', 'createdAt', 'imageUrl' ],
     filters: filters,
     data () {
       return {

@@ -5,7 +5,7 @@
     :class="{ active: isCurrent }"
     :style="{ width: `${width}px`, margin: `0 ${margin/2}px` }"
   >
-    <div class="sagak-body" :style="{ backgroundImage: `url(${data.image_url})` }"></div>
+    <div class="sagak-body" :style="{ backgroundImage: `url(${data.imageUrl})` }"></div>
   </router-link>
 </template>
 

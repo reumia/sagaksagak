@@ -65,7 +65,7 @@
         else this.add()
       },
       addFile (response) {
-        this.SET_COMIC({image_url: response.image_url})
+        this.SET_COMIC({imageUrl: response.imageUrl})
       }
     }
   }
