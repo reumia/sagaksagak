@@ -50,6 +50,7 @@
     },
     methods: {
       ...mapMutations([ 'SET_COMIC' ]),
+      // TODO : 새 코믹 추가 후 페이지 이동 시, Relation 모델 데이터 못 불러오는 문제
       add () {
         this.$store.dispatch('ADD_COMIC')
           .then(comic => this.$router.push({ name: 'Comic', params: { id: comic.id } }))
