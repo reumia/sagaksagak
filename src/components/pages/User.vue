@@ -11,7 +11,7 @@
         <a :href="`mailto:${user.email}`" class="function"><i class="icon material-icons">mail_outline</i></a>
         <a v-if="user.site" :href="user.site" class="function" target="_blank"><i class="icon material-icons">open_in_browser</i></a>
         <span class="function"><i class="icon material-icons">crop_din</i> {{ user.cuts.length | formatCurrency }}</span>
-        <button class="function color-danger"><i class="icon material-icons">favorite</i> {{ user.likes.length | formatCurrency }}</button>
+        <button class="function color-danger" @click="likeUser"><i class="icon material-icons">favorite</i> {{ user.likes.length | formatCurrency }}</button>
       </Functions>
     </Introduction>
 
@@ -54,6 +54,16 @@
     created () {
       this.$store.dispatch('GET_USER_BY_ID', {id: this.id})
         .catch(err => console.warn(err.response.data))
+    },
+    methods: {
+      likeUser () {
+        this.$store.dispatch('LIKE_USER', {id: this.id})
+          .then(() => {
+            // TODO : 성공시 업데이트
+            console.log('오예')
+          })
+          .catch(err => console.warn(err.response.data))
+      }
     }
   }
 </script>

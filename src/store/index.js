@@ -141,6 +141,12 @@ const actions = {
     const cut = response.data
 
     return cut
+  },
+  async LIKE_USER ({commit}, {id}) {
+    const response = await axios.post(`/likes/user/${id}`)
+    const result = response.data
+
+    return result
   }
 }
 
