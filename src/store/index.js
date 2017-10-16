@@ -21,14 +21,17 @@ const mutations = {
   HIDE_GLOBAL_NAVIGATION (state) {
     state.isGlobalNavigationVisible = false
   },
-  SET_LATEST_COMICS (state, comics) {
-    state.comicsLatest = comics
-  },
   SET_CURRENT_USER (state, user) {
     state.currentUser = user
   },
   DELETE_CURRENT_USER (state) {
     state.currentUser = null
+  },
+  SET_USER (state, user) {
+    state.user = _.assignIn(state.user, user)
+  },
+  DELETE_USER (state) {
+    state.user = null
   },
   SET_COMIC (state, comic) {
     state.comic = _.assignIn(state.comic, comic)
@@ -36,11 +39,8 @@ const mutations = {
   DELETE_COMIC (state) {
     state.comic = null
   },
-  SET_USER (state, user) {
-    state.user = _.assignIn(state.user, user)
-  },
-  DELETE_USER (state) {
-    state.user = null
+  SET_LATEST_COMICS (state, comics) {
+    state.comicsLatest = comics
   }
 }
 
@@ -60,32 +60,36 @@ const actions = {
 
     commit('DELETE_CURRENT_USER')
   },
-  async ADD_USER () {
-  },
-  async UPDATE_USER ({commit}, {id, name, descriptions, site, image_url}) {
-    const response = await axios.put(`/users/${id}/update`, {
-      name: name,
-      descriptions: descriptions,
-      site: site,
-      image_url: image_url
-    })
-    const user = response.data
-
-    commit('SET_CURRENT_USER', user)
-
-    return user
-  },
   async GET_CURRENT_USER ({commit}) {
     const response = await axios.get('/users/@me')
     const user = response.data
 
     commit('SET_CURRENT_USER', user)
   },
-  async GET_LATEST_COMICS ({commit}) {
-    const response = await axios.get(`/comics/latest`)
-    const comics = response.data
+  async GET_USER_BY_ID ({commit}, {id}) {
+    if (id) {
+      const response = await axios.get(`/users/${id}`)
+      const user = response.data
 
-    commit('SET_LATEST_COMICS', comics)
+      commit('SET_USER', user)
+    } else {
+      commit('DELETE_USER')
+    }
+  },
+  async ADD_USER () {
+  },
+  async UPDATE_USER ({commit, state}, {id}) {
+    const response = await axios.put(`/users/${id}/update`, {
+      name: state.user.name,
+      descriptions: state.user.descriptions,
+      image_url: state.user.image_url,
+      site: state.user.site
+    })
+    const user = response.data
+
+    if (id === state.currentUser.id) commit('SET_CURRENT_USER', user)
+
+    return user
   },
   async GET_COMIC_BY_ID ({commit}, {id}) {
     if (id) {
@@ -116,6 +120,12 @@ const actions = {
     const comic = response.data
 
     return comic
+  },
+  async GET_LATEST_COMICS ({commit}) {
+    const response = await axios.get(`/comics/latest`)
+    const comics = response.data
+
+    commit('SET_LATEST_COMICS', comics)
   }
 }
 

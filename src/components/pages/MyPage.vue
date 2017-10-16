@@ -5,7 +5,7 @@
         @onAdded="addFile"
         @onDeleted="deleteFile"
       ></FileUploader>
-      <form @submit.prevent="updateUser">
+      <form @submit.prevent="update">
         <input class="input" v-model="newName" type="text" placeholder="이름"/>
         <textarea class="input" v-model="newDescriptions" placeholder="설명" required></textarea>
         <input class="input" v-model="newSite" type="url" placeholder="웹사이트"/>
@@ -18,39 +18,44 @@
 <script>
   import Card from '@/components/partials/Card'
   import FileUploader from '@/components/partials/FileUploader'
-  import { mapState } from 'vuex'
+  import { mapState, mapMutations } from 'vuex'
 
   export default {
     name: 'mypage',
+    created () {
+      this.$store.dispatch('GET_USER_BY_ID', { id: this.currentUser.id })
+        .catch(err => console.warn(err.response.data))
+    },
     components: { Card, FileUploader },
     computed: {
-      ...mapState([ 'currentUser' ]),
+      ...mapState([ 'currentUser', 'user' ]),
       newName: {
         get () {
-          return this.currentUser.name
+          return this.user ? this.user.name : null
         },
-        set () {
-          // TODO
+        set (value) {
+          this.SET_USER({name: value})
         }
       },
       newDescriptions: {
         get () {
-          return this.currentUser.descriptions
+          return this.user ? this.user.descriptions : null
         },
-        set () {
-          // TODO
+        set (value) {
+          this.SET_USER({descriptions: value})
         }
       },
       newSite: {
         get () {
-          return this.currentUser.site
+          return this.user ? this.user.site : null
         },
-        set () {
-          // TODO
+        set (value) {
+          this.SET_USER({site: value})
         }
       }
     },
     methods: {
+      ...mapMutations([ 'SET_USER' ]),
       addFile (file) {
         // TODO
         // this.image_url = file.url
@@ -59,7 +64,7 @@
         // TODO
         // this.image_url = null
       },
-      updateUser () {
+      update () {
         this.$store.dispatch('UPDATE_USER', {
           id: this.currentUser.id,
           name: this.name,
