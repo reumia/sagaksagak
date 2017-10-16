@@ -109,6 +109,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   // TODO : 새 페이지 진입시 NAVIGATION 닫기
+  store.commit('HIDE_GLOBAL_NAVIGATION')
   /* 현재유저 체크 */
   if (Boolean(store.state.currentUser) === false) {
     store.dispatch('GET_CURRENT_USER')

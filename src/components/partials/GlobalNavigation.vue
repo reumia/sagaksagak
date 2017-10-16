@@ -17,7 +17,7 @@
         <button class="button button-small button-success" @click="$router.push({ name: 'AddComic' })">
           <i class="material-icons icon">add</i> 새 코믹 만들기
         </button>
-        <button class="button button-danger button-small" @click="$store.dispatch('SIGN_OUT')">
+        <button class="button button-danger button-small" @click="signOut">
           <i class="material-icons icon">power_settings_new</i> 로그아웃
         </button>
       </div>
@@ -47,7 +47,12 @@
       ...mapState([ 'currentUser' ])
     },
     methods: {
-      ...mapMutations([ 'HIDE_GLOBAL_NAVIGATION' ])
+      ...mapMutations([ 'HIDE_GLOBAL_NAVIGATION' ]),
+      signOut () {
+        this.$store.dispatch('SIGN_OUT')
+          .then(() => this.$router.push({ name: 'Home' }))
+          .catch(err => console.warn(err.response.data))
+      }
     },
     data () {
       return {
