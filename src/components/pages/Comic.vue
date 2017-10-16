@@ -9,7 +9,7 @@
     >
       <Functions>
         <span class="function"><i class="icon material-icons">access_time</i> {{ comic.createdAt | formatDate }}</span>
-        <router-link :to="{ name: 'User', params: { id: comic.owner_id } }" class="function"><i class="icon material-icons">person</i> {{ comic.owner.name }}</router-link>
+        <router-link :to="{ name: 'User', params: { id: comic.ownerId } }" class="function"><i class="icon material-icons">person</i> {{ comic.owner.name }}</router-link>
         <span class="function"><i class="icon material-icons">crop_din</i> {{ comic.cuts.length | formatCurrency }}</span>
         <button class="function color-danger"><i class="icon material-icons">favorite</i> {{ comic.likes.length | formatCurrency }}</button>
       </Functions>
@@ -44,7 +44,7 @@
     computed: {
       ...mapState([ 'currentUser', 'comic' ]),
       isMine () {
-        return this.currentUser && this.comic && this.comic.owner_id === parseInt(this.currentUser.id, 10)
+        return this.currentUser && this.comic && this.comic.ownerId === parseInt(this.currentUser.id, 10)
       }
     },
     created () {
