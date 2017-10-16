@@ -52,11 +52,9 @@ const mutations = {
 }
 
 const actions = {
-  async SIGN_IN ({commit}, {email, password, descriptions}) {
+  async SIGN_IN ({commit}, payload) {
     const response = await axios.post('/auth/sign-in', {
-      email: email,
-      password: password,
-      descriptions: descriptions
+      ...payload
     })
     const user = response.data
 
@@ -133,6 +131,16 @@ const actions = {
     const comics = response.data
 
     commit('SET_LATEST_COMICS', comics)
+  },
+  async ADD_CUT ({commit, state}, payload) {
+    const response = await axios.post('/cuts', {
+      ...payload,
+      title: state.cut.title,
+      imageUrl: state.cut.imageUrl
+    })
+    const cut = response.data
+
+    return cut
   }
 }
 

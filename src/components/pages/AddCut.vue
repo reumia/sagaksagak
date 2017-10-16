@@ -26,9 +26,9 @@
     created () {
     },
     components: { Card, FileUploader },
-    props: [ 'id' ],
+    props: [ 'id', 'parentId', 'comicId' ],
     computed: {
-      ...mapState([ 'currentUser', 'cut' ]),
+      ...mapState([ 'currentUser' ]),
       newTitle: {
         get () {
           return this.cut ? this.cut.title : null
@@ -41,14 +41,26 @@
     methods: {
       ...mapMutations([ 'SET_CUT' ]),
       add () {
+        console.log({
+          parentId: this.parentId,
+          comicId: this.comicId
+        })
+        this.$store.dispatch('ADD_CUT', {
+          parentId: this.parentId,
+          comicId: this.comicId
+        })
+          .then(cut => this.$router.push({ name: 'Cut', params: { id: cut.id } }))
+          .catch(err => console.warn(err.response.data))
       },
       update () {
+        // TODO : 컷 수정
       },
       handleSubmit () {
         if (this.id) this.update()
         else this.add()
       },
       addFile (response) {
+        this.SET_CUT({imageUrl: response.imageUrl})
       }
     }
   }

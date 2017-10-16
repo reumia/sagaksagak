@@ -70,6 +70,10 @@ const router = new Router({
       path: '/cut/add',
       name: 'AddCut',
       component: AddCut,
+      props: route => ({
+        comicId: route.query.comicId,
+        parentId: route.query.parentId
+      }),
       meta: {
         auth: true
       }
