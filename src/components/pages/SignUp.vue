@@ -28,6 +28,7 @@
       }
     },
     methods: {
+      // TODO : Store로 이관여부
       signUp () {
         this.$http.post(`/auth/sign-up`, {
           email: this.email,
