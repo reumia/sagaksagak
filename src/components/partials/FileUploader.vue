@@ -1,45 +1,149 @@
 <template>
   <div class="file-uploader-wrap">
     <!-- Exists Image -->
-    <div class="exists-image" v-if="newImageUrl" :style="{ backgroundImage: `url(${newImageUrl})` }">
+    <div class="exists-image" v-if="base && base.image_url" :style="{ backgroundImage: `url(${base.image_url})` }">
       <div class="button-flex">
-        <button class="button button-extra-small button-danger" @click="deleteImage"><i class="icon material-icons">delete</i> 삭제</button>
+        <button class="button button-extra-small button-danger" @click="deleteExists"><i class="icon material-icons">delete</i> 삭제</button>
       </div>
     </div>
-    <!-- TODO : Uploader -->
+    <!-- File Uploader -->
     <div class="file-uploader" v-else>
-      파일 업로더
+      <!-- Dimmed Layer -->
+      <div v-show="$refs.upload && $refs.upload.dropActive" class="file-uploader-dimmed">
+        <div class="text">Drag & Drop 하여 파일을 업로드하세요.</div>
+      </div>
+      <!-- Uploaded Image -->
+      <div class="file-uploader-image" v-show="!edit && files.length">
+        <img :src="files.length ? files[0].url : null" class="image" />
+      </div>
+      <!-- Uploader -->
+      <div class="file-uploader-upload" v-show="!edit && !files.length">
+        <!--<label class="label-upload" for="file">Drag & Drop 하여 파일을 업로드하세요.</label>-->
+        <file-upload
+          extensions="gif,jpg,jpeg,png,webp"
+          accept="image/png,image/gif,image/jpeg,image/webp"
+          name="file"
+          class="button button-success button-upload"
+          post-action="http://127.0.0.1:3001/upload"
+          :drop="!edit"
+          v-model="files"
+          @input-filter="inputFilter"
+          @input-file="inputFile"
+          ref="upload"
+        >
+          <i class="icon material-icons">file_upload</i> 파일 업로드
+        </file-upload>
+      </div>
+      <!-- Editor -->
+      <div class="file-uploader-edit" v-show="edit && files.length">
+        <div class="edit-image" v-if="files.length">
+          <img ref="editImage" :src="files[0].url" />
+        </div>
+        <div class="button-flex">
+          <button type="submit" class="button button-small button-success" @click.prevent="onCrop">이미지 자르기</button>
+          <button type="button" class="button button-small button-danger" @click.prevent="$refs.upload.clear">취소</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
   import { mapState } from 'vuex'
+  import Cropper from 'cropperjs'
 
   export default {
     name: 'file-uploader',
     data () {
       return {
-        exists: null
+        files: [],
+        edit: false,
+        cropper: false
       }
     },
     computed: {
-      ...mapState([ 'comic', 'currentUser' ]),
-      newImageUrl () {
+      ...mapState([ 'comic', 'user' ]),
+      base () {
+        // Router 이름에 따라 데이터 분배
         const currentRouterName = this.$router.history.current.name
 
-        // 현재 라우터 위치에 따라 기존 이미지 다르게 설정
-        if (currentRouterName === 'MyPage') return this.currentUser ? this.currentUser.image_url : null
-        if (currentRouterName === 'UpdateComic') return this.comic ? this.comic.image_url : null
+        if (currentRouterName === 'MyPage') return this.user
+        if (currentRouterName === 'UpdateComic') return this.comic
       }
     },
     methods: {
-      addImage () {
-        this.$emit('onAdded')
+      alert (message) {
+        alert(message)
       },
-      deleteImage () {
-        this.exists = null
-        this.$emit('onDeleted')
+      onCrop () {
+        this.edit = false
+
+        let oldFile = this.files[0]
+        let binStr = atob(this.cropper.getCroppedCanvas().toDataURL(oldFile.type).split(',')[1])
+        let arr = new Uint8Array(binStr.length)
+        for (let i = 0; i < binStr.length; i++) {
+          arr[i] = binStr.charCodeAt(i)
+        }
+
+        let file = new File([arr], oldFile.name, { type: oldFile.type })
+
+        this.$refs.upload.update(oldFile.id, {
+          file,
+          type: file.type,
+          size: file.size,
+          active: true
+        })
+      },
+      inputFile (newFile, oldFile, prevent) {
+        if (newFile && !oldFile) {
+          this.$nextTick(() => {
+            this.edit = true
+          })
+        }
+        if (!newFile && oldFile) this.edit = false
+        if (newFile && newFile.success && newFile.response) this.onUploadSucceed(newFile.response)
+        if (newFile && newFile.error) this.onUploadError(newFile.error)
+      },
+      inputFilter (newFile, oldFile, prevent) {
+        if (newFile && !oldFile) {
+          if (!/\.(gif|jpg|jpeg|png|webp)$/i.test(newFile.name)) {
+            this.alert('Your choice is not a picture')
+            return prevent()
+          }
+        }
+        if (newFile && (!oldFile || newFile.file !== oldFile.file)) {
+          newFile.url = ''
+          let URL = window.URL || window.webkitURL
+          if (URL && URL.createObjectURL) newFile.url = URL.createObjectURL(newFile.file)
+        }
+      },
+      onUploadSucceed (response) {
+        this.$emit('onSuccess', response)
+      },
+      onUploadError (err) {
+        console.warn(err)
+      },
+      deleteExists () {
+        this.base.image_url = null
+        this.files = []
+      }
+    },
+    watch: {
+      edit (value) {
+        if (value) {
+          this.$nextTick(function () {
+            if (!this.$refs.editImage) return
+            this.cropper = new Cropper(this.$refs.editImage, {
+              aspectRatio: 3 / 1,
+              viewMode: 1
+            })
+          })
+        } else {
+          if (this.cropper) {
+            this.cropper.destroy()
+            this.cropper = false
+          }
+        }
       }
     }
   }
@@ -47,6 +151,7 @@
 
 <style lang="scss">
   @import 'init';
+  @import '~cropperjs/dist/cropper.css';
 
   .exists-image {
     @include transition(height);
@@ -65,92 +170,71 @@
     }
   }
 
-  .file-uploader {
-    padding: ($space-unit * 4) 0;
-    margin: ($space-unit / 2) 0;
-    border: 2px dashed $color-border;
-    background: $color-background-darker;
-    &.is-dragging {
-      background: repeating-linear-gradient(
-        135deg,
-        $color-background-dark,
-        $color-background-dark 10px,
-        mix($color-success, $color-background-dark, 10) 10px,
-        mix($color-success, $color-background-dark, 10) 20px
-      );
-    }
-    .button {
-      margin: 0 auto;
-      width: auto;
-    }
-  }
-
-  .uploaded {
-  }
-  .uploaded-item {
+  .file-uploader-image {
     position: relative;
-    margin: ($space-unit / 2) 0;
-    background-color: $color-background;
-    .button-close {
-      position: absolute;
-      z-index: 1;
-      top: $space-unit / 2;
-      right: $space-unit / 2;
-    }
-    &:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      border: 2px solid rgba(0,0,0,.1);
-    }
-    &.is-error {
-      .status,
-      .progress-bar {
-        background-color: $color-danger;
-      }
-    }
-    &.is-success {
-      .status {
-        background-color: $color-success;
-      }
-    }
-  }
-  .uploaded-item-image {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  .uploaded-item-body {
-    padding: ($space-unit / 2) $space-unit;
-    .status {
-      display: inline-block;
-      border-radius: $radius-unit;
-      padding: 2px 6px 0;
-      margin-right: 4px;
-      background-color: $color-text-light;
-      color: $color-background;
-      font-size: $font-size-smallest;
-      vertical-align: middle;
-      text-transform: capitalize;
-    }
-    .name {
-      color: $color-text-light;
-      font-size: $font-size-smaller;
+    overflow: hidden;
+    border-radius: $radius-unit;
+    margin: ($space-unit / 2) auto;
+    .image {
+      display: block;
+      width: 100%;
+      height: auto;
     }
   }
 
-  .progress {
-    width: 100%;
-    height: $space-unit / 4;
-    background-color: $color-text-lighter;
+  .file-uploader-upload {
+    padding: $space-unit * 2;
+    margin: ($space-unit / 2) auto;
+    border: 2px dashed $color-border;
+    color: $color-text-lighter;
+    font-size: $font-size-small;
+    text-align: center;
+    .label-upload,
+    .button-upload {
+      margin: ($space-unit / 2) 0;
+    }
+    .label-upload {
+      display: block;
+    }
+    .button-upload {
+      display: inline-block;
+      width: auto;
+      vertical-align: top;
+    }
   }
-  .progress-bar {
-    display: block;
-    width: auto;
-    height: 100%;
-    background-color: $color-success;
+
+  .file-uploader-edit {
+    padding: $space-unit;
+    margin: ($space-unit / 2) auto;
+    border: 2px dashed $color-border;
+    color: $color-text-lighter;
+    font-size: $font-size-small;
+    .edit-image {
+    }
+  }
+
+  .file-uploader-dimmed {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    position: fixed;
+    z-index: 9999;
+    opacity: .8;
+    text-align: center;
+    background: $color-text-lighter;
+  }
+  .file-uploader-dimmed .text {
+    margin: -.5em 0 0;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: $font-size;
+    color: #fff;
+    padding: 0;
   }
 </style>

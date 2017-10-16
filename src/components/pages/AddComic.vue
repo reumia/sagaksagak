@@ -2,8 +2,7 @@
   <div class="add-comic">
     <Card :title="id ? '코믹 수정' : '새 코믹'">
       <FileUploader
-        @onAdded="addFile"
-        @onDeleted="deleteFile"
+        @onSuccess="addFile"
       ></FileUploader>
       <form @submit.prevent="handleSubmit">
         <input class="input" v-model="newTitle" type="text" placeholder="제목" required/>
@@ -62,13 +61,8 @@
         if (this.id) this.update()
         else this.add()
       },
-      addFile (file) {
-        // TODO
-        // this.image_url = file.url
-      },
-      deleteFile () {
-        // TODO
-        // this.image_url = null
+      addFile (response) {
+        this.SET_COMIC({image_url: response.image_url})
       }
     }
   }

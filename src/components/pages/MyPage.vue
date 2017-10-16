@@ -2,8 +2,7 @@
   <div class="my-page" v-if="currentUser">
     <Card :title="`${newName} 수정`">
       <FileUploader
-        @onAdded="addFile"
-        @onDeleted="deleteFile"
+        @onSuccess="addFile"
       ></FileUploader>
       <form @submit.prevent="update">
         <input class="input" v-model="newName" type="text" placeholder="이름"/>
@@ -56,14 +55,6 @@
     },
     methods: {
       ...mapMutations([ 'SET_USER' ]),
-      addFile (file) {
-        // TODO
-        // this.image_url = file.url
-      },
-      deleteFile () {
-        // TODO
-        // this.image_url = null
-      },
       update () {
         this.$store.dispatch('UPDATE_USER', {
           id: this.currentUser.id,
@@ -74,6 +65,10 @@
         })
           .then(user => this.$router.push({ name: 'User', params: { id: user.id } }))
           .catch(err => console.warn(err.response.data))
+      },
+      addFile (response) {
+        console.log(response)
+        this.SET_USER({image_url: response.image_url})
       }
     }
   }
