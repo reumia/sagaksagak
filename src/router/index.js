@@ -9,7 +9,7 @@ import Cut from '@/components/pages/Cut'
 import Comic from '@/components/pages/Comic'
 import AddComic from '@/components/pages/AddComic'
 import User from '@/components/pages/User'
-import MyPage from '@/components/pages/MyPage'
+import UpdateUser from '@/components/pages/UpdateUser'
 
 Vue.use(Router)
 
@@ -40,9 +40,9 @@ const router = new Router({
       }
     },
     {
-      path: '/user/my-page',
-      name: 'MyPage',
-      component: MyPage,
+      path: '/user/update',
+      name: 'UpdateUser',
+      component: UpdateUser,
       props: true,
       meta: {
         auth: true

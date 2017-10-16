@@ -17,7 +17,7 @@
 
     <OwnerButtons v-if="isMine">
       <router-link :to="{ name: 'AddComic' }" class="button button-success">새 코믹</router-link>
-      <router-link :to="{ name: 'MyPage' }" class="button button-primary">유저 정보 수정</router-link>
+      <router-link :to="{ name: 'UpdateUser' }" class="button button-primary">유저 정보 수정</router-link>
     </OwnerButtons>
 
     <Card v-if="user" title="운영중인 사각">

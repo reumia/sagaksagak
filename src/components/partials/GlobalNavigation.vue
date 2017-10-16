@@ -12,10 +12,10 @@
       </div>
       <div class="button-wrap">
         <button class="button button-primary button-small" @click="$router.push({ name: 'User', params: { id: currentUser.id } })">
-          <i class="material-icons icon">account_box</i> 내 사각 보러가기
+          <i class="material-icons icon">account_box</i> 마이페이지
         </button>
-        <button class="button button-small" @click="$router.push({ name: 'MyPage' })">
-          <i class="material-icons icon">settings</i> 정보수정
+        <button class="button button-small button-success" @click="$router.push({ name: 'AddComic' })">
+          <i class="material-icons icon">add</i> 새 코믹 만들기
         </button>
         <button class="button button-danger button-small" @click="$store.dispatch('SIGN_OUT')">
           <i class="material-icons icon">power_settings_new</i> 로그아웃

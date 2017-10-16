@@ -71,7 +71,7 @@
         // Router 이름에 따라 데이터 분배
         const currentRouterName = this.$router.history.current.name
 
-        if (currentRouterName === 'MyPage') return this.user
+        if (currentRouterName === 'UpdateUser') return this.user
         if (currentRouterName === 'UpdateComic') return this.comic
       }
     },

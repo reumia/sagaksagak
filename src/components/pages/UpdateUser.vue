@@ -23,7 +23,7 @@
   import { mapState, mapMutations } from 'vuex'
 
   export default {
-    name: 'mypage',
+    name: 'update-user',
     created () {
       this.$store.dispatch('GET_USER_BY_ID', { id: this.currentUser.id })
         .catch(err => console.warn(err.response.data))
