@@ -7,7 +7,10 @@
       <form @submit.prevent="handleSubmit">
         <input class="input" v-model="newTitle" type="text" placeholder="제목" required/>
         <textarea class="input" v-model="newDescriptions" placeholder="설명" required></textarea>
-        <button class="button button-primary" type="submit"><i class="icon material-icons">check</i> 변경내용 적용</button>
+        <div class="button-flex">
+          <button class="button button-primary" type="submit"><i class="icon material-icons">check</i> 변경내용 적용</button>
+          <button class="button" type="button" @click="$router.go(-1)"><i class="icon material-icons">close</i> 취소</button>
+        </div>
       </form>
     </Card>
   </div>

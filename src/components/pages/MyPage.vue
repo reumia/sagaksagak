@@ -8,7 +8,10 @@
         <input class="input" v-model="newName" type="text" placeholder="이름"/>
         <textarea class="input" v-model="newDescriptions" placeholder="설명" required></textarea>
         <input class="input" v-model="newSite" type="url" placeholder="웹사이트"/>
-        <button class="button button-primary" type="submit"><i class="icon material-icons">check</i> 유저 정보 변경</button>
+        <div class="button-flex">
+          <button class="button button-primary" type="submit"><i class="icon material-icons">check</i> 유저 정보 변경</button>
+          <button class="button" type="button" @click="$router.go(-1)"><i class="icon material-icons">close</i> 취소</button>
+        </div>
       </form>
     </Card>
   </div>
@@ -67,7 +70,6 @@
           .catch(err => console.warn(err.response.data))
       },
       addFile (response) {
-        console.log(response)
         this.SET_USER({image_url: response.image_url})
       }
     }

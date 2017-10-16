@@ -40,8 +40,12 @@
           <img ref="editImage" :src="files[0].url" />
         </div>
         <div class="button-flex">
-          <button type="submit" class="button button-small button-success" @click.prevent="onCrop">이미지 자르기</button>
-          <button type="button" class="button button-small button-danger" @click.prevent="$refs.upload.clear">취소</button>
+          <button type="submit" class="button button-extra-small button-success" @click.prevent="onCrop">
+            <i class="icon material-icons">crop</i> 자르기
+          </button>
+          <button type="button" class="button button-extra-small button-danger" @click.prevent="$refs.upload.clear">
+            <i class="icon material-icons">close</i> 취소
+          </button>
         </div>
       </div>
     </div>
@@ -153,20 +157,28 @@
   @import 'init';
   @import '~cropperjs/dist/cropper.css';
 
-  .exists-image {
-    @include transition(height);
+  %image-height {
     position: relative;
     border-radius: $radius-unit;
+    padding-top: 33%;
     margin: ($space-unit / 2) auto;
-    height: 120px;
+    height: 0;
+  }
+
+  .exists-image {
+    @include transition(height);
+    @extend %image-height;
     background-size: cover;
     background-position: center center;
     &.active {
       height: 39px;
     }
     .button-flex {
+      position: absolute;
+      margin: 0;
+      top: $space-unit / 2;
+      right: $space-unit / 2;
       justify-content: flex-end;
-      padding: $space-unit / 2;
     }
   }
 
@@ -183,33 +195,37 @@
   }
 
   .file-uploader-upload {
-    padding: $space-unit * 2;
-    margin: ($space-unit / 2) auto;
-    border: 2px dashed $color-border;
+    @extend %image-height;
+    background-color: $color-disabled;
     color: $color-text-lighter;
     font-size: $font-size-small;
     text-align: center;
-    .label-upload,
     .button-upload {
-      margin: ($space-unit / 2) 0;
+      position: absolute;
+      margin: 0;
+      top: 50%;
+      left: 50%;
+      margin-left: -100px;
+      margin-top: -25px;
+      width: 200px;
+      height: 50px;
     }
     .label-upload {
       display: block;
     }
-    .button-upload {
-      display: inline-block;
-      width: auto;
-      vertical-align: top;
-    }
   }
 
   .file-uploader-edit {
-    padding: $space-unit;
+    position: relative;
+    overflow: hidden;
+    border-radius: $radius-unit;
     margin: ($space-unit / 2) auto;
-    border: 2px dashed $color-border;
-    color: $color-text-lighter;
-    font-size: $font-size-small;
-    .edit-image {
+    .button-flex {
+      position: absolute;
+      margin: 0;
+      top: $space-unit / 2;
+      right: $space-unit / 2;
+      z-index: 1;
     }
   }
 

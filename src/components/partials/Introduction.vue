@@ -28,8 +28,8 @@
     position: relative;
     overflow: hidden;
     margin-bottom: $space-unit * 3;
-    padding: ($space-unit * 1.5) ($space-unit * 2) 0;
     max-width: $space-unit * 24;
+    text-align: center;
     @media screen and (min-width: 376px) {
       border-radius: $radius-unit;
       margin: ($space-unit * 3) auto;
@@ -38,17 +38,19 @@
     }
   }
   .introduction-image {
-    margin: ($space-unit * -1.5) ($space-unit * -2) ($space-unit * 1.5);
-    height: 100px;
+    padding-top: 33%;
+    width: 100%;
+    height: 0;
     background-position: center center;
     background-size: cover;
   }
   .introduction-title {
+    padding: ($space-unit * 1.5) ($space-unit * 2) 0;
     font-size: $font-size-large;
     font-weight: bold;
   }
   .introduction-descriptions {
-    margin-top: $space-unit / 2;
+    padding: ($space-unit / 2) ($space-unit * 2) 0;
     color: $color-text-light;
     font-size: $font-size-small;
   }
