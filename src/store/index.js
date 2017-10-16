@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../utils/axios'
+import _ from 'lodash'
 
 Vue.use(Vuex)
 
@@ -30,10 +31,16 @@ const mutations = {
     state.currentUser = null
   },
   SET_COMIC (state, comic) {
-    state.comic = comic
+    state.comic = _.assignIn(state.comic, comic)
   },
   DELETE_COMIC (state) {
     state.comic = null
+  },
+  SET_USER (state, user) {
+    state.user = _.assignIn(state.user, user)
+  },
+  DELETE_USER (state) {
+    state.user = null
   }
 }
 

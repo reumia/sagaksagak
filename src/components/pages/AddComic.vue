@@ -17,7 +17,7 @@
 <script>
   import Card from '@/components/partials/Card'
   import FileUploader from '@/components/partials/FileUploader'
-  import { mapState } from 'vuex'
+  import { mapState, mapMutations } from 'vuex'
 
   export default {
     name: 'add-comic',
@@ -33,33 +33,34 @@
         get () {
           return this.comic ? this.comic.title : null
         },
-        set () {
-          // TODO
+        set (value) {
+          this.SET_COMIC({title: value})
         }
       },
       newDescriptions: {
         get () {
           return this.comic ? this.comic.descriptions : null
         },
-        set () {
-          // TODO
+        set (value) {
+          this.SET_COMIC({descriptions: value})
         }
       }
     },
     methods: {
-      addUser () {
+      ...mapMutations([ 'SET_COMIC' ]),
+      add () {
         this.$store.dispatch('ADD_COMIC')
           .then(comic => this.$router.push({ name: 'Comic', params: { id: comic.id } }))
           .catch(err => console.warn(err.response.data))
       },
-      updateUser () {
+      update () {
         this.$store.dispatch('UPDATE_COMIC', { id: this.id })
           .then(comic => this.$router.push({ name: 'Comic', params: { id: comic.id } }))
           .catch(err => console.warn(err.response.data))
       },
       handleSubmit () {
-        if (this.id) this.updateUser()
-        else this.addUser()
+        if (this.id) this.update()
+        else this.add()
       },
       addFile (file) {
         // TODO
