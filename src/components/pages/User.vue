@@ -46,22 +46,14 @@
     filters: filters,
     components: { Card, Index, Functions, Sticker, OwnerButtons, Introduction },
     computed: {
-      ...mapState([ 'currentUser' ]),
+      ...mapState([ 'currentUser', 'user' ]),
       isMine () {
         return this.currentUser && this.user && this.currentUser.id === parseInt(this.id, 10)
       }
     },
     created () {
-      this.$http.get(`/users/${this.id}`)
-        .then(response => {
-          this.user = response.data
-        })
+      this.$store.dispatch('GET_USER_BY_ID', {id: this.id})
         .catch(err => console.warn(err.response.data))
-    },
-    data () {
-      return {
-        user: null
-      }
     }
   }
 </script>
