@@ -11,7 +11,7 @@
         <a :href="`mailto:${user.email}`" class="function"><i class="icon material-icons">mail_outline</i></a>
         <a v-if="user.site" :href="user.site" class="function" target="_blank"><i class="icon material-icons">open_in_browser</i></a>
         <span class="function"><i class="icon material-icons">crop_din</i> {{ user.cuts.length | formatCurrency }}</span>
-        <button class="function" :class="{ 'color-danger': hasLiked }" @click="handleLike"><i class="icon material-icons">favorite</i> {{ user.likes.length | formatCurrency }}</button>
+        <Like class="function" :data="user" :type="'user'" :id="id"></Like>
       </Functions>
     </Introduction>
 
@@ -37,15 +37,15 @@
   import Functions from '@/components/partials/Functions'
   import OwnerButtons from '@/components/partials/OwnerButtons'
   import Introduction from '@/components/partials/Introduction'
+  import Like from '@/components/partials/Like'
   import filters from '@/utils/filters'
   import { mapState } from 'vuex'
-  import _ from 'lodash'
 
   export default {
     name: 'user',
     props: [ 'id' ],
     filters: filters,
-    components: { Card, Index, Functions, Sticker, OwnerButtons, Introduction },
+    components: { Card, Index, Functions, Sticker, OwnerButtons, Introduction, Like },
     created () {
       this.$store.dispatch('GET_USER_BY_ID', {id: this.id})
         .catch(err => console.warn(err.response.data))
@@ -54,29 +54,6 @@
       ...mapState([ 'currentUser', 'user' ]),
       isMine () {
         return this.currentUser && this.user && this.currentUser.id === parseInt(this.id, 10)
-      },
-      hasLiked () {
-        return this.currentUser && this.user && _.find(this.user.likes, {'userId': parseInt(this.currentUser.id, 19)})
-      }
-    },
-    methods: {
-      handleLike () {
-        if (this.hasLiked) this.addLike()
-        else this.deleteLike()
-      },
-      addLike () {
-        this.$store.dispatch('ADD_LIKE', {type: 'user', id: this.id})
-          .then(like => {
-            this.user.likes.push(like)
-          })
-          .catch(err => console.warn(err.response.data))
-      },
-      deleteLike () {
-        this.$store.dispatch('DELETE_LIKE', {type: 'user', id: this.id})
-          .then(like => {
-            this.user.likes = _.reject(this.user.likes, like)
-          })
-          .catch(err => console.warn(err.response.data))
       }
     }
   }

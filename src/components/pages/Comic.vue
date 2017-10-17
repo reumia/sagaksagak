@@ -11,7 +11,7 @@
         <span class="function"><i class="icon material-icons">access_time</i> {{ comic.createdAt | formatDate }}</span>
         <router-link :to="{ name: 'User', params: { id: comic.ownerId } }" class="function"><i class="icon material-icons">person</i> {{ comic.owner.name }}</router-link>
         <span class="function"><i class="icon material-icons">crop_din</i> {{ comic.cuts.length | formatCurrency }}</span>
-        <button class="function color-danger"><i class="icon material-icons">favorite</i> {{ comic.likes.length | formatCurrency }}</button>
+        <Like class="function" :data="comic" :type="'comic'" :id="id"></Like>
       </Functions>
     </Introduction>
 
@@ -33,6 +33,7 @@
   import Functions from '@/components/partials/Functions'
   import OwnerButtons from '@/components/partials/OwnerButtons'
   import Introduction from '@/components/partials/Introduction'
+  import Like from '@/components/partials/Like'
   import filters from '@/utils/filters'
   import { mapState } from 'vuex'
 
@@ -40,16 +41,16 @@
     name: 'comic',
     props: [ 'id' ],
     filters: filters,
-    components: { Card, Functions, OwnerButtons, Introduction },
+    components: { Card, Functions, OwnerButtons, Introduction, Like },
+    created () {
+      this.$store.dispatch('GET_COMIC_BY_ID', { id: this.id })
+        .catch(err => console.warn(err.response.data))
+    },
     computed: {
       ...mapState([ 'currentUser', 'comic' ]),
       isMine () {
         return this.currentUser && this.comic && this.comic.ownerId === parseInt(this.currentUser.id, 10)
       }
-    },
-    created () {
-      this.$store.dispatch('GET_COMIC_BY_ID', { id: this.id })
-        .catch(err => console.warn(err.response.data))
     }
   }
 </script>
