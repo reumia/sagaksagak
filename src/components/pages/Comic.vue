@@ -16,13 +16,13 @@
     </Introduction>
 
     <OwnerButtons v-if="isMine">
-      <router-link :to="{ name: 'AddCut', query: { comicId: this.id } }" v-if="comic.cuts.length === 0" class="button button-success">첫번째 컷 작성</router-link>
+      <router-link :to="{ name: 'AddCut', query: { comicId: this.id } }" class="button button-success">{{ comic.cuts.length > 0 ? '새 컷' : '첫번째 컷' }}</router-link>
       <router-link :to="{ name: 'UpdateComic', params: { id: comic.id } }" class="button button-primary">코믹 정보 수정</router-link>
     </OwnerButtons>
 
     <article class="comic-body">
       <Card title="트리" v-if="comic">
-        {{ comic }}
+        {{ comic.cuts }}
       </Card>
     </article>
   </div>

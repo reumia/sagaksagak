@@ -86,6 +86,19 @@ textarea.input {
   background-color: $color-danger;
 }
 
+.select {
+  position: relative;
+  .select-icon {
+    position: absolute;
+    top: $space-unit;
+    right: $space-unit / 2;
+    color: $color-text-lighter;
+  }
+  .select-input {
+    padding-right: $space-unit * 2;
+  }
+}
+
 form {
   .input,
   .button,
