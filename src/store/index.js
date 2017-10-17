@@ -142,17 +142,14 @@ const actions = {
 
     return cut
   },
-  async ADD_LIKE_USER ({commit}, {id}) {
-    const response = await axios.post(`/likes/user/${id}`)
-    const result = response.data
 
-    return result
+  async ADD_LIKE ({commit}, {type, id}) {
+    const response = await axios.post(`/likes/${type}/${id}`)
+    return response.data
   },
-  async DELETE_LIKE_USER ({commit}, {id}) {
-    const response = await axios.delete(`/likes/user/${id}`)
-    const result = response.data
-
-    return result
+  async DELETE_LIKE ({commit}, {type, id}) {
+    const response = await axios.delete(`/likes/${type}/${id}`)
+    return response.data
   }
 }
 

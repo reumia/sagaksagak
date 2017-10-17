@@ -61,18 +61,18 @@
     },
     methods: {
       handleLike () {
-        if (this.hasLiked) this.unlikeUser()
-        else this.likeUser()
+        if (this.hasLiked) this.addLike()
+        else this.deleteLike()
       },
-      likeUser () {
-        this.$store.dispatch('ADD_LIKE_USER', {id: this.id})
+      addLike () {
+        this.$store.dispatch('ADD_LIKE', {type: 'user', id: this.id})
           .then(like => {
             this.user.likes.push(like)
           })
           .catch(err => console.warn(err.response.data))
       },
-      unlikeUser () {
-        this.$store.dispatch('DELETE_LIKE_USER', {id: this.id})
+      deleteLike () {
+        this.$store.dispatch('DELETE_LIKE', {type: 'user', id: this.id})
           .then(like => {
             this.user.likes = _.reject(this.user.likes, like)
           })
