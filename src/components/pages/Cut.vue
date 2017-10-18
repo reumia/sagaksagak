@@ -113,15 +113,13 @@
             likes: 0
           }
         ],
-        prev: {
+        parent: {
           id: 1,
           title: '유미의 세포들 #0',
-          descriptions: '',
-          imageUrl: '/static/example/cut_01.jpg',
           owner: 0,
           likes: 241
         },
-        next: {
+        child: {
           id: 4,
           title: '유미의 세포들 #2-1',
           descriptions: '',

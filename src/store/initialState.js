@@ -20,6 +20,11 @@ export default {
     likeComics: [],
     likeCuts: []
   },
+  currentCut: {
+    siblings: [],
+    parent: null,
+    child: null
+  },
   user: {
     status: null,
     id: null,
