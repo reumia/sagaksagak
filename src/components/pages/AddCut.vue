@@ -1,8 +1,25 @@
 <template>
   <div class="add-cut">
-    <Card title="부모 컷" v-if="parentCut">
+    <Card :title="id ? '컷 수정' : '새 컷'">
+      <!-- 부모 컷 선택하기 -->
+      <div class="select">
+        <i class="select-icon icon material-icons" :disabled="Boolean(parentId) === false && options.length === 1 && options[0].value === null">keyboard_arrow_down</i>
+        <select
+          class="select-input input"
+          :disabled="Boolean(parentId) === false && options.length === 1 && options[0].value === null"
+          v-model="selected"
+          @change="handleChange"
+        >
+          <option
+            v-for="item in options"
+            :value="item.value"
+            :disabled="item.value === null"
+          >{{ item.text }}</option>
+        </select>
+      </div>
+      <!-- // 부모 컷 선택하기 -->
       <!-- 현재 부모 컷 -->
-      <div class="parent-cut">
+      <div class="parent-cut" v-if="parentCut">
         <div class="parent-cut-image">
           <img :src="parentCut.imageUrl" class="image">
         </div>
@@ -12,30 +29,11 @@
         </div>
       </div>
       <!-- // 현재 부모 컷 -->
-    </Card>
-    <Card :title="id ? '컷 수정' : '새 컷'">
       <FileUploader
         :ratio="1 / 1"
         @onSuccess="addFile"
       ></FileUploader>
       <form @submit.prevent="handleSubmit">
-        <!-- 부모 컷 선택하기 -->
-        <div class="select">
-          <i class="select-icon icon material-icons" :disabled="Boolean(parentId) === false && options.length <= 0">keyboard_arrow_down</i>
-          <select
-            class="select-input input"
-            :disabled="Boolean(parentId) === false && options.length === 1 && options[0].value === null"
-            v-model="selected"
-            @change="handleChange"
-          >
-            <option
-              v-for="item in options"
-              :value="item.value"
-              :disabled="item.value === null"
-            >{{ item.text }}</option>
-          </select>
-        </div>
-        <!-- // 부모 컷 선택하기 -->
         <input class="input" v-model="newTitle" type="text" placeholder="제목" required/>
         <div class="button-flex">
           <button class="button button-primary" type="submit"><i class="icon material-icons">check</i> {{ id ? '변경내용 적용' : '새 컷 만들기' }}</button>
@@ -83,6 +81,7 @@
         _.forEach(this.comic.cuts, cut => {
           values.push({ value: cut.id, text: `#${cut.id} : ${cut.title}` })
           if (parseInt(cut.id, 10) === parseInt(this.parentId, 10)) this.selected = cut.id
+          else this.selected = null
         })
 
         return values
