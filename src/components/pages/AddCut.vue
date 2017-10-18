@@ -46,8 +46,12 @@
     components: { Card, FileUploader },
     props: [ 'id', 'parentId', 'comicId' ],
     created () {
-      this.$store.dispatch('GET_COMIC_BY_ID', { id: this.comicId })
-        .catch(err => console.warn(err.response.data))
+      this.DELETE_CUT()
+
+      if (this.comic.id !== this.comicId) {
+        this.$store.dispatch('GET_COMIC_BY_ID', { id: this.comicId })
+          .catch(err => console.warn(err.response.data))
+      }
     },
     computed: {
       ...mapState([ 'currentUser', 'comic', 'cut' ]),
@@ -110,7 +114,7 @@
       }
     },
     methods: {
-      ...mapMutations([ 'SET_CUT' ]),
+      ...mapMutations([ 'SET_CUT', 'DELETE_CUT' ]),
       add () {
         if (this.hasInitial && this.isSelected === false) {
           console.warn('부모 컷을 선택하세요.')
