@@ -125,7 +125,7 @@ router.beforeEach((to, from, next) => {
   store.commit('HIDE_GLOBAL_NAVIGATION')
 
   // 현재 접속 유저 체크
-  if (Boolean(store.state.currentUser) === false) {
+  if (Boolean(store.state.currentUser.id) === false) {
     store.dispatch('GET_CURRENT_USER')
       .then(() => next())
       .catch(() => {

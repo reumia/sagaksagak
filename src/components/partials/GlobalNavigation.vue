@@ -5,7 +5,7 @@
       <i class="material-icons icon">close</i>
     </button>
     <!-- 유저 버튼 : 인증 -->
-    <div class="nav-user active" v-if="currentUser">
+    <div class="nav-user active" v-if="currentUser.name">
       <div class="title">{{ currentUser.name }}</div>
       <div class="info">
         <div class="info-email">{{ currentUser.email }}</div>

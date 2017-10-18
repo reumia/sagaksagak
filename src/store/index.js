@@ -2,17 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../utils/axios'
 import _ from 'lodash'
+import initialState from './initialState'
 
 Vue.use(Vuex)
 
 const state = {
-  isGlobalNavigationVisible: false,
-  comicsLatest: null,
-  comicsBest: null,
-  currentUser: null,
-  comic: null,
-  user: null,
-  cut: null
+  ...initialState
 }
 
 const mutations = {
@@ -26,19 +21,25 @@ const mutations = {
     state.currentUser = user
   },
   DELETE_CURRENT_USER (state) {
-    state.currentUser = null
+    state.currentUser = {
+      ...initialState.currentUser
+    }
   },
   SET_USER (state, user) {
     state.user = _.assignIn(state.user, user)
   },
   DELETE_USER (state) {
-    state.user = null
+    state.user = {
+      ...initialState.user
+    }
   },
   SET_COMIC (state, comic) {
     state.comic = _.assignIn(state.comic, comic)
   },
   DELETE_COMIC (state) {
-    state.comic = null
+    state.comic = {
+      ...initialState.comic
+    }
   },
   SET_LATEST_COMICS (state, comics) {
     state.comicsLatest = comics
@@ -47,7 +48,9 @@ const mutations = {
     state.cut = _.assignIn(state.cut, cut)
   },
   DELETE_CUT (state) {
-    state.cut = null
+    state.cut = {
+      ...initialState.cut
+    }
   }
 }
 

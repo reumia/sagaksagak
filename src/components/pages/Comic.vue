@@ -1,8 +1,7 @@
 <template>
-  <div class="page-comic">
-    <div class="comic-background" v-if="comic" :style="{ backgroundImage: `url(${comic.imageUrl})` }"></div>
+  <div class="page-comic" v-if="comic.id">
+    <div class="comic-background" v-if="comic.imageUrl" :style="{ backgroundImage: `url(${comic.imageUrl})` }"></div>
     <Introduction
-      v-if="comic"
       :title="comic.title"
       :descriptions="comic.descriptions"
       :status="comic.status"
@@ -21,7 +20,7 @@
     </OwnerButtons>
 
     <article class="comic-body">
-      <Card title="트리" v-if="comic">
+      <Card title="트리" v-if="comic.cuts.length > 0">
         {{ comic.cuts }}
       </Card>
     </article>
@@ -49,7 +48,7 @@
     computed: {
       ...mapState([ 'currentUser', 'comic' ]),
       isMine () {
-        return this.currentUser && this.comic && this.comic.ownerId === parseInt(this.currentUser.id, 10)
+        return this.comic.ownerId === parseInt(this.currentUser.id, 10)
       }
     }
   }

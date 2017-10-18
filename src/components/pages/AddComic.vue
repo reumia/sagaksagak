@@ -24,8 +24,13 @@
   export default {
     name: 'add-comic',
     created () {
-      this.$store.dispatch('GET_COMIC_BY_ID', { id: this.id })
-        .catch(err => console.warn(err.response.data))
+      const currentRouterName = this.$router.history.current.name
+
+      if (currentRouterName === 'UpdateComic') {
+        this.$store.dispatch('GET_COMIC_BY_ID', { id: this.id })
+          .catch(err => console.warn(err.response.data))
+      }
+      if (currentRouterName === 'AddComic') this.DELETE_COMIC()
     },
     components: { Card, FileUploader },
     props: [ 'id' ],
@@ -33,7 +38,7 @@
       ...mapState([ 'currentUser', 'comic' ]),
       newTitle: {
         get () {
-          return this.comic ? this.comic.title : null
+          return this.comic.title
         },
         set (value) {
           this.SET_COMIC({title: value})
@@ -41,7 +46,7 @@
       },
       newDescriptions: {
         get () {
-          return this.comic ? this.comic.descriptions : null
+          return this.comic.descriptions
         },
         set (value) {
           this.SET_COMIC({descriptions: value})
@@ -49,7 +54,7 @@
       }
     },
     methods: {
-      ...mapMutations([ 'SET_COMIC' ]),
+      ...mapMutations([ 'SET_COMIC', 'DELETE_COMIC' ]),
       // TODO : 새 코믹 추가 후 페이지 이동 시, Relation 모델 데이터 못 불러오는 문제
       add () {
         this.$store.dispatch('ADD_COMIC')

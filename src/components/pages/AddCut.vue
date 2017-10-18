@@ -3,8 +3,8 @@
     <Card title="새 컷">
       <!-- 부모 컷 선택하기 -->
       <div class="select">
-        <i class="select-icon icon material-icons" :disabled="selectDisabled">keyboard_arrow_down</i>
-        <select class="select-input input" :disabled="selectDisabled" @change="handleChange" v-model="selected">
+        <i class="select-icon icon material-icons" :disabled="isInitial">keyboard_arrow_down</i>
+        <select class="select-input input" :disabled="isInitial" v-model="newParentId" @change="handleChange">
           <option v-for="item in options" :value="item.value" :disabled="item.value === null">{{ item.text }}</option>
         </select>
       </div>
@@ -49,53 +49,62 @@
       this.$store.dispatch('GET_COMIC_BY_ID', { id: this.comicId })
         .catch(err => console.warn(err.response.data))
     },
-    data () {
-      return {
-        selected: null
-      }
-    },
     computed: {
-      ...mapState([ 'currentUser', 'comic' ]),
+      ...mapState([ 'currentUser', 'comic', 'cut' ]),
       newTitle: {
         get () {
-          return this.cut ? this.cut.title : null
+          return this.cut.title
         },
         set (value) {
           this.SET_CUT({title: value})
         }
       },
-      selectDisabled () {
-        const hasParentId = Boolean(this.parentId) === true
-        const hasOptionsWithoutInitialOption = this.options.length > 1
-        const isInitialOption = this.options[0].value === null
+      newParentId: {
+        get () {
+          return this.cut.parentId
+        },
+        set (value) {
+          this.SET_CUT({parentId: value})
+        }
+      },
+      isSelected () {
+        return Boolean(this.cut.parentId) === true
+      },
+      isInitial () {
+        return this.comic.cuts.length <= 0
+      },
+      hasInitial () {
+        let filtered = []
+        filtered = _.filter(this.comic.cuts, o => {
+          return o.parentId === null
+        })
 
-        return !hasParentId && !hasOptionsWithoutInitialOption && isInitialOption
+        return filtered.length > 0
       },
       options () {
+        let selectedCutId = null
         let values = [{ value: null, text: '부모 컷을 선택하세요.' }]
 
-        if (Boolean(this.comic) === false) return values
+        if (this.comic.cuts.length > 0) {
+          _.forEach(this.comic.cuts, cut => {
+            values.push({ value: cut.id, text: `#${cut.id} : ${cut.title}` })
 
-        _.forEach(this.comic.cuts, cut => {
-          const isSelected = parseInt(cut.id, 10) === parseInt(this.parentId, 10)
+            const isSelected = parseInt(cut.id, 10) === parseInt(this.parentId, 10)
+            if (isSelected) selectedCutId = cut.id
+          })
+        }
 
-          values.push({ value: cut.id, text: `#${cut.id} : ${cut.title}` })
-
-          if (isSelected) this.selected = cut.id
-          else this.selected = null
-        })
+        this.SET_CUT({parentId: selectedCutId})
 
         return values
       },
       parentCut () {
         let filtered = null
 
-        if (this.comic) {
-          filtered = _.filter(this.comic.cuts, o => {
-            return parseInt(o.id, 10) === parseInt(this.parentId, 10)
-          })
-          filtered = filtered[0] || null
-        }
+        filtered = _.filter(this.comic.cuts, o => {
+          return parseInt(o.id, 10) === parseInt(this.parentId, 10)
+        })
+        filtered = filtered[0] || null
 
         return filtered
       }
@@ -103,19 +112,21 @@
     methods: {
       ...mapMutations([ 'SET_CUT' ]),
       add () {
-        this.$store.dispatch('ADD_CUT', {
-          parentId: this.selected,
-          comicId: this.comicId
-        })
-          .then(cut => this.$router.push({ name: 'Cut', params: { id: cut.id } }))
-          .catch(err => console.warn(err.response.data))
-      },
-      handleChange () {
-        if (Boolean(this.selected) === false) return
-        this.$router.push({ name: 'AddCut', query: { comicId: this.comicId, parentId: this.selected } })
+        if (this.hasInitial && this.isSelected === false) {
+          console.warn('부모 컷을 선택하세요.')
+        } else {
+          this.$store.dispatch('ADD_CUT', { parentId: this.cut.parentId, comicId: this.comicId })
+            .then(cut => this.$router.push({ name: 'Cut', params: { id: cut.id } }))
+            .catch(err => console.warn(err.response.data))
+        }
       },
       addFile (response) {
         this.SET_CUT({imageUrl: response.imageUrl})
+      },
+      handleChange () {
+        if (this.isSelected) {
+          this.$router.push({ name: 'AddCut', query: { comicId: this.comicId, parentId: this.cut.parentId } })
+        }
       }
     }
   }
