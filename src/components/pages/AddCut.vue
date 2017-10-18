@@ -1,6 +1,6 @@
 <template>
   <div class="add-cut">
-    <Card :title="id ? '컷 수정' : '새 컷'">
+    <Card title="새 컷">
       <!-- 부모 컷 선택하기 -->
       <div class="select">
         <i class="select-icon icon material-icons" :disabled="selectDisabled">keyboard_arrow_down</i>
@@ -24,7 +24,7 @@
         :ratio="1 / 1"
         @onSuccess="addFile"
       ></FileUploader>
-      <form @submit.prevent="handleSubmit">
+      <form @submit.prevent="add">
         <input class="input" v-model="newTitle" type="text" placeholder="제목" required/>
         <div class="button-flex">
           <button class="button button-primary" type="submit"><i class="icon material-icons">check</i> {{ id ? '변경내용 적용' : '새 컷 만들기' }}</button>
@@ -104,10 +104,6 @@
         })
           .then(cut => this.$router.push({ name: 'Cut', params: { id: cut.id } }))
           .catch(err => console.warn(err.response.data))
-      },
-      handleSubmit () {
-        if (this.id) this.update()
-        else this.add()
       },
       handleChange () {
         if (Boolean(this.selected) === false) return
