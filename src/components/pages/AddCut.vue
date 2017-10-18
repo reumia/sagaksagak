@@ -88,11 +88,16 @@
         return values
       },
       parentCut () {
-        if (Boolean(this.comic) === false) return null
+        let filtered = null
 
-        const filtered = _.filter(this.comic.cuts, o => parseInt(o.id, 10) === parseInt(this.parentId, 10))
+        if (this.comic) {
+          filtered = _.filter(this.comic.cuts, o => {
+            return parseInt(o.id, 10) === parseInt(this.parentId, 10)
+          })
+          filtered = filtered[0] || null
+        }
 
-        return filtered[0]
+        return filtered
       }
     },
     methods: {
