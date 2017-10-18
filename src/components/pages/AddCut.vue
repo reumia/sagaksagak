@@ -3,18 +3,9 @@
     <Card :title="id ? '컷 수정' : '새 컷'">
       <!-- 부모 컷 선택하기 -->
       <div class="select">
-        <i class="select-icon icon material-icons" :disabled="Boolean(parentId) === false && options.length === 1 && options[0].value === null">keyboard_arrow_down</i>
-        <select
-          class="select-input input"
-          :disabled="Boolean(parentId) === false && options.length === 1 && options[0].value === null"
-          v-model="selected"
-          @change="handleChange"
-        >
-          <option
-            v-for="item in options"
-            :value="item.value"
-            :disabled="item.value === null"
-          >{{ item.text }}</option>
+        <i class="select-icon icon material-icons" :disabled="selectDisabled">keyboard_arrow_down</i>
+        <select class="select-input input" :disabled="selectDisabled" @change="handleChange" v-model="selected">
+          <option v-for="item in options" :value="item.value" :disabled="item.value === null">{{ item.text }}</option>
         </select>
       </div>
       <!-- // 부모 컷 선택하기 -->
@@ -73,14 +64,24 @@
           this.SET_CUT({title: value})
         }
       },
+      selectDisabled () {
+        const hasParentId = Boolean(this.parentId) === true
+        const hasOptionsWithoutInitialOption = this.options.length > 1
+        const isInitialOption = this.options[0].value === null
+
+        return !hasParentId && !hasOptionsWithoutInitialOption && isInitialOption
+      },
       options () {
         let values = [{ value: null, text: '부모 컷을 선택하세요.' }]
 
         if (Boolean(this.comic) === false) return values
 
         _.forEach(this.comic.cuts, cut => {
+          const isSelected = parseInt(cut.id, 10) === parseInt(this.parentId, 10)
+
           values.push({ value: cut.id, text: `#${cut.id} : ${cut.title}` })
-          if (parseInt(cut.id, 10) === parseInt(this.parentId, 10)) this.selected = cut.id
+
+          if (isSelected) this.selected = cut.id
           else this.selected = null
         })
 
@@ -97,10 +98,6 @@
     methods: {
       ...mapMutations([ 'SET_CUT' ]),
       add () {
-        console.log({
-          parentId: this.selected,
-          comicId: this.comicId
-        })
         this.$store.dispatch('ADD_CUT', {
           parentId: this.selected,
           comicId: this.comicId
