@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../utils/axios'
 import _ from 'lodash'
+import * as d3 from 'd3-hierarchy'
 import initialState from './initialState'
 
 Vue.use(Vuex)
@@ -53,7 +54,6 @@ const mutations = {
     }
   },
   async SET_TREE (state, cuts) {
-    const d3 = require('d3-hierarchy')
     const stratify = await d3.stratify().id((d) => d.id).parentId((d) => d.parentId)
 
     state.tree = stratify(cuts)
