@@ -67,5 +67,6 @@ export default {
     imageUrl: null,
     createdAt: null,
     likes: []
-  }
+  },
+  tree: {}
 }

@@ -21,7 +21,7 @@
 
     <article class="comic-body">
       <Card title="트리" v-if="comic.cuts.length > 0">
-        {{ comic.cuts }}
+        <Tree></Tree>
       </Card>
     </article>
   </div>
@@ -33,6 +33,7 @@
   import OwnerButtons from '@/components/partials/OwnerButtons'
   import Introduction from '@/components/partials/Introduction'
   import Like from '@/components/partials/Like'
+  import Tree from '@/components/partials/Tree'
   import filters from '@/utils/filters'
   import { mapState } from 'vuex'
 
@@ -40,7 +41,7 @@
     name: 'comic',
     props: [ 'id' ],
     filters: filters,
-    components: { Card, Functions, OwnerButtons, Introduction, Like },
+    components: { Card, Functions, OwnerButtons, Introduction, Like, Tree },
     created () {
       this.$store.dispatch('GET_COMIC_BY_ID', { id: this.id })
         .catch(err => console.warn(err.response.data))
