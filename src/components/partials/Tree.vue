@@ -18,18 +18,20 @@
 
 <script>
   import * as d3 from 'd3'
-  import { mapState } from 'vuex'
 
   export default {
     name: 'tree',
-    created () {
-      const root = this.tree
-      const tree = d3.tree().size([this.canvasWidth - 100, this.canvasHeight - 100])
+    props: [ 'root' ],
+    watch: {
+      root (val) {
+        const root = val
+        const tree = d3.tree().size([this.canvasWidth - 100, this.canvasHeight - 100])
 
-      this.links = root.descendants().slice(1)
-      this.nodes = root.descendants()
+        this.links = root.descendants().slice(1)
+        this.nodes = root.descendants()
 
-      tree(root)
+        tree(root)
+      }
     },
     data () {
       return {
@@ -38,9 +40,6 @@
         links: [],
         nodes: []
       }
-    },
-    computed: {
-      ...mapState([ 'tree' ])
     },
     methods: {
       getDiagonal (d) {

@@ -21,7 +21,7 @@
 
     <article class="comic-body">
       <Card title="트리" v-if="comic.cuts.length > 0">
-        <Tree></Tree>
+        <Tree :root="comic.tree"></Tree>
       </Card>
     </article>
   </div>
@@ -47,7 +47,7 @@
         .catch(err => console.warn(err.response.data))
     },
     computed: {
-      ...mapState([ 'currentUser', 'comic' ]),
+      ...mapState([ 'currentUser', 'comic', 'tree' ]),
       isMine () {
         return this.comic.ownerId === parseInt(this.currentUser.id, 10)
       }
