@@ -21,7 +21,7 @@
 
     <article class="comic-body">
       <Card title="트리" v-if="comic.cuts.length > 0">
-        <Tree :root="comic.tree"></Tree>
+        <Tree></Tree>
       </Card>
     </article>
   </div>

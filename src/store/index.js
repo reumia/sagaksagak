@@ -51,6 +51,12 @@ const mutations = {
     state.cut = {
       ...initialState.cut
     }
+  },
+  async SET_TREE (state, cuts) {
+    const d3 = require('d3-hierarchy')
+    const stratify = await d3.stratify().id((d) => d.id).parentId((d) => d.parentId)
+
+    state.tree = stratify(cuts)
   }
 }
 
@@ -104,12 +110,8 @@ const actions = {
       const response = await axios.get(`/comics/${id}`)
       const comic = response.data
 
-      const d3 = require('d3-hierarchy')
-      const stratify = d3.stratify().id((d) => d.id).parentId((d) => d.parentId)
-
-      state.comic.tree = await stratify(comic.cuts)
-
       commit('SET_COMIC', comic)
+      commit('SET_TREE', comic.cuts)
     } else {
       commit('DELETE_COMIC')
     }
