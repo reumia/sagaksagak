@@ -1,22 +1,17 @@
 <template>
-  <svg :width="canvasWidth" :height="canvasHeight" ref="canvas">
-    <g ref="g" transform="translate(40,0)">
-      <path class="link" v-for="link in links" :key="link.id" :d="getDiagonal(link)"></path>
-      <g v-for="node in nodes" :key="node.id"
-         :class="{
-           'node': true,
-           'node--internal': Boolean(node.children) === true,
-           'node--leaf': Boolean(node.children) === false
-         }"
-         :transform="getTranslate(node)">
-        <circle r="2.5"></circle>
-        <text dy="3" :x="getTextX(node)" :style="getTextStyle(node)">{{ getText(node) }}</text>
-      </g>
-    </g>
-  </svg>
+  <div class="tree">
+    <!-- CANVAS -->
+    <canvas :width="canvasWidth" :height="canvasHeight" ref="canvas">
+    </canvas>
+    <!-- Dummy Images -->
+    <div class="dummy-images">
+      <img v-for="node in nodes" :src="node.data.imageUrl" :key="node.id" :id="`image-${node.id}`">
+    </div>
+  </div>
 </template>
 
 <script>
+  import _ from 'lodash'
   import * as d3 from 'd3'
   import { mapState } from 'vuex'
 
@@ -30,60 +25,68 @@
     computed: mapState([ 'tree' ]),
     data () {
       return {
-        canvasWidth: 400,
-        canvasHeight: 400,
-        links: [],
+        canvasWidth: 600,
+        canvasHeight: 600,
+        nodeWidth: 100,
+        nodeHeight: 100,
+        fontSize: 10,
         nodes: []
       }
     },
     methods: {
-      renderTree (a) {
-        const root = this.tree
-        const tree = d3.tree().size([this.canvasWidth - 100, this.canvasHeight - 100])
+      getTree () {
+        const tree = d3.tree()
+          .size([this.canvasWidth, this.canvasHeight])
+          .nodeSize([this.nodeWidth, this.nodeHeight])
 
-        this.links = root.descendants().slice(1)
-        this.nodes = root.descendants()
+        this.nodes = this.tree.descendants()
 
-        tree(root)
+        tree(this.tree)
       },
-      getDiagonal (d) {
-        return `M${d.y},${d.x}C${d.parent.y + 100},${d.x} ${d.parent.y + 100},${d.parent.x} ${d.parent.y},${d.parent.x}`
+      renderTree () {
+        if (typeof this.$refs.canvas === 'undefined') return
+
+        this.getTree()
+
+        const canvas = d3.select(this.$refs.canvas)
+        const context = canvas.node().getContext('2d')
+
+        context.font = `${this.fontSize}px sans-serif`
+
+        _.each(this.nodes, (node, key) => {
+          this.renderRect(context, node)
+          // TODO : Image 그리기
+          //  this.renderImage(context, node)
+          this.renderTitle(context, node)
+        })
       },
-      getTranslate (d) {
-        return `translate(${d.y},${d.x})`
+      renderRect (context, d) {
+        context.fillStyle = 'black'
+        context.fillRect((d.x + (this.canvasWidth - this.nodeWidth) / 2), d.y, this.nodeWidth, this.nodeHeight)
       },
-      getText (d) {
-        return d.data.title
+      renderImage (context, d) {
+        const element = this.$el.childNodes[2].children[0]
+        console.log(element)
+        const image = element
+
+        context.drawImage(image, d.x + (this.canvasWidth) / 2, d.y, 80, 80)
       },
-      getTextX (d) {
-        return d.children ? -8 : 8
-      },
-      getTextStyle (d) {
-        return {
-          textAnchor: d.children ? 'end' : 'start'
-        }
+      renderTitle (context, d) {
+        const title = d.data.title
+        const text = context.measureText(title)
+
+        context.fillStyle = 'white'
+        context.fillText(title, d.x + (this.canvasWidth - text.width) / 2, d.y + this.fontSize, this.nodeWidth)
       }
     }
   }
 </script>
 
 <style lang="scss">
-  .link {
-    fill: none;
-    stroke: #555;
-    stroke-opacity: 0.4;
-    stroke-width: 1.5px;
-  }
-  .node circle {
-    fill: #999;
-  }
-  .node text {
-    font: 10px sans-serif;
-  }
-  .node--internal circle {
-    fill: #555;
-  }
-  .node--internal text {
-    text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+  @import 'init';
+
+  canvas {
+    display: block;
+    margin: 0 auto;
   }
 </style>
