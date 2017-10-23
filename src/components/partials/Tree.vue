@@ -37,6 +37,8 @@
       }
     },
     methods: {
+      // TODO : ZOOM 데이터 가져오기
+      // https://github.com/d3/d3-zoom
       getTree () {
         const tree = d3
           .tree()
