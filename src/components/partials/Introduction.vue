@@ -24,18 +24,16 @@
   @import 'init';
 
   .introduction {
-    box-sizing: border-box;
-    position: relative;
     overflow: hidden;
-    margin-bottom: $space-unit * 3;
-    max-width: $space-unit * 24;
-    text-align: center;
-    @media screen and (min-width: 376px) {
-      border-radius: $radius-unit;
-      margin: ($space-unit * 3) auto;
-      background-color: $color-background;
-      box-shadow: $box-shadow-unit;
-    }
+    box-sizing: border-box;
+    border-radius: $radius-unit;
+    position: absolute;
+    z-index: 100;
+    top: $header-height + $space-unit * 2.5;
+    left: $space-unit * 2;
+    width: $intro-width;
+    background-color: $color-background;
+    box-shadow: $box-shadow-unit;
   }
   .introduction-image {
     padding-top: 33%;
@@ -45,7 +43,7 @@
     background-size: cover;
   }
   .introduction-title {
-    padding: ($space-unit * 1.5) ($space-unit * 2) 0;
+    padding: ($space-unit) ($space-unit * 2) 0;
     font-size: $font-size-large;
     font-weight: bold;
   }

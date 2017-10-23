@@ -13,20 +13,15 @@
         <span class="function"><i class="icon material-icons">crop_din</i> {{ user.cuts.length | formatCurrency }}</span>
         <Like class="function" :data="user" :type="'user'" :id="id"></Like>
       </Functions>
+      <OwnerButtons v-if="isMine">
+        <router-link :to="{ name: 'AddComic' }" class="button button-success">새 코믹</router-link>
+        <router-link :to="{ name: 'UpdateUser' }" class="button button-primary">유저 정보 수정</router-link>
+      </OwnerButtons>
     </Introduction>
 
-    <OwnerButtons v-if="isMine">
-      <router-link :to="{ name: 'AddComic' }" class="button button-success">새 코믹</router-link>
-      <router-link :to="{ name: 'UpdateUser' }" class="button button-primary">유저 정보 수정</router-link>
-    </OwnerButtons>
-
-    <Card v-if="user" title="운영중인 사각">
+    <div class="user-body">
       <Index :items="user.comics"></Index>
-    </Card>
-
-    <Card title="참여중인 사각">
-      <Index></Index>
-    </Card>
+    </div>
   </div>
 </template>
 
@@ -61,4 +56,9 @@
 
 <style lang="scss">
   @import 'init';
+
+  .user-body {
+    padding-top: $space-unit * 2.5;
+    padding-left: $intro-width + $space-unit * 4;
+  }
 </style>
