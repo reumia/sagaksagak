@@ -19,9 +19,7 @@
     </Introduction>
 
     <article class="comic-body">
-      <Card title="트리" v-if="comic.cuts.length > 0">
-        <Tree></Tree>
-      </Card>
+      <Tree v-if="comic.cuts.length > 0"></Tree>
     </article>
   </div>
 </template>
