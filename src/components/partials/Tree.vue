@@ -3,7 +3,7 @@
     <svg :width="viewerWidth" :height="viewerHeight">
       <g :transform="`translate(${viewerWidth / 2}, ${viewerHeight / 4})`">
         <path v-for="line in lines" class="link" :d="getDiagonal(line)" :key="line.id"></path>
-        <g v-for="node in nodes" class="node" :transform="getTransform(node)" :key="node.id">
+        <g v-for="node in nodes" class="node" :transform="getTransform(node)" :key="node.id" @click="handleClick(node)">
           <rect class="rect-background" r="10" :width="rectWidth" :height="rectHeight" :transform="`translate(${rectWidth / -2}, ${rectHeight / -2})`"></rect>
           <image :width="rectWidth" :height="rectHeight" :transform="`translate(${rectWidth / -2}, ${rectHeight / -2})`" :href="node.data.imageUrl"></image>
           <rect class="rect-mask" r="10" :width="rectWidth" :height="rectHeight" :transform="`translate(${rectWidth / -2}, ${rectHeight / -2})`"></rect>
@@ -69,6 +69,9 @@
       },
       getTransform (d) {
         return `translate(${d.x},${d.y})`
+      },
+      handleClick (d) {
+        this.$router.push({ name: 'Cut', params: { 'id': d.data.id } })
       }
     }
   }
