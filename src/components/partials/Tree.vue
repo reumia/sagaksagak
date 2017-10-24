@@ -4,7 +4,9 @@
       <g :transform="`translate(${viewerWidth / 2}, ${viewerHeight / 4})`">
         <path v-for="line in lines" class="link" :d="getDiagonal(line)" :key="line.id"></path>
         <g v-for="node in nodes" class="node" :transform="getTransform(node)" :key="node.id">
-          <image :width="rectWidth" :height="rectHeight" :transform="`translate(${rectWidth / -2}, ${rectHeight / -2})`" :xlink:href="getBase64(node)"></image>
+          <rect class="rect-background" r="10" :width="rectWidth" :height="rectHeight" :transform="`translate(${rectWidth / -2}, ${rectHeight / -2})`"></rect>
+          <image :width="rectWidth" :height="rectHeight" :transform="`translate(${rectWidth / -2}, ${rectHeight / -2})`" :href="node.data.imageUrl"></image>
+          <rect class="rect-mask" r="10" :width="rectWidth" :height="rectHeight" :transform="`translate(${rectWidth / -2}, ${rectHeight / -2})`"></rect>
         </g>
       </g>
     </svg>
@@ -67,23 +69,6 @@
       },
       getTransform (d) {
         return `translate(${d.x},${d.y})`
-      },
-      getBase64 (d) {
-        // TODO : Get Base64 with imageUrl
-        // https://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript
-        return 'data:image/png;base64,R0lGODlhLAAsANUAAAAAAP////7+/v39/fz8/Pv7+/r6+vn5+fj4+Pf39/Ly8vHx8fDw8O/v7+7u\n' +
-          '7u3t7ezs7Ovr6+rq6unp6ejo6Ofn5+bm5uXl5eTk5OPj4+Li4uHh4eDg4N/f397e3t3d3dzc3Nvb\n' +
-          '29ra2tnZ2djY2NfX19bW1tXV1dTU1NPT09LS0v///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n' +
-          'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAACsALAAAAAAsACwAAAb/wIBw\n' +
-          'SCwOFBXO6JRKnUacimJQrFqvQsUGpep6v13URoEtFxciL6jCSBAEAkKCUQF5RQsz9uDpliYGegYT\n' +
-          'JV0eB3pFDFwmEAKJQwIQJiooDZABFF0bBJhFBBtdFIkXKikQnlcQKSoYZhWVealXClwVWA2msrNX\n' +
-          'C6yXVQdcqLxlEJWIRX0bxXqhHmcqJwXNZgSUuwFpxNVlDyoiQwoqJY/dRBQW5gEChWQBoRLnkRld\n' +
-          'FkQSKswDrIHzAhq8jBpiwNQRFSDmsQvVxVURO0hU3DongIOXC1ZgJVHBgKJFe1cYqFCiIkE3AR28\n' +
-          'TLSSQMUSFZ2aDejTZaUVAtJYrZs14INA7zMCTOnEMiEClp5eJugJ6gTmFVgqjFYhYKeLPD04n5S8\n' +
-          '8lHFg08hvEjV0xIKxytITQELQCBsF256REaRiIVqlxR5CqTp8hWTxnEJ6+5N0WCwg1QQ+anwd6XA\n' +
-          'CDCEUxVMQSWeGQMkvEROlY9ZgHHlzBwopGItpnYq3mlTAfcKAhKHZ30LN2SBNGoKP1HqSGRZ7iLP\n' +
-          'gg37LeQYimRFcuH97as0FlgoslWrRbdMqVPnVrVKpElfzFmgRGFqwMiRJ0mULKXi40cCYywGJJA+\n' +
-          'VIzBXoRs3MCRQ6cqON7TbcAKGASmMMZvRySxRBNPRDEFJkEAADs=\n'
       }
     }
   }
@@ -101,16 +86,20 @@
       right: 0;
     }
 
-    .node circle {
-      fill: #999;
+    .node .rect-background {
+      fill: #fff;
+      stroke-width: 0;
+    }
+
+    .node .rect-mask {
+      fill: transparent;
+      stroke: $color-text;
+      stroke-width: 1px;
+      stroke-opacity: .3;
     }
 
     .node text {
       font: 10px sans-serif;
-    }
-
-    .node--internal circle {
-      fill: #555;
     }
 
     .node--internal text {
@@ -119,9 +108,8 @@
 
     .link {
       fill: none;
-      stroke: #555;
-      stroke-opacity: 0.4;
-      stroke-width: 1.5px;
+      stroke: #e3e3e3;
+      stroke-width: 1px;
     }
   }
 </style>
