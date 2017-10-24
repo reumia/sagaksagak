@@ -30,8 +30,8 @@
         viewerWidth: window.innerWidth,
         viewerHeight: window.innerHeight - 64,
         viewerSpacing: 80,
-        nodeWidth: 140,
-        nodeHeight: 180,
+        nodeWidth: 130,
+        nodeHeight: 160,
         rectWidth: 120,
         rectHeight: 120,
         nodes: [],
@@ -87,6 +87,10 @@
       bottom: 0;
       left: 0;
       right: 0;
+    }
+
+    .node {
+      cursor: pointer;
     }
 
     .node .rect-background {
