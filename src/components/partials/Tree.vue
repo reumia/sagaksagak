@@ -1,7 +1,7 @@
 <template>
   <div class="tree">
     <svg :width="viewerWidth" :height="viewerHeight" ref="svg">
-      <g :transform="`translate(${this.viewerWidth / 2}, ${this.viewerHeight / 4})scale(${zoom.scale})`">
+      <g :transform="`translate(${zoom.translateX}, ${zoom.translateY})scale(${zoom.scale})`">
         <path v-for="line in lines" class="link" :d="getDiagonal(line)" :key="line.id"></path>
         <g v-for="node in nodes" class="node" :transform="getNodeTransform(node)" :key="node.id" @click="handleClick(node)">
           <rect class="rect-background" r="10" :width="rectWidth" :height="rectHeight" :transform="`translate(${rectWidth / -2}, ${rectHeight / -2})`"></rect>
@@ -17,6 +17,11 @@
   import * as d3 from 'd3'
   import { mapState } from 'vuex'
 
+  const viewerW = window.innerWidth
+  const viewerH = window.innerHeight - 64
+  const viewerX = viewerW / 2
+  const viewerY = viewerH / 4
+
   export default {
     name: 'tree',
     created () {
@@ -27,8 +32,8 @@
     computed: mapState([ 'tree' ]),
     data () {
       return {
-        viewerWidth: window.innerWidth,
-        viewerHeight: window.innerHeight - 64,
+        viewerWidth: viewerW,
+        viewerHeight: viewerH,
         viewerSpacing: 80,
         nodeWidth: 130,
         nodeHeight: 160,
@@ -37,6 +42,8 @@
         nodes: [],
         lines: [],
         zoom: {
+          translateX: viewerX,
+          translateY: viewerY,
           scale: 1
         }
       }
@@ -78,10 +85,13 @@
         this.$router.push({ name: 'Cut', params: { 'id': d.data.id } })
       },
       onZoom () {
-        // TODO : ZOOM 데이터 가져오기
         // https://github.com/d3/d3-zoom
         // https://bl.ocks.org/mbostock/6123708
+        // TODO : D3 Zoom initial transition state
+        // https://github.com/d3/d3/issues/2521
         console.log('zoomed', d3.event)
+        this.zoom.translateX = d3.event.transform.x
+        this.zoom.translateY = d3.event.transform.y
         this.zoom.scale = d3.event.transform.k
       }
     }
