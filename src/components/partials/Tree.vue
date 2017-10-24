@@ -92,45 +92,36 @@
 <style lang="scss">
   @import 'init';
 
-  svg {
-    position: fixed;
-    top: $header-height;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
+  .tree {
+    svg {
+      position: fixed;
+      top: $header-height;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
 
-  .node circle {
-    fill: #999;
-  }
+    .node circle {
+      fill: #999;
+    }
 
-  .node text {
-    font: 10px sans-serif;
-  }
+    .node text {
+      font: 10px sans-serif;
+    }
 
-  .node--internal circle {
-    fill: #555;
-  }
+    .node--internal circle {
+      fill: #555;
+    }
 
-  .node--internal text {
-    text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
-  }
+    .node--internal text {
+      text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+    }
 
-  .link {
-    fill: none;
-    stroke: #555;
-    stroke-opacity: 0.4;
-    stroke-width: 1.5px;
-  }
-
-  form {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    position: absolute;
-    left: 10px;
-    top: 10px;
-  }
-
-  label {
-    display: block;
+    .link {
+      fill: none;
+      stroke: #555;
+      stroke-opacity: 0.4;
+      stroke-width: 1.5px;
+    }
   }
 </style>

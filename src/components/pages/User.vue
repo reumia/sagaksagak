@@ -58,7 +58,6 @@
   @import 'init';
 
   .user-body {
-    padding-top: $space-unit * 2.5;
-    padding-left: $intro-width + $space-unit * 4;
+    padding: ($space-unit * 2.5) ($space-unit * 2) ($space-unit * 2.5) ($intro-width + $space-unit * 4);
   }
 </style>
