@@ -1,9 +1,9 @@
 <template>
   <div class="tree">
-    <svg :width="viewerWidth" :height="viewerHeight">
-      <g :transform="`translate(${viewerWidth / 2}, ${viewerHeight / 4})`">
+    <svg :width="viewerWidth" :height="viewerHeight" ref="svg">
+      <g :transform="`translate(${this.viewerWidth / 2}, ${this.viewerHeight / 4})scale(${zoom.scale})`">
         <path v-for="line in lines" class="link" :d="getDiagonal(line)" :key="line.id"></path>
-        <g v-for="node in nodes" class="node" :transform="getTransform(node)" :key="node.id" @click="handleClick(node)">
+        <g v-for="node in nodes" class="node" :transform="getNodeTransform(node)" :key="node.id" @click="handleClick(node)">
           <rect class="rect-background" r="10" :width="rectWidth" :height="rectHeight" :transform="`translate(${rectWidth / -2}, ${rectHeight / -2})`"></rect>
           <image :width="rectWidth" :height="rectHeight" :transform="`translate(${rectWidth / -2}, ${rectHeight / -2})`" :href="node.data.imageUrl"></image>
           <rect class="rect-mask" r="10" :width="rectWidth" :height="rectHeight" :transform="`translate(${rectWidth / -2}, ${rectHeight / -2})`"></rect>
@@ -35,12 +35,13 @@
         rectWidth: 120,
         rectHeight: 120,
         nodes: [],
-        lines: []
+        lines: [],
+        zoom: {
+          scale: 1
+        }
       }
     },
     methods: {
-      // TODO : ZOOM 데이터 가져오기
-      // https://github.com/d3/d3-zoom
       getTree () {
         const tree = d3
           .tree()
@@ -50,11 +51,14 @@
         this.nodes = this.tree.descendants()
         this.lines = this.tree.descendants().slice(1)
 
-        console.log(this.nodes)
-
         tree(this.tree)
       },
       renderTree () {
+        const zoom = d3.zoom().scaleExtent([-10, 10]).on('zoom', this.onZoom)
+        const selection = d3.select(this.$refs.svg)
+
+        selection.call(zoom)
+
         this.getTree()
       },
       getDiagonal (d) {
@@ -67,11 +71,18 @@
           L${d.parent.x},${d.parent.y + this.rectHeight / 2}
         `
       },
-      getTransform (d) {
+      getNodeTransform (d) {
         return `translate(${d.x},${d.y})`
       },
       handleClick (d) {
         this.$router.push({ name: 'Cut', params: { 'id': d.data.id } })
+      },
+      onZoom () {
+        // TODO : ZOOM 데이터 가져오기
+        // https://github.com/d3/d3-zoom
+        // https://bl.ocks.org/mbostock/6123708
+        console.log('zoomed', d3.event)
+        this.zoom.scale = d3.event.transform.k
       }
     }
   }
