@@ -57,10 +57,10 @@
   }
   .comic-background {
     position: absolute;
-    top: 0;
+    top: $header-height;
     left: 0;
     right: 0;
-    height: 300px;
+    height: $space-unit * 24;
     background-size: cover;
     background-position: center center;
     filter: blur(2px);
