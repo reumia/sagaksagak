@@ -130,9 +130,9 @@
 
     .node .rect-mask {
       fill: transparent;
-      stroke: $color-text;
-      stroke-width: 1px;
-      stroke-opacity: .4;
+      stroke: #000;
+      stroke-width: 2px;
+      stroke-opacity: .2;
     }
 
     .node text {
