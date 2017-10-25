@@ -30,14 +30,14 @@
     overflow: hidden;
     position: relative;
     z-index: 100;
-    margin: 0 0 $space-unit * 3;
+    margin: 0 0 $space-unit * 2;
     max-width: $intro-width;
     background-color: $color-background;
     box-shadow: $box-shadow-unit;
     box-sizing: border-box;
     border-top: 1px solid rgba(0,0,0,.1);
     @media screen and (min-width: 376px) {
-      margin: ($space-unit * 2) auto ($space-unit * 3);
+      margin: ($space-unit * 2) auto;
       border-radius: $radius-unit;
       border-top: 0;
     }

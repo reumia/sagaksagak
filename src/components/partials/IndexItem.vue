@@ -33,7 +33,7 @@
   .index-item {
     box-sizing: border-box;
     display: block;
-    width: 100%;
+    width: 50%;
     padding: $space-unit / 2;
     color: $color-text;
     text-decoration: none;

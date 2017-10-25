@@ -132,7 +132,7 @@
       fill: transparent;
       stroke: #000;
       stroke-width: 2px;
-      stroke-opacity: .2;
+      opacity: .2;
     }
 
     .node text {
@@ -146,7 +146,7 @@
     .link {
       fill: none;
       stroke: #ddd;
-      stroke-width: 1px;
+      stroke-width: 2px;
     }
   }
 </style>
