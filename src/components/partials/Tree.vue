@@ -130,9 +130,9 @@
 
     .node .rect-mask {
       fill: transparent;
-      stroke: #000;
-      stroke-width: 2px;
-      opacity: .2;
+      stroke: #333;
+      stroke-width: 1px;
+      stroke-opacity: .5;
     }
 
     .node text {
@@ -145,8 +145,8 @@
 
     .link {
       fill: none;
-      stroke: #ddd;
-      stroke-width: 2px;
+      stroke: #ccc;
+      stroke-width: 1px;
     }
   }
 </style>
