@@ -77,26 +77,26 @@
       getNodeTransform (d) {
         return `translate(${d.x},${d.y})`
       },
-      initZoom () {
+      initZoom (isTransition) {
         // Drag & Zoom simple example - https://bl.ocks.org/mbostock/6123708
         // D3 Zoom initial transition state - https://github.com/d3/d3/issues/2521
         // Zoom to bound box - https://bl.ocks.org/mbostock/9656675
-        const zoom = d3.zoom().scaleExtent([-3, 2]).on('zoom', this.onZoom)
+        const zoom = d3.zoom().scaleExtent([0.2, 1.5]).on('zoom', this.onZoom)
         const selection = d3.select(this.$refs.svg)
         const initialZoomState = d3.zoomIdentity
           .translate(this.zoom.translateX, this.zoom.translateY)
           .scale(this.zoom.scale)
 
-        selection
-          .call(zoom)
-          .call(zoom.transform, initialZoomState)
+        selection.call(zoom)
+        if (isTransition) selection.transition().call(zoom.transform, initialZoomState)
+        else selection.call(zoom.transform, initialZoomState)
       },
       resetZoom () {
         this.zoom.translateX = viewerX
         this.zoom.translateY = viewerY
         this.zoom.scale = 1
 
-        this.initZoom()
+        this.initZoom(true)
       },
       onZoom () {
         this.zoom.translateX = d3.event.transform.x
