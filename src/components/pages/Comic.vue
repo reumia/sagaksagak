@@ -17,10 +17,7 @@
         <router-link :to="{ name: 'UpdateComic', params: { id: comic.id } }" class="button button-primary">코믹 정보 수정</router-link>
       </OwnerButtons>
     </Introduction>
-
-    <article class="comic-body">
-      <Tree v-if="comic.cuts.length > 0"></Tree>
-    </article>
+    <Tree v-if="comic.cuts.length > 0"></Tree>
   </div>
 </template>
 
@@ -76,9 +73,5 @@
       right: 0;
       background: linear-gradient(transparentize($color-background-dark, .2), $color-background-dark);
     }
-  }
-  .comic-body {
-    position: relative;
-    z-index: 1;
   }
 </style>

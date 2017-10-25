@@ -17,11 +17,6 @@
   import * as d3 from 'd3'
   import { mapState } from 'vuex'
 
-  const viewerW = window.innerWidth
-  const viewerH = window.innerHeight - 64
-  const viewerX = viewerW / 2
-  const viewerY = viewerH / 4
-
   export default {
     name: 'tree',
     created () {
@@ -31,9 +26,10 @@
     },
     computed: mapState([ 'tree' ]),
     data () {
+      // TODO : 뷰어크기 윈도우 리사이즈 대응
       return {
-        viewerWidth: viewerW,
-        viewerHeight: viewerH,
+        viewerWidth: window.innerWidth,
+        viewerHeight: window.innerHeight,
         viewerSpacing: 80,
         nodeWidth: 130,
         nodeHeight: 160,
@@ -42,8 +38,8 @@
         nodes: [],
         lines: [],
         zoom: {
-          translateX: viewerX,
-          translateY: viewerY,
+          translateX: 0,
+          translateY: 0,
           scale: 1
         }
       }
@@ -77,7 +73,13 @@
       getNodeTransform (d) {
         return `translate(${d.x},${d.y})`
       },
+      setInitialZoom () {
+        this.zoom.translateX = window.innerWidth / 2
+        this.zoom.translateY = this.$el.offsetTop
+        this.zoom.scale = 1
+      },
       initZoom (isTransition) {
+        this.setInitialZoom()
         // Drag & Zoom simple example - https://bl.ocks.org/mbostock/6123708
         // D3 Zoom initial transition state - https://github.com/d3/d3/issues/2521
         // Zoom to bound box - https://bl.ocks.org/mbostock/9656675
@@ -92,10 +94,6 @@
         else selection.call(zoom.transform, initialZoomState)
       },
       resetZoom () {
-        this.zoom.translateX = viewerX
-        this.zoom.translateY = viewerY
-        this.zoom.scale = 1
-
         this.initZoom(true)
       },
       onZoom () {
@@ -121,7 +119,6 @@
       left: 0;
       right: 0;
     }
-
     .node {
       cursor: pointer;
     }
@@ -135,7 +132,7 @@
       fill: transparent;
       stroke: $color-text;
       stroke-width: 1px;
-      stroke-opacity: .3;
+      stroke-opacity: .4;
     }
 
     .node text {
@@ -148,7 +145,7 @@
 
     .link {
       fill: none;
-      stroke: #e3e3e3;
+      stroke: #ddd;
       stroke-width: 1px;
     }
   }

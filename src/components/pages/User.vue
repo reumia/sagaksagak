@@ -18,10 +18,9 @@
         <router-link :to="{ name: 'UpdateUser' }" class="button button-primary">유저 정보 수정</router-link>
       </OwnerButtons>
     </Introduction>
-
-    <div class="user-body">
+    <Card>
       <Index :items="user.comics"></Index>
-    </div>
+    </Card>
   </div>
 </template>
 
@@ -56,8 +55,4 @@
 
 <style lang="scss">
   @import 'init';
-
-  .user-body {
-    padding: ($space-unit * 2.5) ($space-unit * 2) ($space-unit * 2.5) ($intro-width + $space-unit * 4);
-  }
 </style>

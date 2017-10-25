@@ -16,7 +16,10 @@
   export default {
     name: 'introduction',
     props: [ 'title', 'status', 'descriptions', 'imageUrl' ],
-    components: { Sticker }
+    components: { Sticker },
+    mounted () {
+      console.log(this.$el.offsetTop, this.$el.offsetHeight)
+    }
   }
 </script>
 
@@ -25,15 +28,19 @@
 
   .introduction {
     overflow: hidden;
-    box-sizing: border-box;
-    border-radius: $radius-unit;
-    position: absolute;
+    position: relative;
     z-index: 100;
-    top: $header-height + $space-unit * 2.5;
-    left: $space-unit * 2;
-    width: $intro-width;
+    margin: 0 0 $space-unit * 3;
+    max-width: $intro-width;
     background-color: $color-background;
     box-shadow: $box-shadow-unit;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(0,0,0,.1);
+    @media screen and (min-width: 376px) {
+      margin: ($space-unit * 2) auto ($space-unit * 3);
+      border-radius: $radius-unit;
+      border-top: 0;
+    }
   }
   .introduction-image {
     padding-top: 33%;
